@@ -5,477 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional Forex Trading Mentorship Platform - Learn from expert traders">
     <title>Forex Mentorship Platform | Professional Trading Education</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-        }
-        
-        nav a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        nav a:hover {
-            color: #667eea;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: white;
-            border-radius: 20px;
-            padding: 60px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 20px;
-            color: #666;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 15px 40px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s;
-            display: inline-block;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-        
-        .btn-secondary:hover {
-            background: #667eea;
-            color: white;
-        }
-        
-        /* Features */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        .feature-card p {
-            color: #666;
-            line-height: 1.8;
-        }
-        
-        /* Pricing Section */
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            color: white;
-            margin: 60px 0 40px;
-            font-weight: bold;
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pricing-card.featured {
-            border: 3px solid #667eea;
-            transform: scale(1.05);
-        }
-        
-        .pricing-badge {
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            background: #667eea;
-            color: white;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-            font-size: 12px;
-            font-weight: bold;
-        }
-        
-        .pricing-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        
-        .pricing-tier {
-            font-size: 24px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .pricing-amount {
-            font-size: 48px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        
-        .pricing-period {
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        
-        .pricing-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            align-items: center;
-        }
-        
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-        
-        .pricing-features li::before {
-            content: "✓";
-            color: #28a745;
-            font-weight: bold;
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 20px;
-        }
-        
-        .stat-number {
-            font-size: 48px;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .stat-label {
-            font-size: 18px;
-            color: #666;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .testimonial-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-        
-        .testimonial-author {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .testimonial-role {
-            color: #999;
-            font-size: 14px;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            background: white;
-            border-radius: 15px;
-            padding: 40px;
-            margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-        
-        .faq-question {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .faq-question:hover {
-            color: #667eea;
-        }
-        
-        .faq-answer {
-            color: #666;
-            line-height: 1.8;
-            padding-left: 20px;
-        }
-        
-        /* System Status */
-        .status-section {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            margin-bottom: 40px;
-        }
-        
-        .status-section h2 {
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-        }
-        
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .status-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .status-label {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .status-value {
-            font-weight: 500;
-        }
-        
-        .status-loading {
-            color: #ffc107;
-        }
-        
-        .status-success {
-            color: #28a745;
-        }
-        
-        .status-error {
-            color: #dc3545;
-        }
-        
-        .status-warning {
-            color: #ff9800;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: white;
-        }
-        
-        .footer-links {
-            margin-top: 20px;
-        }
-        
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            transition: opacity 0.3s;
-        }
-        
-        .footer-links a:hover {
-            opacity: 0.8;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 40px 20px;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            nav a {
-                margin: 0 15px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .pricing-card.featured {
-                transform: scale(1);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
     <!-- Header -->
@@ -535,31 +66,26 @@
                 <h3>Expert Mentorship</h3>
                 <p>Learn from professional traders with years of experience. Get personalized guidance, one-on-one sessions, and continuous support throughout your journey.</p>
             </div>
-            
             <div class="feature-card">
                 <div class="feature-icon">📊</div>
                 <h3>Live Trading Sessions</h3>
                 <p>Watch live trading in action. Learn real-time analysis, entry/exit strategies, risk management, and how to read market psychology.</p>
             </div>
-            
             <div class="feature-card">
                 <div class="feature-icon">💰</div>
                 <h3>FTMO Challenge Support</h3>
                 <p>Get expert guidance to pass your FTMO challenge. We provide proven strategies, psychology coaching, and step-by-step support.</p>
             </div>
-            
             <div class="feature-card">
                 <div class="feature-icon">📈</div>
                 <h3>Technical Analysis</h3>
                 <p>Master chart patterns, indicators, candlestick analysis, support/resistance levels, and trend identification techniques.</p>
             </div>
-            
             <div class="feature-card">
                 <div class="feature-icon">🧠</div>
                 <h3>Trading Psychology</h3>
                 <p>Learn emotional control, discipline, patience, and how to develop a winning mindset to become a consistently profitable trader.</p>
             </div>
-            
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3>Risk Management</h3>
@@ -582,7 +108,7 @@
                     <li>Weekly market analysis</li>
                     <li>Email support</li>
                 </ul>
-                <a href="enrollment.html?tier=starter" class="btn btn-primary" style="width: 100%;">Get Started</a>
+                <a href="enrollment.html?tier=starter" class="btn btn-primary">Get Started</a>
             </div>
 
             <!-- Core Tier (Featured) -->
@@ -600,7 +126,7 @@
                     <li>Monthly 1-on-1 session</li>
                     <li>Priority support</li>
                 </ul>
-                <a href="enrollment.html?tier=core" class="btn btn-primary" style="width: 100%;">Start Now</a>
+                <a href="enrollment.html?tier=core" class="btn btn-primary">Start Now</a>
             </div>
 
             <!-- Pro Tier -->
@@ -618,7 +144,7 @@
                     <li>Lifetime course updates</li>
                     <li>24/7 VIP support</li>
                 </ul>
-                <a href="enrollment.html?tier=pro" class="btn btn-primary" style="width: 100%;">Go Pro</a>
+                <a href="enrollment.html?tier=pro" class="btn btn-primary">Go Pro</a>
             </div>
         </section>
 
@@ -632,7 +158,6 @@
                 <div class="testimonial-author">Michael Chen</div>
                 <div class="testimonial-role">Funded Trader - Pro Tier</div>
             </div>
-            
             <div class="testimonial-card">
                 <div class="testimonial-text">
                     "Best investment I ever made. The live sessions showed me exactly what I was doing wrong. Now I'm trading with a $100K funded account!"
@@ -640,7 +165,6 @@
                 <div class="testimonial-author">Sarah Johnson</div>
                 <div class="testimonial-role">Funded Trader - Core Tier</div>
             </div>
-            
             <div class="testimonial-card">
                 <div class="testimonial-text">
                     "The mentors are patient, knowledgeable, and genuinely want you to succeed. I learned more in 1 month here than 2 years on my own."
@@ -662,7 +186,6 @@
                     It varies by individual, but most dedicated students see improvement within 2-3 months. Consistency and following the strategies taught are key to success.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">
                     Do I need prior trading experience?
@@ -672,7 +195,6 @@
                     No! We welcome beginners. Our courses start from the basics and progressively advance. You'll learn everything from market fundamentals to advanced strategies.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">
                     What's included in the live trading sessions?
@@ -682,7 +204,6 @@
                     Live sessions include real-time market analysis, trade setups, entry/exit strategies, risk management demonstrations, and Q&A. You watch our mentors trade live and explain their thought process.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">
                     How does the FTMO challenge support work?
@@ -692,7 +213,6 @@
                     Pro tier members get dedicated FTMO coaching including strategy review, psychology support, account analysis, and daily check-ins during your challenge period.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">
                     Is there a money-back guarantee?
@@ -702,7 +222,6 @@
                     Yes! We offer a 14-day money-back guarantee. If you're not satisfied with the course content, contact us for a full refund within 14 days of enrollment.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question">
                     How do I submit payment proof?
@@ -733,8 +252,8 @@
 
         <!-- Final CTA -->
         <section class="hero">
-            <h2 style="font-size: 36px; margin-bottom: 20px;">Ready to Start Your Trading Journey?</h2>
-            <p style="margin-bottom: 30px;">Join hundreds of successful traders who transformed their lives through our mentorship program.</p>
+            <h2>Ready to Start Your Trading Journey?</h2>
+            <p>Join hundreds of successful traders who transformed their lives through our mentorship program.</p>
             <div class="cta-buttons">
                 <a href="#pricing" class="btn btn-primary">Choose Your Plan</a>
                 <a href="auth-modal.html" class="btn btn-secondary">Student Login</a>
@@ -744,7 +263,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Forex Mentorship Platform. All rights reserved.</p>
+        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
         <p>Professional Trading Education | Risk Disclaimer: Trading involves risk. Past performance does not guarantee future results.</p>
         <div class="footer-links">
             <a href="terms.html">Terms of Service</a>
@@ -755,80 +274,47 @@
 
     <!-- Supabase JavaScript Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    
     <!-- Main JavaScript -->
     <script src="js/main.js"></script>
-    
+
     <!-- System Status Check -->
     <script>
         window.addEventListener('load', async () => {
             const dbStatus = document.getElementById('db-status');
             const apiStatus = document.getElementById('api-status');
-            
-            // Wait for app to initialize
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Check Database Connection
+
+            await new Promise(resolve => setTimeout(resolve, 300));
+
             try {
-                if (!window.app || !window.app.supabase) {
-                    throw new Error('Supabase not initialized');
-                }
-                
-                const { data, error } = await window.app.supabase
-                    .from('users')
-                    .select('email')
-                    .limit(1);
-                
+                if (!window.app || !window.app.supabase) throw new Error('Supabase not initialized');
+                const { error } = await window.app.supabase.from('users').select('id').limit(1);
                 if (error) throw error;
-                
-                dbStatus.innerHTML = '✅ Connected';
+                dbStatus.textContent = '✅ Connected';
                 dbStatus.className = 'status-value status-success';
-                
             } catch (err) {
-                dbStatus.innerHTML = '❌ ' + err.message;
+                dbStatus.textContent = '❌ ' + err.message;
                 dbStatus.className = 'status-value status-error';
-                console.error('DB Error:', err);
             }
-            
-            // Check API Connection
+
             try {
-                if (!window.app || !window.app.API_BASE) {
-                    throw new Error('API not configured');
-                }
-                
-                const response = await fetch(window.app.API_BASE + '/health', {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    const data = await response.json();
-                    apiStatus.innerHTML = '✅ Online (v' + (data.version || '1.0') + ')';
-                    apiStatus.className = 'status-value status-success';
-                } else {
-                    throw new Error('Status ' + response.status);
-                }
-                
+                if (!window.app || !window.app.API_BASE) throw new Error('API not configured');
+                const r = await fetch(window.app.API_BASE + '/health');
+                if (!r.ok) throw new Error('Status ' + r.status);
+                const j = await r.json();
+                apiStatus.textContent = '✅ Online (v' + (j.version || '1.0') + ')';
+                apiStatus.className = 'status-value status-success';
             } catch (err) {
-                apiStatus.innerHTML = '⚠️ Not deployed (Edge Function needed)';
+                apiStatus.textContent = '⚠️ Not deployed (Edge Function needed)';
                 apiStatus.className = 'status-value status-warning';
-                console.log('API:', err.message);
             }
         });
 
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{
+            a.addEventListener('click',e=>{
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                const t=document.querySelector(a.getAttribute('href'));
+                if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
             });
         });
     </script>
