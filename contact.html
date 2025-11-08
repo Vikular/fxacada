@@ -84,26 +84,6 @@
     </div>
   </div>
 
-  <script>
-    const form=document.getElementById('contactForm');
-    const ok=document.getElementById('ok');
-    const err=document.getElementById('err');
-
-    form.addEventListener('submit',e=>{
-      e.preventDefault();
-      ok.style.display='none'; err.style.display='none'; err.textContent='';
-      const name=document.getElementById('name').value.trim();
-      const email=document.getElementById('email').value.trim();
-      const subject=document.getElementById('subject').value.trim();
-      const message=document.getElementById('message').value.trim();
-
-      if(!name||!email||!subject||!message){
-        err.textContent='Please fill all required fields.'; err.style.display='block'; return;
-      }
-      // Placeholder submit. Replace with your API/Email service if needed.
-      ok.style.display='block';
-      form.reset();
-    });
-  </script>
+  <script src="js/interactions.js"></script>
 </body>
 </html>

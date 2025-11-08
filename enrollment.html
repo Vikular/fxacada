@@ -87,60 +87,6 @@
     </div>
   </div>
 
-  <script>
-    const pricing = {
-      starter: { price: 199, desc: 'Starter access with core materials' },
-      core: { price: 499, desc: 'Core tier with live sessions (3x/week)' },
-      pro: { price: 999, desc: 'Pro tier with FTMO coaching and VIP support' }
-    };
-
-    function setTier(tier) {
-      const t = pricing[tier] ? tier : 'starter';
-      const pill = document.getElementById('planPill');
-      const desc = document.getElementById('planDesc');
-      const price = document.getElementById('planPrice');
-      const sel = document.getElementById('tier');
-
-      pill.textContent = 'Tier: ' + t;
-      desc.textContent = pricing[t].desc;
-      price.textContent = '$' + pricing[t].price;
-      sel.value = t;
-    }
-
-    // Initialize from URL ?tier=...
-    const params = new URLSearchParams(location.search);
-    setTier((params.get('tier') || '').toLowerCase());
-
-    // Keep summary in sync when user changes dropdown
-    document.getElementById('tier').addEventListener('change', e => setTier(e.target.value));
-
-    const form = document.getElementById('enrollForm');
-    const ok = document.getElementById('ok');
-    const err = document.getElementById('err');
-
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      ok.style.display = 'none'; err.style.display = 'none'; err.textContent = '';
-
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName = document.getElementById('lastName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const whatsapp = document.getElementById('whatsapp').value.trim();
-      const tier = document.getElementById('tier').value;
-      const notes = document.getElementById('notes').value.trim();
-
-      if (!firstName || !lastName || !email) {
-        err.textContent = 'Please fill all required fields.'; err.style.display = 'block'; return;
-      }
-
-      // Placeholder submit. Replace with API call if needed.
-      // Example (if you wire up backend):
-      // await fetch('/api/enroll', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ firstName,lastName,email,whatsapp,tier,notes }) });
-
-      ok.style.display = 'block';
-      form.reset();
-      setTier(tier); // keep selection after reset
-    });
-  </script>
+  <script src="js/interactions.js"></script>
 </body>
 </html>
