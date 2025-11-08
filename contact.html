@@ -1,89 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact Us - Forex Mentorship</title>
-  <meta name="description" content="Contact Forex Mentorship support team" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:40px 20px;color:#333}
-    .container{max-width:700px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden}
-    .header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:28px 24px;text-align:center}
-    .header h1{font-size:28px;margin-bottom:6px}
-    .content{padding:26px}
-    .methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:20px}
-    .method{background:#f7f7fb;border:1px solid #eee;border-radius:12px;padding:14px}
-    .method b{display:block;margin-bottom:6px}
-    .form-group{margin-bottom:16px}
-    label{display:block;margin-bottom:6px;font-weight:600}
-    input,textarea{width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:10px;font-size:14px}
-    input:focus,textarea:focus{outline:none;border-color:#667eea;background:#fafbff}
-    textarea{min-height:120px;resize:vertical}
-    .btn{width:100%;padding:14px;border:none;border-radius:10px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea,#764ba2)}
-    .note{font-size:12px;color:#666;margin-top:10px;text-align:center}
-    .footer{padding:18px;text-align:center;color:#666;font-size:13px}
-    .links a{color:#667eea;text-decoration:none;margin:0 8px}
-    .msg{display:none;margin-bottom:12px;padding:12px;border-radius:10px;font-size:14px}
-    .msg.ok{background:#ecfdf3;color:#166534;border:1px solid #bbf7d0}
-    .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Contact Us</h1>
-      <p>We usually reply within 24 hours.</p>
-    </div>
-    <div class="content">
-      <div class="methods">
-        <div class="method">
-          <b>Email</b>
-          <a href="mailto:support@forexmentorship.com">support@forexmentorship.com</a>
+    <header>
+        <div class="header-content">
+            <div class="logo">📈 Forex Mentorship</div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="auth-modal.html" class="btn btn-primary">Login</a>
+            </nav>
         </div>
-        <div class="method">
-          <b>WhatsApp</b>
-          +1 (555) 123-4567
-        </div>
-        <div class="method">
-          <b>Hours</b>
-          Mon–Fri, 9 AM–6 PM EST
-        </div>
-      </div>
+    </header>
 
-      <div id="ok" class="msg ok">Message sent. We’ll get back to you soon.</div>
-      <div id="err" class="msg err"></div>
+    <div class="contact-container">
+        <div class="contact-header">
+            <h1>💬 Get in Touch</h1>
+            <p>We're here to help! Send us a message and we'll respond within 24 hours.</p>
+        </div>
 
-      <form id="contactForm" novalidate>
-        <div class="form-group">
-          <label for="name">Name *</label>
-          <input id="name" required />
-        </div>
-        <div class="form-group">
-          <label for="email">Email *</label>
-          <input id="email" type="email" required />
-        </div>
-        <div class="form-group">
-          <label for="subject">Subject *</label>
-          <input id="subject" required />
-        </div>
-        <div class="form-group">
-          <label for="message">Message *</label>
-          <textarea id="message" required></textarea>
-        </div>
-        <button class="btn" type="submit">Send Message</button>
-        <div class="note">This sends a placeholder notification only.</div>
-      </form>
-    </div>
-    <div class="footer">
-      <div class="links">
-        <a href="index.html">Home</a> •
-        <a href="terms.html">Terms</a> •
-        <a href="privacy.html">Privacy</a>
-      </div>
-    </div>
-  </div>
+        <div class="contact-content">
+            <div class="methods">
+                <div class="method">
+                    <b>📧 Email</b>
+                    <a href="mailto:support@forexmentorship.com">support@forexmentorship.com</a>
+                </div>
+                <div class="method">
+                    <b>💬 WhatsApp</b>
+                    <a href="https://wa.me/1234567890" target="_blank">+1 (234) 567-890</a>
+                </div>
+                <div class="method">
+                    <b>⏰ Response Time</b>
+                    Usually within 24 hours
+                </div>
+            </div>
 
-  <script src="js/interactions.js"></script>
+            <div class="msg ok" id="successMsg" style="display:none;"></div>
+            <div class="msg err" id="errorMsg" style="display:none;"></div>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Select a topic</option>
+                        <option value="enrollment">Enrollment Question</option>
+                        <option value="payment">Payment Issue</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="ftmo">FTMO Coaching</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="How can we help you?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-footer">
+            <p>Need immediate assistance? Check our <a href="index.html#faq">FAQ</a> or <a href="https://wa.me/1234567890" target="_blank">message us on WhatsApp</a>.</p>
+        </div>
+    </div>
+
+    <footer style="margin-top: 0;">
+        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="index.html">Home</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
 </body>
 </html>

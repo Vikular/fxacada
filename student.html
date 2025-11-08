@@ -4,197 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard - Forex Mentorship</title>
-    <meta name="description" content="Student dashboard for Forex Mentorship platform">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
     <link rel="stylesheet" href="css/globals.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo">📈 Forex Mentorship</div>
             <nav>
-                <a href="index.html">Home</a>
-                <a href="#courses">My Courses</a>
-                <a href="#sessions">Live Sessions</a>
-                <a href="#support">Support</a>
-                <a href="#" id="logoutBtn">Logout</a>
+                <span id="userName">Loading...</span>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
             </nav>
         </div>
     </header>
 
     <div class="container">
-        <!-- Welcome Section -->
         <section class="hero">
-            <h1>👋 Welcome Back, <span id="studentName">Student</span>!</h1>
-            <p id="tierInfo">You're enrolled in the <strong id="tierLevel">Starter</strong> tier</p>
+            <h1>📚 Welcome Back, <span id="displayName">Student</span>!</h1>
+            <p>Your learning dashboard. Track your progress and access all resources.</p>
         </section>
 
-        <!-- Quick Actions -->
-        <section class="stats-section">
-            <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Quick Actions</h2>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <a href="submit-payment.html" class="btn btn-primary" style="text-decoration: none;">💳 Submit Payment</a>
-                </div>
-                <div class="stat-item">
-                    <a href="submit-ftmo.html" class="btn btn-primary" style="text-decoration: none;">🎯 Submit FTMO</a>
-                </div>
-                <div class="stat-item">
-                    <a href="contact.html" class="btn btn-secondary" style="text-decoration: none;">💬 Contact Support</a>
-                </div>
-                <div class="stat-item">
-                    <a href="#courses" class="btn btn-secondary" style="text-decoration: none;">📚 Browse Courses</a>
-                </div>
+        <section class="status-section">
+            <h2>📊 Your Status</h2>
+            <div class="status-item">
+                <span class="status-label">Enrollment Tier:</span>
+                <span class="status-value" id="userTier">Loading...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Payment Status:</span>
+                <span class="status-value" id="paymentStatus">Loading...</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">FTMO Status:</span>
+                <span class="status-value" id="ftmoStatus">Not submitted</span>
             </div>
         </section>
 
-        <!-- Course Progress -->
-        <h2 class="section-title" id="courses">📚 My Courses</h2>
-        <section class="features">
+        <h2 class="section-title">🎯 Quick Actions</h2>
+        <div class="features">
             <div class="feature-card">
-                <div class="feature-icon">🎓</div>
-                <h3>Forex Fundamentals</h3>
-                <p>Master the basics of forex trading, market structure, and currency pairs.</p>
-                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; margin: 15px 0;">
-                    <div style="background: #667eea; height: 100%; width: 75%; border-radius: 10px;"></div>
-                </div>
-                <p style="color: #666; font-size: 14px;">75% Complete</p>
-                <a href="#" class="btn btn-primary" style="margin-top: 10px;">Continue Learning</a>
+                <div class="feature-icon">💳</div>
+                <h3>Submit Payment</h3>
+                <p>Upload your payment proof for verification</p>
+                <a href="submit-payment.html" class="btn btn-primary mt-20">Submit Now</a>
             </div>
-
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Technical Analysis</h3>
-                <p>Learn chart patterns, indicators, and price action strategies.</p>
-                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; margin: 15px 0;">
-                    <div style="background: #667eea; height: 100%; width: 45%; border-radius: 10px;"></div>
-                </div>
-                <p style="color: #666; font-size: 14px;">45% Complete</p>
-                <a href="#" class="btn btn-primary" style="margin-top: 10px;">Continue Learning</a>
+                <div class="feature-icon">🎯</div>
+                <h3>FTMO Challenge</h3>
+                <p>Submit your FTMO challenge details</p>
+                <a href="submit-ftmo.html" class="btn btn-primary mt-20">Submit Details</a>
             </div>
-
             <div class="feature-card">
-                <div class="feature-icon">💰</div>
-                <h3>Risk Management</h3>
-                <p>Protect your capital with proper position sizing and risk controls.</p>
-                <div style="background: #e5e7eb; border-radius: 10px; height: 8px; margin: 15px 0;">
-                    <div style="background: #667eea; height: 100%; width: 20%; border-radius: 10px;"></div>
-                </div>
-                <p style="color: #666; font-size: 14px;">20% Complete</p>
-                <a href="#" class="btn btn-primary" style="margin-top: 10px;">Start Course</a>
+                <div class="feature-icon">💬</div>
+                <h3>Get Support</h3>
+                <p>Need help? Contact our team</p>
+                <a href="contact.html" class="btn btn-primary mt-20">Contact Us</a>
             </div>
-        </section>
+        </div>
 
-        <!-- Live Sessions Schedule -->
-        <h2 class="section-title" id="sessions">📅 Upcoming Live Sessions</h2>
-        <section class="faq-section">
-            <div class="faq-item" style="border: 2px solid #667eea; background: #f9fafb;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h3 style="color: #667eea; margin-bottom: 5px;">Market Analysis & Trading Setup</h3>
-                        <p style="color: #666; font-size: 14px;">📅 Monday, Nov 11 • ⏰ 10:00 AM EST</p>
-                    </div>
-                    <a href="#" class="btn btn-primary">Join Session</a>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h3 style="margin-bottom: 5px;">Live Trading Demo</h3>
-                        <p style="color: #666; font-size: 14px;">📅 Wednesday, Nov 13 • ⏰ 2:00 PM EST</p>
-                    </div>
-                    <a href="#" class="btn btn-secondary">Set Reminder</a>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div>
-                        <h3 style="margin-bottom: 5px;">Q&A Session</h3>
-                        <p style="color: #666; font-size: 14px;">📅 Friday, Nov 15 • ⏰ 4:00 PM EST</p>
-                    </div>
-                    <a href="#" class="btn btn-secondary">Set Reminder</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Resources -->
-        <h2 class="section-title">📖 Resources</h2>
-        <section class="pricing-grid">
-            <div class="card">
-                <h3 style="margin-bottom: 10px;">📄 Course Materials</h3>
-                <p style="margin-bottom: 15px; color: #666;">Access all PDF guides, cheat sheets, and study materials.</p>
-                <a href="#" class="btn btn-secondary">View Materials</a>
-            </div>
-
-            <div class="card">
-                <h3 style="margin-bottom: 10px;">🎥 Recorded Sessions</h3>
-                <p style="margin-bottom: 15px; color: #666;">Watch previous live sessions and training recordings.</p>
-                <a href="#" class="btn btn-secondary">Watch Videos</a>
-            </div>
-
-            <div class="card">
-                <h3 style="margin-bottom: 10px;">💬 Community Chat</h3>
-                <p style="margin-bottom: 15px; color: #666;">Connect with other students and mentors.</p>
-                <a href="#" class="btn btn-secondary">Join Chat</a>
-            </div>
-        </section>
-
-        <!-- Support Section -->
-        <section class="hero" id="support">
-            <h2>Need Help?</h2>
-            <p>Our support team is here to assist you with any questions or issues.</p>
+        <section class="hero mt-40">
+            <h2>📖 Learning Resources</h2>
+            <p>Access your course materials, live sessions, and community.</p>
             <div class="cta-buttons">
-                <a href="contact.html" class="btn btn-primary">Contact Support</a>
-                <a href="index.html#faq" class="btn btn-secondary">View FAQ</a>
+                <button class="btn btn-primary" data-tooltip="Coming soon">Video Library</button>
+                <button class="btn btn-secondary" data-tooltip="Coming soon">Live Sessions</button>
+                <button class="btn btn-secondary" data-tooltip="Coming soon">Community</button>
             </div>
         </section>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="terms.html">Terms</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
-        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
     <script src="js/main.js"></script>
-    <script>
-        // Role guard - ensure user is logged in
-        if (!window.app) {
-            window.location.href = 'auth-modal.html';
-        } else {
-            // Check if user has valid session
-            const user = localStorage.getItem('userEmail');
-            const role = localStorage.getItem('userRole');
-            
-            if (!user || role === 'limited-admin' || role === 'super-admin') {
-                window.location.href = 'auth-modal.html';
-            }
-
-            // Populate user info
-            const name = localStorage.getItem('userName') || 'Student';
-            const tier = localStorage.getItem('userTier') || 'Starter';
-            
-            document.getElementById('studentName').textContent = name;
-            document.getElementById('tierLevel').textContent = tier.toUpperCase();
-        }
-
-        // Logout handler
-        document.getElementById('logoutBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (window.app && window.app.logout) {
-                window.app.logout();
-            }
-            localStorage.clear();
-            window.location.href = 'index.html';
-        });
-    </script>
+    <script src="js/interactions.js"></script>
 </body>
 </html>

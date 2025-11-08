@@ -1,73 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Student Login - Forex Mentorship</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Student login for Forex Mentorship platform">
-  <link rel="stylesheet" href="css/globals.css">
-  <link rel="stylesheet" href="css/components.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body class="auth-page">
-  <div class="auth-wrap">
-    <h1>🎓 Student Login</h1>
-    <p class="sub">Access your dashboard</p>
-
-    <div id="err" class="msg err"></div>
-
-    <form id="loginForm" novalidate>
-      <div class="fg">
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" required />
-      </div>
-      <div class="fg">
-        <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" required />
-      </div>
-      <button class="btn" id="loginBtn" type="submit">Login</button>
-    </form>
-
-    <div class="links">
-      <p><a href="enrollment.html?tier=starter">Enroll</a> · <a href="index.html">Back Home</a></p>
+    <div class="auth-wrap">
+        <h1>🔐 Student Login</h1>
+        <p class="sub">Access your dashboard and learning materials</p>
+        
+        <div class="msg err" id="errorMsg"></div>
+        
+        <form id="loginForm">
+            <div class="fg">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="student@example.com">
+            </div>
+            <div class="fg">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+        </form>
+        
+        <div class="links">
+            Don't have an account? <a href="enrollment.html">Enroll Now</a><br>
+            <a href="admin-login.html">Admin Login</a> | <a href="index.html">Back to Home</a>
+        </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/interactions.js"></script>
-  <script>
-    const form = document.getElementById('loginForm');
-    const btn = document.getElementById('loginBtn');
-    const err = document.getElementById('err');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      err.style.display = 'none';
-      err.textContent = '';
-
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!email || !password) {
-        err.textContent = 'Enter email and password.';
-        err.style.display = 'block';
-        return;
-      }
-
-      btn.disabled = true;
-      btn.textContent = '⏳ Logging in...';
-
-      try {
-        if (!window.app || !window.app.login) throw new Error('App not initialized. Ensure js/main.js is loaded.');
-        await window.app.login(email, password);
-        location.href = 'student.html';
-      } catch (ex) {
-        err.textContent = ex.message || 'Login failed';
-        err.style.display = 'block';
-        btn.disabled = false;
-        btn.textContent = 'Login';
-      }
-    });
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
 </body>
 </html>
