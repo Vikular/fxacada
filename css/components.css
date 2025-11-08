@@ -1,4 +1,31 @@
 /* =======================================
+   Component Imports (Modular Architecture)
+   ======================================= */
+
+/* Core Components */
+@import 'components/hero.css';
+@import 'components/button.css';
+@import 'components/card.css';
+@import 'components/pricing.css';
+@import 'components/stats.css';
+@import 'components/features.css';
+@import 'components/testimonials.css';
+@import 'components/faq.css';
+@import 'components/status.css';
+@import 'components/form.css';
+@import 'components/pill.css';
+
+/* Page-Specific Styles */
+@import 'pages/legal.css';
+@import 'pages/contact.css';
+@import 'pages/enrollment.css';
+@import 'pages/admin.css';
+@import 'pages/auth.css';
+
+/* Utilities */
+@import 'utilities.css';
+
+/* =======================================
    Component Styles
    ======================================= */
 

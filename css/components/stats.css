@@ -1,0 +1,39 @@
+/* =======================================
+   Stats Component
+   ======================================= */
+.stats-section {
+  margin: 24px 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+.stat-label {
+  color: var(--color-text-light);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+@media (max-width: 768px) {
+  .stats-grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}

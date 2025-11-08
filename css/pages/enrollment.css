@@ -1,0 +1,50 @@
+/* =======================================
+   Enrollment Page
+   ======================================= */
+.enrollment-container {
+  max-width: 880px;
+  margin: 28px auto;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.enrollment-header {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  padding: 28px 24px;
+}
+
+.enrollment-header h1 { 
+  font-size: 28px; 
+  margin-bottom: 6px; 
+}
+
+.enrollment-content { 
+  padding: 24px; 
+}
+
+.plan {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: #f7f7fb;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 16px;
+}
+
+.price {
+  margin-left: auto;
+  font-weight: 900;
+  color: #111827;
+}
+
+@media (max-width: 768px) {
+  .enrollment-container { 
+    padding: 20px; 
+  }
+}

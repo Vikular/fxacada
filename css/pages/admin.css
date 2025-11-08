@@ -1,0 +1,24 @@
+/* =======================================
+   Admin Pages
+   ======================================= */
+.admin-container {
+  max-width: 1200px;
+  margin: 28px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--color-border);
+}
+
+.admin-container h1 {
+  font-size: 28px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .admin-container { 
+    padding: 20px; 
+  }
+}

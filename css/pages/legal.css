@@ -1,0 +1,79 @@
+/* =======================================
+   Legal Pages (Terms, Privacy)
+   ======================================= */
+.legal-container {
+  max-width: 900px;
+  margin: 28px auto;
+  background: #fff;
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--color-border);
+}
+
+.legal-container h1 { 
+  font-size: 32px; 
+  margin-bottom: 10px; 
+}
+
+.legal-container .last-updated,
+.legal-container .updated {
+  color: #666;
+  font-style: italic;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #eee;
+}
+
+.legal-container .section { 
+  margin-bottom: 26px; 
+}
+
+.legal-container h2 {
+  color: var(--color-primary);
+  margin: 24px 0 10px;
+  font-size: 22px;
+}
+
+.legal-container p,
+.legal-container li { 
+  color: #555; 
+  line-height: 1.8; 
+}
+
+.legal-container ul { 
+  margin: 12px 0 12px 22px; 
+}
+
+.legal-container .highlight,
+.legal-container .note {
+  background: #fff8e1;
+  padding: 16px;
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.legal-container .highlight strong { 
+  color: #856404; 
+}
+
+.legal-container .back-link,
+.legal-container .back {
+  text-align: center;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 2px solid #eee;
+}
+
+.legal-container .back-link a,
+.legal-container .back a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .legal-container { 
+    padding: 20px; 
+  }
+}
