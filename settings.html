@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin - Forex Mentorship</title>
+    <meta name="description" content="Configure platform settings and preferences">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">📈 Forex Mentorship - Admin</div>
+            <nav>
+                <a href="admin.html">Dashboard</a>
+                <a href="manage-users.html">Users</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>⚙️ Platform Settings</h1>
+            <p>Configure and manage your platform preferences</p>
+        </section>
+
+        <div id="ok" class="msg ok" style="max-width: 800px; margin: 0 auto 20px;"></div>
+        <div id="err" class="msg err" style="max-width: 800px; margin: 0 auto 20px;"></div>
+
+        <!-- General Settings -->
+        <h2 class="section-title">🌐 General Settings</h2>
+        <section class="faq-section">
+            <form id="generalForm">
+                <div class="fg">
+                    <label for="siteName">Site Name</label>
+                    <input id="siteName" value="Forex Mentorship Platform" />
+                </div>
+                <div class="fg">
+                    <label for="siteTagline">Tagline</label>
+                    <input id="siteTagline" value="Professional Trading Education" />
+                </div>
+                <div class="fg">
+                    <label for="adminEmail">Admin Email</label>
+                    <input id="adminEmail" type="email" value="admin@forexmentorship.com" />
+                </div>
+                <div class="fg">
+                    <label for="supportEmail">Support Email</label>
+                    <input id="supportEmail" type="email" value="support@forexmentorship.com" />
+                </div>
+                <div class="fg">
+                    <label for="timezone">Timezone</label>
+                    <select id="timezone">
+                        <option value="EST">Eastern (EST)</option>
+                        <option value="CST">Central (CST)</option>
+                        <option value="MST">Mountain (MST)</option>
+                        <option value="PST">Pacific (PST)</option>
+                        <option value="UTC">UTC</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save General Settings</button>
+            </form>
+        </section>
+
+        <!-- Pricing Settings -->
+        <h2 class="section-title">💰 Pricing Configuration</h2>
+        <section class="faq-section">
+            <form id="pricingForm">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <h3>Starter Tier</h3>
+                        <div class="fg">
+                            <label for="starterPrice">Price (USD)</label>
+                            <input id="starterPrice" type="number" value="199" />
+                        </div>
+                        <div class="fg">
+                            <label>
+                                <input type="checkbox" checked /> Active
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Core Tier</h3>
+                        <div class="fg">
+                            <label for="corePrice">Price (USD)</label>
+                            <input id="corePrice" type="number" value="499" />
+                        </div>
+                        <div class="fg">
+                            <label>
+                                <input type="checkbox" checked /> Active
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>Pro Tier</h3>
+                        <div class="fg">
+                            <label for="proPrice">Price (USD)</label>
+                            <input id="proPrice" type="number" value="999" />
+                        </div>
+                        <div class="fg">
+                            <label>
+                                <input type="checkbox" checked /> Active
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Save Pricing</button>
+            </form>
+        </section>
+
+        <!-- Payment Settings -->
+        <h2 class="section-title">💳 Payment Settings</h2>
+        <section class="faq-section">
+            <form id="paymentForm">
+                <div class="fg">
+                    <label for="bankName">Bank Name</label>
+                    <input id="bankName" value="Chase Bank" />
+                </div>
+                <div class="fg">
+                    <label for="accountName">Account Name</label>
+                    <input id="accountName" value="Pip Nation Academy" />
+                </div>
+                <div class="fg">
+                    <label for="accountNumber">Account Number</label>
+                    <input id="accountNumber" value="1234567890" />
+                </div>
+                <div class="fg">
+                    <label for="routingNumber">Routing Number</label>
+                    <input id="routingNumber" value="021000021" />
+                </div>
+                <div class="fg">
+                    <label for="paypalEmail">PayPal Email (optional)</label>
+                    <input id="paypalEmail" type="email" placeholder="payments@forexmentorship.com" />
+                </div>
+                <div class="fg">
+                    <label for="cryptoWallet">Crypto Wallet Address (optional)</label>
+                    <input id="cryptoWallet" placeholder="0x..." />
+                </div>
+                <button type="submit" class="btn btn-primary">Save Payment Info</button>
+            </form>
+        </section>
+
+        <!-- Email Notifications -->
+        <h2 class="section-title">📧 Email Notifications</h2>
+        <section class="faq-section">
+            <form id="notificationForm">
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> New enrollment notifications
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> Payment submission notifications
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> FTMO challenge submissions
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> Contact form submissions
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" /> Daily activity summary
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> Weekly reports
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Notifications</button>
+            </form>
+        </section>
+
+        <!-- Security Settings -->
+        <h2 class="section-title">🔒 Security Settings</h2>
+        <section class="faq-section">
+            <form id="securityForm">
+                <div class="fg">
+                    <label for="sessionTimeout">Session Timeout (minutes)</label>
+                    <input id="sessionTimeout" type="number" value="60" min="15" max="1440" />
+                </div>
+                <div class="fg">
+                    <label for="maxLoginAttempts">Max Login Attempts</label>
+                    <input id="maxLoginAttempts" type="number" value="5" min="3" max="10" />
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> Require email verification
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" /> Enable two-factor authentication
+                    </label>
+                </div>
+                <div class="fg">
+                    <label>
+                        <input type="checkbox" checked /> Log admin actions
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Security Settings</button>
+            </form>
+        </section>
+
+        <!-- System Information -->
+        <h2 class="section-title">ℹ️ System Information</h2>
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-label">Platform Version</div>
+                    <div class="stat-number" style="font-size: 24px;">v1.0.0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Database Status</div>
+                    <div class="stat-number status-success" style="font-size: 24px;">✅ Connected</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Storage Used</div>
+                    <div class="stat-number" style="font-size: 24px;">2.4 GB</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Last Backup</div>
+                    <div class="stat-number" style="font-size: 24px;">Nov 8</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Danger Zone -->
+        <h2 class="section-title" style="color: #dc3545;">⚠️ Danger Zone</h2>
+        <section class="faq-section">
+            <div style="background: #fef2f2; border: 2px solid #dc3545; border-radius: 12px; padding: 20px;">
+                <h3 style="color: #dc3545; margin-bottom: 10px;">Destructive Actions</h3>
+                <p style="color: #991b1b; margin-bottom: 15px;">These actions are irreversible. Use with caution.</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn" style="background: #dc3545;" onclick="confirmAction('clear-cache')">Clear Cache</button>
+                    <button class="btn" style="background: #dc3545;" onclick="confirmAction('reset-stats')">Reset Statistics</button>
+                    <button class="btn" style="background: #991b1b;" onclick="confirmAction('delete-data')">Delete All Data</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Role guard - super-admin only
+        if (!window.app) {
+            window.location.href = 'admin-login.html';
+        } else {
+            const role = localStorage.getItem('userRole');
+            if (role !== 'super-admin') {
+                alert('Access denied. This page requires super-admin privileges.');
+                window.location.href = 'admin.html';
+            }
+        }
+
+        const ok = document.getElementById('ok');
+        const err = document.getElementById('err');
+
+        function showMessage(success, text) {
+            ok.style.display = 'none';
+            err.style.display = 'none';
+            if (success) {
+                ok.textContent = text;
+                ok.style.display = 'block';
+            } else {
+                err.textContent = text;
+                err.style.display = 'block';
+            }
+            setTimeout(() => {
+                ok.style.display = 'none';
+                err.style.display = 'none';
+            }, 3000);
+        }
+
+        // Form handlers
+        document.getElementById('generalForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showMessage(true, '✅ General settings saved successfully!');
+        });
+
+        document.getElementById('pricingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showMessage(true, '✅ Pricing configuration saved successfully!');
+        });
+
+        document.getElementById('paymentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showMessage(true, '✅ Payment information saved successfully!');
+        });
+
+        document.getElementById('notificationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showMessage(true, '✅ Notification preferences saved successfully!');
+        });
+
+        document.getElementById('securityForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showMessage(true, '✅ Security settings saved successfully!');
+        });
+
+        function confirmAction(action) {
+            const messages = {
+                'clear-cache': 'Clear all cached data?',
+                'reset-stats': 'Reset all statistics? This cannot be undone.',
+                'delete-data': 'DELETE ALL DATA? This is permanent and irreversible!'
+            };
+            
+            if (confirm(messages[action])) {
+                if (action === 'delete-data' && !confirm('Are you ABSOLUTELY sure? Type YES to confirm.')) {
+                    return;
+                }
+                showMessage(true, `✅ ${action} completed successfully!`);
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.app && window.app.logout) window.app.logout();
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

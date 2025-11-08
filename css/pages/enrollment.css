@@ -15,11 +15,17 @@
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #fff;
   padding: 28px 24px;
+  text-align: center;
 }
 
 .enrollment-header h1 { 
   font-size: 28px; 
   margin-bottom: 6px; 
+}
+
+.enrollment-header p {
+  margin: 0;
+  opacity: 0.95;
 }
 
 .enrollment-content { 
@@ -41,10 +47,11 @@
   margin-left: auto;
   font-weight: 900;
   color: #111827;
+  font-size: 20px;
 }
 
 @media (max-width: 768px) {
   .enrollment-container { 
-    padding: 20px; 
+    margin: 18px; 
   }
 }

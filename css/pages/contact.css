@@ -23,6 +23,11 @@
   margin-bottom: 6px; 
 }
 
+.contact-header p {
+  margin: 0;
+  opacity: 0.95;
+}
+
 .contact-content { 
   padding: 24px; 
 }
@@ -43,7 +48,13 @@
 
 .method b { 
   display: block; 
-  margin-bottom: 6px; 
+  margin-bottom: 6px;
+  color: var(--color-text);
+}
+
+.method a {
+  color: var(--color-primary);
+  word-break: break-all;
 }
 
 .contact-footer {
@@ -51,6 +62,7 @@
   text-align: center;
   color: #666;
   font-size: 13px;
+  background: #f9fafb;
 }
 
 .contact-footer .links a { 
@@ -66,6 +78,9 @@
 
 @media (max-width: 768px) {
   .contact-container { 
-    padding: 20px; 
+    margin: 18px; 
+  }
+  .methods {
+    grid-template-columns: 1fr;
   }
 }

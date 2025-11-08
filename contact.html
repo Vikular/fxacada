@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us - Forex Mentorship</title>
+  <meta name="description" content="Contact Forex Mentorship support team" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:40px 20px;color:#333}
+    .container{max-width:700px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden}
+    .header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:28px 24px;text-align:center}
+    .header h1{font-size:28px;margin-bottom:6px}
+    .content{padding:26px}
+    .methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:20px}
+    .method{background:#f7f7fb;border:1px solid #eee;border-radius:12px;padding:14px}
+    .method b{display:block;margin-bottom:6px}
+    .form-group{margin-bottom:16px}
+    label{display:block;margin-bottom:6px;font-weight:600}
+    input,textarea{width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:10px;font-size:14px}
+    input:focus,textarea:focus{outline:none;border-color:#667eea;background:#fafbff}
+    textarea{min-height:120px;resize:vertical}
+    .btn{width:100%;padding:14px;border:none;border-radius:10px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea,#764ba2)}
+    .note{font-size:12px;color:#666;margin-top:10px;text-align:center}
+    .footer{padding:18px;text-align:center;color:#666;font-size:13px}
+    .links a{color:#667eea;text-decoration:none;margin:0 8px}
+    .msg{display:none;margin-bottom:12px;padding:12px;border-radius:10px;font-size:14px}
+    .msg.ok{background:#ecfdf3;color:#166534;border:1px solid #bbf7d0}
+    .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Contact Us</h1>
+      <p>We usually reply within 24 hours.</p>
+    </div>
+    <div class="content">
+      <div class="methods">
+        <div class="method">
+          <b>Email</b>
+          <a href="mailto:support@forexmentorship.com">support@forexmentorship.com</a>
+        </div>
+        <div class="method">
+          <b>WhatsApp</b>
+          +1 (555) 123-4567
+        </div>
+        <div class="method">
+          <b>Hours</b>
+          Mon–Fri, 9 AM–6 PM EST
+        </div>
+      </div>
+
+      <div id="ok" class="msg ok">Message sent. We’ll get back to you soon.</div>
+      <div id="err" class="msg err"></div>
+
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="name">Name *</label>
+          <input id="name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input id="email" type="email" required />
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input id="subject" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea id="message" required></textarea>
+        </div>
+        <button class="btn" type="submit">Send Message</button>
+        <div class="note">This sends a placeholder notification only.</div>
+      </form>
+    </div>
+    <div class="footer">
+      <div class="links">
+        <a href="index.html">Home</a> •
+        <a href="terms.html">Terms</a> •
+        <a href="privacy.html">Privacy</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form=document.getElementById('contactForm');
+    const ok=document.getElementById('ok');
+    const err=document.getElementById('err');
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      ok.style.display='none'; err.style.display='none'; err.textContent='';
+      const name=document.getElementById('name').value.trim();
+      const email=document.getElementById('email').value.trim();
+      const subject=document.getElementById('subject').value.trim();
+      const message=document.getElementById('message').value.trim();
+
+      if(!name||!email||!subject||!message){
+        err.textContent='Please fill all required fields.'; err.style.display='block'; return;
+      }
+      // Placeholder submit. Replace with your API/Email service if needed.
+      ok.style.display='block';
+      form.reset();
+    });
+  </script>
+</body>
+</html>

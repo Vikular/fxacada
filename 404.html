@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Forex Mentorship</title>
+    <meta name="description" content="The page you're looking for doesn't exist">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+        }
+        .error-code {
+            font-size: 120px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        .error-title {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .error-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .error-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .search-box {
+            margin: 30px 0;
+        }
+        .search-box input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .popular-links {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e5e7eb;
+        }
+        .popular-links h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            text-align: left;
+        }
+        .link-item {
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+        .link-item:hover {
+            background: #fff;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        .link-item a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .link-item p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 80px;
+            }
+            .error-title {
+                font-size: 24px;
+            }
+            .error-message {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">🤔 Page Not Found</h1>
+        <p class="error-message">
+            Oops! The page you're looking for doesn't exist. It might have been moved, deleted, or you may have mistyped the URL.
+        </p>
+
+        <div class="error-links">
+            <a href="index.html" class="btn btn-primary">🏠 Back to Home</a>
+            <a href="contact.html" class="btn btn-secondary">📧 Contact Support</a>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search our site..." />
+        </div>
+
+        <div class="popular-links">
+            <h3>Popular Pages</h3>
+            <div class="links-grid">
+                <div class="link-item">
+                    <a href="index.html#pricing">
+                        💰 Pricing & Plans
+                    </a>
+                    <p>View our mentorship tiers</p>
+                </div>
+                <div class="link-item">
+                    <a href="auth-modal.html">
+                        🔐 Student Login
+                    </a>
+                    <p>Access your dashboard</p>
+                </div>
+                <div class="link-item">
+                    <a href="enrollment.html">
+                        📝 Enrollment
+                    </a>
+                    <p>Join our program</p>
+                </div>
+                <div class="link-item">
+                    <a href="index.html#courses">
+                        📚 Courses
+                    </a>
+                    <p>What you'll learn</p>
+                </div>
+                <div class="link-item">
+                    <a href="index.html#testimonials">
+                        ⭐ Reviews
+                    </a>
+                    <p>Student testimonials</p>
+                </div>
+                <div class="link-item">
+                    <a href="index.html#faq">
+                        ❓ FAQ
+                    </a>
+                    <p>Common questions</p>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top: 40px; color: #999; font-size: 14px;">
+            Error Code: 404 | <a href="mailto:support@forexmentorship.com" style="color: #667eea;">Report this issue</a>
+        </p>
+    </div>
+
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = e.target.value.trim().toLowerCase();
+                
+                // Simple routing based on keywords
+                if (query.includes('login') || query.includes('signin')) {
+                    window.location.href = 'auth-modal.html';
+                } else if (query.includes('price') || query.includes('plan') || query.includes('tier')) {
+                    window.location.href = 'index.html#pricing';
+                } else if (query.includes('enroll') || query.includes('register') || query.includes('signup')) {
+                    window.location.href = 'enrollment.html';
+                } else if (query.includes('contact') || query.includes('support')) {
+                    window.location.href = 'contact.html';
+                } else if (query.includes('admin')) {
+                    window.location.href = 'admin-login.html';
+                } else if (query.includes('course') || query.includes('learn')) {
+                    window.location.href = 'index.html#courses';
+                } else if (query.includes('faq') || query.includes('question')) {
+                    window.location.href = 'index.html#faq';
+                } else if (query.includes('review') || query.includes('testimonial')) {
+                    window.location.href = 'index.html#testimonials';
+                } else if (query) {
+                    alert(`No results found for "${query}". Try a different search term.`);
+                }
+            }
+        });
+
+        // Auto-focus search on page load
+        window.addEventListener('load', () => {
+            document.getElementById('searchInput').focus();
+        });
+    </script>
+    <script src="js/interactions.js"></script>
+</body>
+</html>

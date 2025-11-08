@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enrollment - Forex Mentorship</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Enroll in the Forex Mentorship program" />
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:40px 20px;color:#333}
+    .container{max-width:860px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden}
+    .header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:28px 24px}
+    .header h1{font-size:28px;margin-bottom:6px}
+    .content{padding:26px}
+    .plan{display:flex;gap:16px;align-items:center;background:#f7f7fb;border:1px solid #eee;border-radius:12px;padding:14px 16px;margin-bottom:18px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px}
+    .price{margin-left:auto;font-weight:800;color:#111827}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .form-group{margin-bottom:16px}
+    .form-group.full{grid-column:1/-1}
+    label{display:block;margin-bottom:6px;font-weight:600}
+    input,textarea,select{width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:10px;font-size:14px}
+    input:focus,textarea:focus,select:focus{outline:none;border-color:#667eea;background:#fafbff}
+    textarea{min-height:120px;resize:vertical}
+    .btn{width:100%;padding:14px;border:none;border-radius:10px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea,#764ba2);margin-top:6px}
+    .small{font-size:12px;color:#666;margin-top:8px}
+    .links{text-align:center;margin-top:16px}
+    .links a{color:#667eea;text-decoration:none}
+    .links a:hover{text-decoration:underline}
+    .msg{display:none;margin-bottom:12px;padding:12px;border-radius:10px;font-size:14px}
+    .msg.ok{background:#ecfdf3;color:#166534;border:1px solid #bbf7d0}
+    .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Enroll in Forex Mentorship</h1>
+      <p>Complete the form to get payment instructions and access.</p>
+    </div>
+    <div class="content">
+      <div class="plan">
+        <span id="planPill" class="pill">Tier: starter</span>
+        <span id="planDesc">Starter access with core materials</span>
+        <span id="planPrice" class="price">$199</span>
+      </div>
+
+      <div id="ok" class="msg ok">Enrollment received. Check your email for next steps.</div>
+      <div id="err" class="msg err"></div>
+
+      <form id="enrollForm" novalidate>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="firstName">First name *</label>
+            <input id="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last name *</label>
+            <input id="lastName" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input id="email" type="email" required />
+          </div>
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp (optional)</label>
+            <input id="whatsapp" placeholder="+1 555 123 4567" />
+          </div>
+          <div class="form-group">
+            <label for="tier">Plan</label>
+            <select id="tier">
+              <option value="starter">Starter - $199</option>
+              <option value="core">Core - $499</option>
+              <option value="pro">Pro - $999</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label for="notes">Notes (optional)</label>
+            <textarea id="notes" placeholder="Anything we should know?"></textarea>
+          </div>
+        </div>
+
+        <button class="btn" type="submit">Complete Enrollment</button>
+        <div class="small">By enrolling you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</div>
+        <div class="links"><a href="index.html">← Back to Home</a></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const pricing = {
+      starter: { price: 199, desc: 'Starter access with core materials' },
+      core: { price: 499, desc: 'Core tier with live sessions (3x/week)' },
+      pro: { price: 999, desc: 'Pro tier with FTMO coaching and VIP support' }
+    };
+
+    function setTier(tier) {
+      const t = pricing[tier] ? tier : 'starter';
+      const pill = document.getElementById('planPill');
+      const desc = document.getElementById('planDesc');
+      const price = document.getElementById('planPrice');
+      const sel = document.getElementById('tier');
+
+      pill.textContent = 'Tier: ' + t;
+      desc.textContent = pricing[t].desc;
+      price.textContent = '$' + pricing[t].price;
+      sel.value = t;
+    }
+
+    // Initialize from URL ?tier=...
+    const params = new URLSearchParams(location.search);
+    setTier((params.get('tier') || '').toLowerCase());
+
+    // Keep summary in sync when user changes dropdown
+    document.getElementById('tier').addEventListener('change', e => setTier(e.target.value));
+
+    const form = document.getElementById('enrollForm');
+    const ok = document.getElementById('ok');
+    const err = document.getElementById('err');
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      ok.style.display = 'none'; err.style.display = 'none'; err.textContent = '';
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName = document.getElementById('lastName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const whatsapp = document.getElementById('whatsapp').value.trim();
+      const tier = document.getElementById('tier').value;
+      const notes = document.getElementById('notes').value.trim();
+
+      if (!firstName || !lastName || !email) {
+        err.textContent = 'Please fill all required fields.'; err.style.display = 'block'; return;
+      }
+
+      // Placeholder submit. Replace with API call if needed.
+      // Example (if you wire up backend):
+      // await fetch('/api/enroll', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ firstName,lastName,email,whatsapp,tier,notes }) });
+
+      ok.style.display = 'block';
+      form.reset();
+      setTier(tier); // keep selection after reset
+    });
+  </script>
+</body>
+</html>

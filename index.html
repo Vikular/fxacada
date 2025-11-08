@@ -272,14 +272,12 @@
         </div>
     </footer>
 
-    <!-- Supabase JavaScript Client -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    <!-- Main JavaScript -->
     <script src="js/main.js"></script>
-
-    <!-- System Status Check -->
     <script>
-        window.addEventListener('load', async () => {
+        // System Status Check
+        async function checkSystemStatus() {
             const dbStatus = document.getElementById('db-status');
             const apiStatus = document.getElementById('api-status');
 
@@ -307,14 +305,16 @@
                 apiStatus.textContent = '⚠️ Not deployed (Edge Function needed)';
                 apiStatus.className = 'status-value status-warning';
             }
-        });
+        }
+
+        window.addEventListener('load', checkSystemStatus);
 
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(a=>{
-            a.addEventListener('click',e=>{
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
                 e.preventDefault();
-                const t=document.querySelector(a.getAttribute('href'));
-                if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
     </script>

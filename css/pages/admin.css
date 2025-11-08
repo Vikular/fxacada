@@ -19,6 +19,7 @@
 
 @media (max-width: 768px) {
   .admin-container { 
-    padding: 20px; 
+    margin: 18px;
+    padding: 16px; 
   }
 }

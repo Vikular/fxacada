@@ -9,4 +9,9 @@
   color: #3730a3;
   font-weight: 800;
   font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="alternate icon" href="/favicon.ico">

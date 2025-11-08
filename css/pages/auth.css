@@ -6,6 +6,7 @@
   place-items: center;
   min-height: 100vh;
   padding: 20px;
+  background: var(--color-bg);
 }
 
 .auth-wrap {
@@ -19,12 +20,14 @@
 }
 
 .auth-wrap h1 { 
-  margin-bottom: 6px; 
+  margin-bottom: 6px;
+  font-size: 26px;
 }
 
 .auth-wrap .sub {
   color: var(--color-text-light);
   margin-bottom: 14px;
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {

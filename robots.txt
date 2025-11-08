@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /admin-login.html
+Disallow: /manage-users.html
+Disallow: /reports.html
+Disallow: /settings.html
+Disallow: /student.html
+Disallow: /submit-payment.html
+Disallow: /submit-ftmo.html
+Disallow: /js/
+Disallow: /css/
+
+Sitemap: https://forexmentorship.com/sitemap.xml
