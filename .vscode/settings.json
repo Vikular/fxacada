@@ -1,4 +1,8 @@
 {
     "git.ignoreLimitWarning": true,
-    "liveServer.settings.port": 5501
+    "liveServer.settings.port": 5501,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.eol": "\n",
+    "html.format.wrapAttributes": "force-aligned"
 }
