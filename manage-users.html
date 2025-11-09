@@ -1,144 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Users - Admin - Forex Mentorship</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Users - Admin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/includes.js" defer></script>
+  <script src="js/admin-users.js" defer></script>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">📈 Forex Mentorship - Admin</div>
-            <nav>
-                <a href="admin.html">Dashboard</a>
-                <a href="manage-users.html">Users</a>
-                <a href="reports.html">Reports</a>
-                <a href="settings.html">Settings</a>
-                <a href="#" id="logoutBtn">Logout</a>
-            </nav>
-        </div>
-    </header>
+  <div data-include="partials/header.html"></div>
 
-    <div class="admin-container">
-        <h1>👥 Manage Users</h1>
-        
-        <div class="msg ok hidden" id="successMsg"></div>
-        <div class="msg err hidden" id="errorMsg"></div>
-
-        <div class="filter-controls">
-            <input type="text" id="searchInput" placeholder="🔍 Search by name or email..." class="search-input">
-            <select id="filterTier" class="filter-select" aria-label="Filter by tier">
-                <option value="">All Tiers</option>
-                <option value="starter">Starter</option>
-                <option value="core">Core</option>
-                <option value="pro">Pro</option>
-            </select>
-            <select id="filterPayment" class="filter-select" aria-label="Filter by payment status">
-                <option value="">All Payments</option>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-            </select>
-        </div>
-
-        <div id="usersTable" class="table-container">
-            <table class="users-table">
-                <thead class="table-header">
-                    <tr>
-                        <th class="table-th">Name</th>
-                        <th class="table-th">Email</th>
-                        <th class="table-th">Tier</th>
-                        <th class="table-th">Payment</th>
-                        <th class="table-th">Enrolled</th>
-                        <th class="table-th text-center">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="usersTableBody">
-                    <tr>
-                        <td colspan="6" class="loading-cell">
-                            Loading users...
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div class="pagination-container">
-            <div id="userCount" class="user-count">Showing 0 users</div>
-            <div class="pagination-buttons">
-                <button id="prevPage" class="btn btn-secondary" disabled>← Previous</button>
-                <button id="nextPage" class="btn btn-secondary" disabled>Next →</button>
-            </div>
-        </div>
+  <main class="container">
+    <h1>Manage Users</h1>
+    <div class="filters">
+      <input class="input" id="search" placeholder="Search email..." />
+      <select class="select" id="tier" aria-label="Filter by tier">
+        <option value="">All tiers</option>
+        <option value="starter">Starter</option>
+        <option value="core">Core</option>
+        <option value="pro">Pro</option>
+      </select>
     </div>
 
-    <!-- Edit User Modal -->
-    <div id="editModal" class="modal hidden">
-        <div class="modal-content">
-            <h2 class="modal-title">Edit User</h2>
-            <form id="editUserForm">
-                <input type="hidden" id="editUserId">
-                <div class="fg">
-                    <label for="editName">Full Name</label>
-                    <input type="text" id="editName" required>
-                </div>
-                <div class="fg">
-                    <label for="editEmail">Email</label>
-                    <input type="email" id="editEmail" required>
-                </div>
-                <div class="fg">
-                    <label for="editTier">Tier</label>
-                    <select id="editTier" required>
-                        <option value="starter">Starter</option>
-                        <option value="core">Core</option>
-                        <option value="pro">Pro</option>
-                    </select>
-                </div>
-                <div class="fg">
-                    <label for="editPaymentStatus">Payment Status</label>
-                    <select id="editPaymentStatus" required>
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
-                    </select>
-                </div>
-                <div class="modal-actions">
-                    <button type="submit" class="btn btn-primary flex-1">Save Changes</button>
-                    <button type="button" id="cancelEdit" class="btn btn-secondary flex-1">Cancel</button>
-                </div>
-            </form>
-        </div>
+    <div class="table-wrap">
+      <table class="table" id="usersTable">
+        <thead>
+          <tr><th>Email</th><th>Name</th><th>Tier</th><th>Status</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
     </div>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/interactions.js"></script>
-    <script>
-        // Check admin access
-        if (!window.app) {
-            window.location.href = 'admin-login.html';
-        } else {
-            const role = localStorage.getItem('userRole');
-            if (role !== 'limited-admin' && role !== 'super-admin') {
-                window.location.href = 'admin-login.html';
-            }
-        }
-
-        // Load users functionality would go here
-        document.getElementById('logoutBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (window.app && window.app.logout) window.app.logout();
-            localStorage.clear();
-            window.location.href = 'index.html';
-        });
-    </script>
+  <div data-include="partials/footer.html"></div>
 </body>
 </html>

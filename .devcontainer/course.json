@@ -1,0 +1,28 @@
+{
+  "id": "course-pro-trading",
+  "title": "Advanced Forex Strategy",
+  "tier": "pro",
+  "description": "High-probability strategy modules, executions and psychology.",
+  "modules": [
+    {
+      "id": "module-1",
+      "title": "Market Structure",
+      "order": 1,
+      "lessons": [
+        {
+          "id": "lesson-1-1",
+            "title": "Understanding Multi-Timeframe Structure",
+            "type": "video",
+            "durationMinutes": 14,
+            "videoUrl": "https://.../structure.mp4",
+            "resources": [
+              { "id": "res-1", "type": "pdf", "title": "Structure Cheat Sheet", "url": "https://.../structure.pdf" }
+            ]
+        }
+      ]
+    }
+  ],
+  "tags": ["structure", "liquidity", "execution"],
+  "published": true,
+  "updatedAt": "2025-11-09T10:00:00Z"
+}

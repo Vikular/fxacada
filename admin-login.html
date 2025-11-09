@@ -1,40 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Forex Mentorship</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Forex Mentorship</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .auth-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1f2937 0%, #111827 100%); }
+    .auth-wrap { background: #fff; border-radius: 16px; padding: 40px; max-width: 420px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+    .auth-wrap h1 { margin: 0 0 8px; text-align: center; color: #1f2937; }
+    .auth-wrap .sub { text-align: center; color: var(--text-light); margin: 0 0 24px; }
+    .auth-wrap form { display: flex; flex-direction: column; gap: 16px; }
+    .auth-wrap label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 14px; }
+    .auth-wrap .links { font-size: 14px; }
+    .auth-wrap .links a { color: var(--primary); font-weight: 600; }
+    .admin-badge { display: inline-block; background: #fbbf24; color: #92400e; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-bottom: 16px; }
+  </style>
 </head>
 <body class="auth-page">
-    <div class="auth-wrap">
-        <h1>🛡️ Admin Login</h1>
-        <p class="sub">Access the admin dashboard</p>
-        
-        <div class="msg err" id="errorMsg"></div>
-        
-        <form id="adminLoginForm">
-            <div class="fg">
-                <label for="email">Admin Email</label>
-                <input type="email" id="email" name="email" required placeholder="admin@forexmentorship.com">
-            </div>
-            <div class="fg">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required placeholder="Enter admin password">
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">Login as Admin</button>
-        </form>
-        
-        <div class="links">
-            <a href="auth-modal.html">Student Login</a> | <a href="index.html">Back to Home</a>
-        </div>
+  <div class="auth-wrap">
+    <div style="text-align: center;">
+      <span class="admin-badge">🛡️ ADMIN ACCESS</span>
     </div>
+    <h1>Admin Login</h1>
+    <p class="sub">Secure administrator portal</p>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/interactions.js"></script>
+    <div class="msg err" id="errorMsg" style="display:none;"></div>
+    <div class="msg ok" id="successMsg" style="display:none;"></div>
+
+    <form id="adminLoginForm">
+      <label>Admin Email
+        <input type="email" id="adminEmail" name="email" class="input" required placeholder="admin@forexmentor.com" autocomplete="email" />
+      </label>
+      <label>Password
+        <input type="password" id="adminPassword" name="password" class="input" required placeholder="••••••••" autocomplete="current-password" />
+      </label>
+      <button type="submit" class="btn btn-primary full-width">Login as Admin</button>
+    </form>
+
+    <div class="links" style="margin-top: 20px; text-align: center;">
+      <p><a href="auth-modal.html">← Student Login</a></p>
+      <p><a href="index.html">← Back to Home</a></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js"></script>
+  <script>
+    const form = document.getElementById('adminLoginForm');
+    const errorMsg = document.getElementById('errorMsg');
+    const successMsg = document.getElementById('successMsg');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorMsg.style.display = 'none';
+      successMsg.style.display = 'none';
+
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+
+      try {
+        const { data, error } = await window.supabaseClient.rpc('verify_user_password', {
+          p_email: email,
+          p_password: password
+        });
+
+        if (error) throw new Error('Authentication failed');
+        if (!data || data.length === 0) {
+          errorMsg.textContent = 'Invalid email or password';
+          errorMsg.style.display = 'block';
+          return;
+        }
+
+        const user = data[0];
+
+        if (!['admin', 'super-admin', 'limited-admin'].includes(user.role)) {
+          errorMsg.textContent = 'Access denied. Admin credentials required.';
+          errorMsg.style.display = 'block';
+          return;
+        }
+
+        await window.supabaseClient.rpc('update_last_login', { p_user_id: user.user_id });
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user_role', user.role);
+        
+        await window.supabaseClient.from('admin_audit_log').insert({
+          admin_id: user.user_id,
+          action: 'login',
+          resource_type: 'auth',
+          details: { email: user.email, role: user.role }
+        });
+
+        successMsg.textContent = 'Admin login successful! Redirecting...';
+        successMsg.style.display = 'block';
+
+        setTimeout(() => { window.location.href = 'admin.html'; }, 1000);
+
+      } catch (err) {
+        console.error('Admin login error:', err);
+        errorMsg.textContent = 'Login failed. Please try again.';
+        errorMsg.style.display = 'block';
+      }
+    });
+  </script>
 </body>
 </html>

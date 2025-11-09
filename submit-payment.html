@@ -1,65 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Payment Proof - Forex Mentorship</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Submit Payment Proof - Forex Mentorship</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="stylesheet" href="css/globals.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/includes.js" defer></script>
 </head>
-<body class="auth-page">
-    <div class="auth-wrap">
-        <h1>💳 Submit Payment Proof</h1>
-        <p class="sub">Upload your payment confirmation to activate your account</p>
+<body>
+  <div data-include="partials/header.html"></div>
 
-        <div class="msg ok" id="successMsg" style="display:none;"></div>
-        <div class="msg err" id="errorMsg" style="display:none;"></div>
+  <main class="container">
+    <h1>💳 Submit Payment Proof</h1>
+    <p class="msg ok" id="successMsg" hidden></p>
+    <p class="msg err" id="errorMsg" hidden></p>
 
-        <form id="paymentForm">
-            <div class="fg">
-                <label for="paymentMethod">Payment Method *</label>
-                <select id="paymentMethod" name="paymentMethod" required>
-                    <option value="">Select method</option>
-                    <option value="bank">Bank Transfer</option>
-                    <option value="paypal">PayPal</option>
-                    <option value="crypto">Cryptocurrency</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+    <form id="paymentForm" class="card" enctype="multipart/form-data" novalidate>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <label>Payment Method
+          <select id="paymentMethod" name="paymentMethod" class="select" required>
+            <option value="">Select method</option>
+            <option value="bank">Bank Transfer</option>
+            <option value="paypal">PayPal</option>
+            <option value="crypto">Cryptocurrency</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>Transaction ID
+          <input type="text" id="transactionId" name="transactionId" class="input" required placeholder="TXN123456" />
+        </label>
+        <label>Amount (USD)
+          <input type="number" id="amount" name="amount" class="input" required min="1" placeholder="199" />
+        </label>
+        <label>Receipt / Screenshot
+          <input type="file" id="screenshot" name="screenshot" class="input" accept="image/*,.pdf" required />
+          <span class="small">JPG, PNG, PDF. Max 5MB.</span>
+        </label>
+      </div>
+      <label>Notes (Optional)
+        <textarea id="notes" name="notes" class="input" rows="3" placeholder="Any additional information..."></textarea>
+      </label>
+      <button type="submit" class="btn btn-primary full-width">Submit for Review</button>
+    </form>
+  </main>
 
-            <div class="fg">
-                <label for="transactionId">Transaction ID *</label>
-                <input type="text" id="transactionId" name="transactionId" required placeholder="e.g., TXN123456789">
-            </div>
+  <div data-include="partials/footer.html"></div>
 
-            <div class="fg">
-                <label for="amount">Amount Paid (USD) *</label>
-                <input type="number" id="amount" name="amount" required placeholder="e.g., 199" min="1">
-            </div>
+  <script>
+    const f = document.getElementById('paymentForm');
+    const ok = document.getElementById('successMsg');
+    const err = document.getElementById('errorMsg');
+    f?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.hidden = true; err.hidden = true;
+      const fd = new FormData(f);
+      // Basic client validation
+      if (!fd.get('paymentMethod') || !fd.get('transactionId') || !fd.get('amount') || !fd.get('screenshot')) {
+        err.textContent = 'Please complete all required fields.'; err.hidden = false; return;
+      }
+      // TODO: send to backend or email service
+      await new Promise(r => setTimeout(r, 600));
+      ok.textContent = 'Payment submitted! We will verify shortly.'; ok.hidden = false;
+      f.reset();
+    });
+  </script>
 
-            <div class="fg">
-                <label for="screenshot">Payment Screenshot/Receipt *</label>
-                <input type="file" id="screenshot" name="screenshot" accept="image/*,.pdf" required>
-                <span class="small">Accepted: JPG, PNG, PDF (Max 5MB)</span>
-            </div>
+  <script>
+    document.getElementById('paymentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        window.location.href = 'auth-modal.html';
+        return;
+      }
 
-            <div class="fg">
-                <label for="notes">Additional Notes (Optional)</label>
-                <textarea id="notes" name="notes" rows="3" placeholder="Any additional information..."></textarea>
-            </div>
+      const formData = new FormData(e.target);
+      const file = formData.get('screenshot');
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit for Review</button>
-        </form>
+      // Upload file to Supabase Storage
+      const fileName = `${user.user_id}/${Date.now()}-${file.name}`;
+      const { data: uploadData, error: uploadError } = await supabaseClient.storage
+        .from('payment-proofs')
+        .upload(fileName, file);
 
-        <div class="links">
-            <a href="student.html">← Back to Dashboard</a>
-        </div>
-    </div>
+      if (uploadError) {
+        alert('File upload failed: ' + uploadError.message);
+        return;
+      }
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/interactions.js"></script>
+      // Get public URL
+      const { data: { publicUrl } } = supabaseClient.storage
+        .from('payment-proofs')
+        .getPublicUrl(fileName);
+
+      // Insert payment submission
+      const { error } = await supabaseClient
+        .from('payment_submissions')
+        .insert({
+          user_id: user.user_id,
+          tier: formData.get('paymentMethod'),
+          amount: parseFloat(formData.get('amount')),
+          proof_url: publicUrl,
+          notes: formData.get('notes')
+        });
+
+      if (error) {
+        alert('Submission failed: ' + error.message);
+        return;
+      }
+
+      alert('Payment submitted successfully!');
+      window.location.href = 'student.html';
+    });
+  </script>
 </body>
 </html>

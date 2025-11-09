@@ -1,58 +1,36 @@
-# Web App Project
+# Forex Mentorship Platform
 
-This project is a web application that utilizes a Supabase backend for data management. It is designed to be simple and easy to deploy on GitHub Pages.
+A comprehensive forex trading mentorship platform with tiered access, course management, and payment tracking.
 
-## Project Structure
+## Features
 
-```
-web-app-project
-├── public
-│   ├── index.html        # Main HTML document
-│   ├── css
-│   │   └── styles.css    # Styles for the web application
-│   └── js
-│       └── main.js       # Main JavaScript code
-├── src
-│   ├── config
-│   │   └── supabase.js   # Supabase client configuration
-│   ├── api
-│   │   └── index.js      # API calls to Supabase
-│   └── utils
-│       └── helpers.js    # Utility functions
-├── .github
-│   └── workflows
-│       └── deploy.yml    # GitHub Actions workflow for deployment
-├── .gitignore             # Files and directories to ignore by Git
-└── README.md              # Project documentation
-```
+- 🔐 Secure authentication (admin & student portals)
+- 📚 Tiered course content (Starter, Core, Pro)
+- 💳 Payment submission tracking
+- 🏆 FTMO challenge management
+- 👥 User role management (Lead, Student, Pro Trader, Admin)
+- 📊 Admin dashboard for reviewing submissions
 
-## Getting Started
+## Tech Stack
 
-To get started with this project, follow these steps:
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
+- **Backend:** Supabase (PostgreSQL)
+- **Authentication:** Custom auth with pgcrypto
+- **Storage:** Supabase Storage
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/web-app-project.git
-   cd web-app-project
-   ```
+## Setup
 
-2. **Install dependencies** (if any):
-   This project does not require any dependencies as it is built with plain HTML, CSS, and JavaScript.
+1. Clone the repository
+2. Create a Supabase project
+3. Run the SQL schema (see `schema.sql`)
+4. Update `js/config.js` with your Supabase credentials
+5. Start a local server (Live Server or `python -m http.server`)
 
-3. **Set up Supabase**:
-   - Create a Supabase account and a new project.
-   - Configure your Supabase settings in `src/config/supabase.js`.
+## Test Credentials
 
-4. **Run the application**:
-   Open `public/index.html` in your web browser to view the application.
-
-## Deployment
-
-This project is set up for deployment on GitHub Pages. The deployment process is automated using GitHub Actions. 
-
-1. Push your changes to the `main` branch.
-2. The GitHub Actions workflow defined in `.github/workflows/deploy.yml` will automatically build and deploy the application to GitHub Pages.
+- **Admin:** `admin@forexmentor.com` / `Admin@123456!`
+- **Student:** `student@test.com` / `Student@123`
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+MIT
