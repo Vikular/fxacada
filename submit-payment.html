@@ -4,78 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Payment Proof - Forex Mentorship</title>
-    <meta name="description" content="Submit payment proof for verification">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body class="auth-page">
-    <div class="auth-wrap" style="max-width: 600px;">
+    <div class="auth-wrap">
         <h1>💳 Submit Payment Proof</h1>
-        <p class="sub">Upload your payment confirmation for verification</p>
+        <p class="sub">Upload your payment confirmation to activate your account</p>
 
-        <div id="ok" class="msg ok"></div>
-        <div id="err" class="msg err"></div>
+        <div class="msg ok" id="successMsg" style="display:none;"></div>
+        <div class="msg err" id="errorMsg" style="display:none;"></div>
 
-        <!-- Payment Info Card -->
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 16px; margin-bottom: 20px;">
-            <h3 style="margin-bottom: 10px; color: #667eea;">Payment Information</h3>
-            <div style="margin-bottom: 8px;">
-                <strong>Account Name:</strong> Pip Nation Academy
-            </div>
-            <div style="margin-bottom: 8px;">
-                <strong>Bank:</strong> Chase Bank
-            </div>
-            <div style="margin-bottom: 8px;">
-                <strong>Account Number:</strong> 1234567890
-            </div>
-            <div style="margin-bottom: 8px;">
-                <strong>Routing Number:</strong> 021000021
-            </div>
-            <div style="background: #fff3cd; padding: 10px; border-radius: 8px; margin-top: 12px; font-size: 14px;">
-                ⚠️ <strong>Important:</strong> Include your email in the payment reference/memo
-            </div>
-        </div>
-
-        <form id="paymentForm" novalidate>
-            <div class="fg">
-                <label for="email">Your Email *</label>
-                <input id="email" type="email" placeholder="student@example.com" required />
-                <div class="small">Must match your enrollment email</div>
-            </div>
-
-            <div class="fg">
-                <label for="tier">Tier *</label>
-                <select id="tier" required>
-                    <option value="">Select your tier</option>
-                    <option value="starter">Starter - $199</option>
-                    <option value="core">Core - $499</option>
-                    <option value="pro">Pro - $999</option>
-                </select>
-            </div>
-
-            <div class="fg">
-                <label for="amount">Amount Paid (USD) *</label>
-                <input id="amount" type="number" step="0.01" placeholder="199.00" required />
-            </div>
-
-            <div class="fg">
-                <label for="transactionId">Transaction ID / Reference *</label>
-                <input id="transactionId" placeholder="TXN123456789" required />
-            </div>
-
-            <div class="fg">
-                <label for="paymentDate">Payment Date *</label>
-                <input id="paymentDate" type="date" required />
-            </div>
-
+        <form id="paymentForm">
             <div class="fg">
                 <label for="paymentMethod">Payment Method *</label>
-                <select id="paymentMethod" required>
+                <select id="paymentMethod" name="paymentMethod" required>
                     <option value="">Select method</option>
-                    <option value="bank-transfer">Bank Transfer</option>
-                    <option value="wire">Wire Transfer</option>
+                    <option value="bank">Bank Transfer</option>
                     <option value="paypal">PayPal</option>
                     <option value="crypto">Cryptocurrency</option>
                     <option value="other">Other</option>
@@ -83,107 +30,36 @@
             </div>
 
             <div class="fg">
-                <label for="screenshot">Payment Screenshot/Receipt *</label>
-                <input id="screenshot" type="file" accept="image/*,.pdf" required style="padding: 8px;" />
-                <div class="small">Accepted: JPG, PNG, PDF (max 5MB)</div>
+                <label for="transactionId">Transaction ID *</label>
+                <input type="text" id="transactionId" name="transactionId" required placeholder="e.g., TXN123456789">
             </div>
 
             <div class="fg">
-                <label for="notes">Additional Notes (optional)</label>
-                <textarea id="notes" rows="3" placeholder="Any additional information..."></textarea>
+                <label for="amount">Amount Paid (USD) *</label>
+                <input type="number" id="amount" name="amount" required placeholder="e.g., 199" min="1">
             </div>
 
-            <button class="btn" id="submitBtn" type="submit">Submit Payment Proof</button>
-            
-            <div class="small" style="text-align: center; margin-top: 12px;">
-                Verification typically takes 24-48 hours. You'll receive an email confirmation once approved.
+            <div class="fg">
+                <label for="screenshot">Payment Screenshot/Receipt *</label>
+                <input type="file" id="screenshot" name="screenshot" accept="image/*,.pdf" required>
+                <span class="small">Accepted: JPG, PNG, PDF (Max 5MB)</span>
             </div>
+
+            <div class="fg">
+                <label for="notes">Additional Notes (Optional)</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Any additional information..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit for Review</button>
         </form>
 
         <div class="links">
-            <a href="student.html">← Back to Dashboard</a> · 
-            <a href="contact.html">Need Help?</a>
+            <a href="student.html">← Back to Dashboard</a>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interactions.js"></script>
-    <script>
-        // Role guard
-        if (!window.app) {
-            window.location.href = 'auth-modal.html';
-        } else {
-            const user = localStorage.getItem('userEmail');
-            if (!user) {
-                window.location.href = 'auth-modal.html';
-            }
-            // Pre-fill email
-            document.getElementById('email').value = user;
-        }
-
-        const form = document.getElementById('paymentForm');
-        const btn = document.getElementById('submitBtn');
-        const ok = document.getElementById('ok');
-        const err = document.getElementById('err');
-
-        // Auto-fill amount based on tier
-        document.getElementById('tier').addEventListener('change', (e) => {
-            const amounts = { starter: 199, core: 499, pro: 999 };
-            const amount = amounts[e.target.value];
-            if (amount) document.getElementById('amount').value = amount;
-        });
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            ok.style.display = 'none';
-            err.style.display = 'none';
-            err.textContent = '';
-
-            const email = document.getElementById('email').value.trim();
-            const tier = document.getElementById('tier').value;
-            const amount = document.getElementById('amount').value;
-            const transactionId = document.getElementById('transactionId').value.trim();
-            const paymentDate = document.getElementById('paymentDate').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const screenshot = document.getElementById('screenshot').files[0];
-            const notes = document.getElementById('notes').value.trim();
-
-            // Validation
-            if (!email || !tier || !amount || !transactionId || !paymentDate || !paymentMethod || !screenshot) {
-                err.textContent = 'Please fill all required fields and upload a screenshot.';
-                err.style.display = 'block';
-                return;
-            }
-
-            if (screenshot.size > 5 * 1024 * 1024) {
-                err.textContent = 'File size must be less than 5MB.';
-                err.style.display = 'block';
-                return;
-            }
-
-            btn.disabled = true;
-            btn.textContent = '⏳ Submitting...';
-
-            try {
-                // In production, upload to Supabase Storage and save to database
-                // For now, simulate success
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                ok.textContent = '✅ Payment proof submitted successfully! We\'ll verify and notify you within 24-48 hours.';
-                ok.style.display = 'block';
-                form.reset();
-                
-                setTimeout(() => {
-                    window.location.href = 'student.html';
-                }, 3000);
-            } catch (ex) {
-                err.textContent = ex.message || 'Submission failed. Please try again.';
-                err.style.display = 'block';
-                btn.disabled = false;
-                btn.textContent = 'Submit Payment Proof';
-            }
-        });
-    </script>
 </body>
 </html>

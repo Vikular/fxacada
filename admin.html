@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">📈 Forex Mentorship - Admin</div>
+            <nav>
+                <a href="admin.html">Dashboard</a>
+                <a href="manage-users.html">Users</a>
+                <a href="reports.html">Reports</a>
+                <a href="settings.html">Settings</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <h1>🛡️ Admin Dashboard</h1>
+            <p>Welcome back, <span id="adminName">Admin</span></p>
+        </section>
+
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">134</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">Pending Payments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Pending FTMO Reviews</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number status-success">✅ Online</div>
+                    <div class="stat-label">System Status</div>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="section-title">🚀 Quick Actions</h2>
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Manage Users</h3>
+                <p>View, edit, and manage student accounts</p>
+                <a href="manage-users.html" class="btn btn-primary mt-20">View Users</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>View Reports</h3>
+                <p>Analytics and platform statistics</p>
+                <a href="reports.html" class="btn btn-primary mt-20">View Reports</a>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Settings</h3>
+                <p>Platform configuration and management</p>
+                <a href="settings.html" class="btn btn-primary mt-20">Open Settings</a>
+            </div>
+        </section>
+
+        <h2 class="section-title">⏰ Recent Activity</h2>
+        <section class="faq-section">
+            <div class="faq-item">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>New enrollment:</strong> John Doe (Pro Tier)
+                    </div>
+                    <span class="small">2 hours ago</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>Payment submitted:</strong> Jane Smith ($499)
+                    </div>
+                    <span class="small">5 hours ago</span>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <strong>FTMO submission:</strong> Mike Johnson (Phase 1)
+                    </div>
+                    <span class="small">1 day ago</span>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+    <script>
+        if (!window.app) {
+            window.location.href = 'admin-login.html';
+        } else {
+            const role = localStorage.getItem('userRole');
+            if (role !== 'limited-admin' && role !== 'super-admin') {
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.app && window.app.logout) window.app.logout();
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Users - Admin - Forex Mentorship</title>
-    <meta name="description" content="Manage user accounts and permissions">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-content">
             <div class="logo">📈 Forex Mentorship - Admin</div>
@@ -25,123 +23,106 @@
         </div>
     </header>
 
-    <div class="container">
-        <section class="hero">
-            <h1>👥 Manage Users</h1>
-            <p>View, edit, and manage student and admin accounts</p>
-        </section>
+    <div class="admin-container">
+        <h1>👥 Manage Users</h1>
+        
+        <div class="msg ok" id="successMsg" style="display:none;"></div>
+        <div class="msg err" id="errorMsg" style="display:none;"></div>
 
-        <!-- Filters & Search -->
-        <section class="stats-section">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+        <div style="margin-bottom: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <input type="text" id="searchInput" placeholder="🔍 Search by name or email..." style="flex: 1; min-width: 250px; padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
+            <select id="filterTier" style="padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
+                <option value="">All Tiers</option>
+                <option value="starter">Starter</option>
+                <option value="core">Core</option>
+                <option value="pro">Pro</option>
+            </select>
+            <select id="filterPayment" style="padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
+                <option value="">All Payments</option>
+                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+            </select>
+        </div>
+
+        <div id="usersTable" style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
+                <thead style="background: #f3f4f6;">
+                    <tr>
+                        <th style="padding: 12px; text-align: left; font-weight: 700;">Name</th>
+                        <th style="padding: 12px; text-align: left; font-weight: 700;">Email</th>
+                        <th style="padding: 12px; text-align: left; font-weight: 700;">Tier</th>
+                        <th style="padding: 12px; text-align: left; font-weight: 700;">Payment</th>
+                        <th style="padding: 12px; text-align: left; font-weight: 700;">Enrolled</th>
+                        <th style="padding: 12px; text-align: center; font-weight: 700;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="usersTableBody">
+                    <tr>
+                        <td colspan="6" style="padding: 40px; text-align: center; color: #6b7280;">
+                            Loading users...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <div id="userCount" style="color: #6b7280;">Showing 0 users</div>
+            <div style="display: flex; gap: 8px;">
+                <button id="prevPage" class="btn btn-secondary" disabled>← Previous</button>
+                <button id="nextPage" class="btn btn-secondary" disabled>Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; padding: 24px; border-radius: 12px; max-width: 500px; width: 90%;">
+            <h2 style="margin-bottom: 16px;">Edit User</h2>
+            <form id="editUserForm">
+                <input type="hidden" id="editUserId">
                 <div class="fg">
-                    <label for="searchUser">Search</label>
-                    <input id="searchUser" type="text" placeholder="Name or email..." />
+                    <label for="editName">Full Name</label>
+                    <input type="text" id="editName" required>
                 </div>
                 <div class="fg">
-                    <label for="filterRole">Role</label>
-                    <select id="filterRole">
-                        <option value="">All Roles</option>
-                        <option value="student">Student</option>
-                        <option value="limited-admin">Limited Admin</option>
-                        <option value="super-admin">Super Admin</option>
-                    </select>
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" required>
                 </div>
                 <div class="fg">
-                    <label for="filterTier">Tier</label>
-                    <select id="filterTier">
-                        <option value="">All Tiers</option>
+                    <label for="editTier">Tier</label>
+                    <select id="editTier" required>
                         <option value="starter">Starter</option>
                         <option value="core">Core</option>
                         <option value="pro">Pro</option>
                     </select>
                 </div>
                 <div class="fg">
-                    <label for="filterStatus">Status</label>
-                    <select id="filterStatus">
-                        <option value="">All Status</option>
-                        <option value="active">Active</option>
+                    <label for="editPaymentStatus">Payment Status</label>
+                    <select id="editPaymentStatus" required>
                         <option value="pending">Pending</option>
-                        <option value="suspended">Suspended</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
                     </select>
                 </div>
-            </div>
-        </section>
-
-        <!-- User Stats -->
-        <section class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number" id="totalUsers">0</div>
-                    <div class="stat-label">Total Users</div>
+                <div style="display: flex; gap: 12px; margin-top: 16px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                    <button type="button" id="cancelEdit" class="btn btn-secondary" style="flex: 1;">Cancel</button>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="activeUsers">0</div>
-                    <div class="stat-label">Active Students</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="pendingUsers">0</div>
-                    <div class="stat-label">Pending</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="adminUsers">0</div>
-                    <div class="stat-label">Admins</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Users Table -->
-        <h2 class="section-title">User List</h2>
-        <section class="faq-section">
-            <div style="overflow-x: auto;">
-                <table id="usersTable" style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background: #f9fafb; text-align: left;">
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Name</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Email</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Role</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Tier</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Status</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Joined</th>
-                            <th style="padding: 12px; border-bottom: 2px solid #e5e7eb;">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersBody">
-                        <!-- Dynamic content -->
-                    </tbody>
-                </table>
-            </div>
-            <div id="loadingMsg" style="text-align: center; padding: 40px; color: #666;">
-                🔄 Loading users...
-            </div>
-            <div id="emptyMsg" style="display: none; text-align: center; padding: 40px; color: #666;">
-                No users found
-            </div>
-        </section>
-
-        <!-- Add User Button -->
-        <section class="hero">
-            <h2>Add New User</h2>
-            <p>Create a new student or admin account</p>
-            <button class="btn btn-primary" onclick="alert('Add user form coming soon')">➕ Add User</button>
-        </section>
+            </form>
+        </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
-        <div class="footer-links">
-            <a href="terms.html">Terms</a>
-            <a href="privacy.html">Privacy</a>
-            <a href="contact.html">Contact</a>
-        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interactions.js"></script>
     <script>
-        // Role guard - enforce admin only
+        // Check admin access
         if (!window.app) {
             window.location.href = 'admin-login.html';
         } else {
@@ -151,104 +132,12 @@
             }
         }
 
-        // Mock user data (replace with Supabase fetch in production)
-        const mockUsers = [
-            { id: 1, name: 'John Doe', email: 'john@example.com', role: 'student', tier: 'pro', status: 'active', joined: '2024-10-15' },
-            { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'student', tier: 'core', status: 'active', joined: '2024-11-01' },
-            { id: 3, name: 'Mike Johnson', email: 'mike@example.com', role: 'student', tier: 'starter', status: 'pending', joined: '2024-11-08' },
-            { id: 4, name: 'Admin User', email: 'admin@forexmentorship.com', role: 'super-admin', tier: null, status: 'active', joined: '2024-01-01' },
-            { id: 5, name: 'Sarah Lee', email: 'sarah@example.com', role: 'student', tier: 'pro', status: 'active', joined: '2024-09-20' },
-        ];
-
-        let filteredUsers = [...mockUsers];
-
-        function updateStats() {
-            const total = mockUsers.length;
-            const active = mockUsers.filter(u => u.status === 'active' && u.role === 'student').length;
-            const pending = mockUsers.filter(u => u.status === 'pending').length;
-            const admins = mockUsers.filter(u => u.role.includes('admin')).length;
-
-            document.getElementById('totalUsers').textContent = total;
-            document.getElementById('activeUsers').textContent = active;
-            document.getElementById('pendingUsers').textContent = pending;
-            document.getElementById('adminUsers').textContent = admins;
-        }
-
-        function renderUsers(users) {
-            const tbody = document.getElementById('usersBody');
-            const loading = document.getElementById('loadingMsg');
-            const empty = document.getElementById('emptyMsg');
-
-            loading.style.display = 'none';
-
-            if (users.length === 0) {
-                tbody.innerHTML = '';
-                empty.style.display = 'block';
-                return;
-            }
-
-            empty.style.display = 'none';
-            tbody.innerHTML = users.map(user => `
-                <tr style="border-bottom: 1px solid #e5e7eb;">
-                    <td style="padding: 12px;">${user.name}</td>
-                    <td style="padding: 12px;">${user.email}</td>
-                    <td style="padding: 12px;">
-                        <span class="pill" style="background: ${user.role.includes('admin') ? '#eef2ff' : '#f0fdf4'}; color: ${user.role.includes('admin') ? '#3730a3' : '#166534'};">
-                            ${user.role}
-                        </span>
-                    </td>
-                    <td style="padding: 12px;">${user.tier || '—'}</td>
-                    <td style="padding: 12px;">
-                        <span class="pill" style="background: ${user.status === 'active' ? '#ecfdf3' : user.status === 'pending' ? '#fff3cd' : '#fef2f2'}; color: ${user.status === 'active' ? '#166534' : user.status === 'pending' ? '#856404' : '#991b1b'};">
-                            ${user.status}
-                        </span>
-                    </td>
-                    <td style="padding: 12px; font-size: 14px; color: #666;">${user.joined}</td>
-                    <td style="padding: 12px;">
-                        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;" onclick="editUser(${user.id})">Edit</button>
-                    </td>
-                </tr>
-            `).join('');
-        }
-
-        function applyFilters() {
-            const search = document.getElementById('searchUser').value.toLowerCase();
-            const role = document.getElementById('filterRole').value;
-            const tier = document.getElementById('filterTier').value;
-            const status = document.getElementById('filterStatus').value;
-
-            filteredUsers = mockUsers.filter(user => {
-                const matchSearch = !search || user.name.toLowerCase().includes(search) || user.email.toLowerCase().includes(search);
-                const matchRole = !role || user.role === role;
-                const matchTier = !tier || user.tier === tier;
-                const matchStatus = !status || user.status === status;
-                return matchSearch && matchRole && matchTier && matchStatus;
-            });
-
-            renderUsers(filteredUsers);
-        }
-
-        function editUser(id) {
-            alert(`Edit user ID: ${id}\n(Edit form coming soon)`);
-        }
-
-        // Event listeners
-        document.getElementById('searchUser').addEventListener('input', applyFilters);
-        document.getElementById('filterRole').addEventListener('change', applyFilters);
-        document.getElementById('filterTier').addEventListener('change', applyFilters);
-        document.getElementById('filterStatus').addEventListener('change', applyFilters);
-
+        // Load users functionality would go here
         document.getElementById('logoutBtn').addEventListener('click', (e) => {
             e.preventDefault();
             if (window.app && window.app.logout) window.app.logout();
             localStorage.clear();
             window.location.href = 'index.html';
-        });
-
-        // Initialize
-        window.addEventListener('load', () => {
-            updateStats();
-            setTimeout(() => renderUsers(filteredUsers), 500);
         });
     </script>
 </body>

@@ -1,92 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Enrollment - Forex Mentorship</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Enroll in the Forex Mentorship program" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:"Segoe UI",Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:40px 20px;color:#333}
-    .container{max-width:860px;margin:0 auto;background:#fff;border-radius:20px;box-shadow:0 10px 40px rgba(0,0,0,.25);overflow:hidden}
-    .header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:28px 24px}
-    .header h1{font-size:28px;margin-bottom:6px}
-    .content{padding:26px}
-    .plan{display:flex;gap:16px;align-items:center;background:#f7f7fb;border:1px solid #eee;border-radius:12px;padding:14px 16px;margin-bottom:18px}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px}
-    .price{margin-left:auto;font-weight:800;color:#111827}
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .form-group{margin-bottom:16px}
-    .form-group.full{grid-column:1/-1}
-    label{display:block;margin-bottom:6px;font-weight:600}
-    input,textarea,select{width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:10px;font-size:14px}
-    input:focus,textarea:focus,select:focus{outline:none;border-color:#667eea;background:#fafbff}
-    textarea{min-height:120px;resize:vertical}
-    .btn{width:100%;padding:14px;border:none;border-radius:10px;cursor:pointer;font-weight:700;color:#fff;background:linear-gradient(135deg,#667eea,#764ba2);margin-top:6px}
-    .small{font-size:12px;color:#666;margin-top:8px}
-    .links{text-align:center;margin-top:16px}
-    .links a{color:#667eea;text-decoration:none}
-    .links a:hover{text-decoration:underline}
-    .msg{display:none;margin-bottom:12px;padding:12px;border-radius:10px;font-size:14px}
-    .msg.ok{background:#ecfdf3;color:#166534;border:1px solid #bbf7d0}
-    .msg.err{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll Now - Forex Mentorship</title>
+    <meta name="description" content="Enroll in our forex mentorship program">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>Enroll in Forex Mentorship</h1>
-      <p>Complete the form to get payment instructions and access.</p>
-    </div>
-    <div class="content">
-      <div class="plan">
-        <span id="planPill" class="pill">Tier: starter</span>
-        <span id="planDesc">Starter access with core materials</span>
-        <span id="planPrice" class="price">$199</span>
-      </div>
+    <header>
+        <div class="header-content">
+            <div class="logo">📈 Forex Mentorship</div>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="auth-modal.html">Login</a>
+            </nav>
+        </div>
+    </header>
 
-      <div id="ok" class="msg ok">Enrollment received. Check your email for next steps.</div>
-      <div id="err" class="msg err"></div>
-
-      <form id="enrollForm" novalidate>
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="firstName">First name *</label>
-            <input id="firstName" required />
-          </div>
-          <div class="form-group">
-            <label for="lastName">Last name *</label>
-            <input id="lastName" required />
-          </div>
-          <div class="form-group">
-            <label for="email">Email *</label>
-            <input id="email" type="email" required />
-          </div>
-          <div class="form-group">
-            <label for="whatsapp">WhatsApp (optional)</label>
-            <input id="whatsapp" placeholder="+1 555 123 4567" />
-          </div>
-          <div class="form-group">
-            <label for="tier">Plan</label>
-            <select id="tier">
-              <option value="starter">Starter - $199</option>
-              <option value="core">Core - $499</option>
-              <option value="pro">Pro - $999</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label for="notes">Notes (optional)</label>
-            <textarea id="notes" placeholder="Anything we should know?"></textarea>
-          </div>
+    <div class="enrollment-container">
+        <div class="enrollment-header">
+            <h1>🎓 Start Your Trading Journey</h1>
+            <p>Complete your enrollment and get instant access to our mentorship program</p>
         </div>
 
-        <button class="btn" type="submit">Complete Enrollment</button>
-        <div class="small">By enrolling you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</div>
-        <div class="links"><a href="index.html">← Back to Home</a></div>
-      </form>
-    </div>
-  </div>
+        <div class="enrollment-content">
+            <div class="msg ok" id="successMsg" style="display:none;"></div>
+            <div class="msg err" id="errorMsg" style="display:none;"></div>
 
-  <script src="js/interactions.js"></script>
+            <h3 style="margin-bottom: 16px;">Select Your Plan</h3>
+            <div class="plan">
+                <input type="radio" name="tier" value="starter" id="starter" checked>
+                <label for="starter" style="cursor: pointer;">
+                    <span class="pill">STARTER</span>
+                    <span style="margin-left: 10px;">Basic course access</span>
+                </label>
+                <span class="price">$199</span>
+            </div>
+            <div class="plan">
+                <input type="radio" name="tier" value="core" id="core">
+                <label for="core" style="cursor: pointer;">
+                    <span class="pill">CORE</span>
+                    <span style="margin-left: 10px;">Live sessions + mentorship</span>
+                </label>
+                <span class="price">$499</span>
+            </div>
+            <div class="plan">
+                <input type="radio" name="tier" value="pro" id="pro">
+                <label for="pro" style="cursor: pointer;">
+                    <span class="pill">PRO</span>
+                    <span style="margin-left: 10px;">FTMO coaching + VIP support</span>
+                </label>
+                <span class="price">$999</span>
+            </div>
+
+            <h3 style="margin: 28px 0 16px;">Personal Information</h3>
+            <form id="enrollmentForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="+1 (234) 567-8900">
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Select country</option>
+                            <option value="US">United States</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="CA">Canada</option>
+                            <option value="AU">Australia</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full">
+                    <label for="password">Create Password *</label>
+                    <input type="password" id="password" name="password" required placeholder="Min. 8 characters" minlength="8">
+                    <span class="small">Must be at least 8 characters long</span>
+                </div>
+
+                <div class="form-group full">
+                    <label for="experience">Trading Experience *</label>
+                    <select id="experience" name="experience" required>
+                        <option value="">Select your level</option>
+                        <option value="beginner">Beginner (0-6 months)</option>
+                        <option value="intermediate">Intermediate (6-24 months)</option>
+                        <option value="advanced">Advanced (2+ years)</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label for="goals">Your Trading Goals</label>
+                    <textarea id="goals" name="goals" placeholder="What do you hope to achieve? (Optional)"></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a> *</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Complete Enrollment</button>
+            </form>
+
+            <div class="note">
+                After enrollment, you'll receive login credentials via email and can submit your payment proof.
+            </div>
+        </div>
+    </div>
+
+    <footer style="margin-top: 0;">
+        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+            <a href="index.html">Home</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+    <script>
+        // Auto-select tier from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tier = urlParams.get('tier');
+        if (tier) {
+            const radio = document.getElementById(tier);
+            if (radio) radio.checked = true;
+        }
+    </script>
 </body>
 </html>
