@@ -26,18 +26,18 @@
     <div class="admin-container">
         <h1>👥 Manage Users</h1>
         
-        <div class="msg ok" id="successMsg" style="display:none;"></div>
-        <div class="msg err" id="errorMsg" style="display:none;"></div>
+        <div class="msg ok hidden" id="successMsg"></div>
+        <div class="msg err hidden" id="errorMsg"></div>
 
-        <div style="margin-bottom: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-            <input type="text" id="searchInput" placeholder="🔍 Search by name or email..." style="flex: 1; min-width: 250px; padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
-            <select id="filterTier" style="padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
+        <div class="filter-controls">
+            <input type="text" id="searchInput" placeholder="🔍 Search by name or email..." class="search-input">
+            <select id="filterTier" class="filter-select" aria-label="Filter by tier">
                 <option value="">All Tiers</option>
                 <option value="starter">Starter</option>
                 <option value="core">Core</option>
                 <option value="pro">Pro</option>
             </select>
-            <select id="filterPayment" style="padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px;">
+            <select id="filterPayment" class="filter-select" aria-label="Filter by payment status">
                 <option value="">All Payments</option>
                 <option value="pending">Pending</option>
                 <option value="approved">Approved</option>
@@ -45,21 +45,21 @@
             </select>
         </div>
 
-        <div id="usersTable" style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden;">
-                <thead style="background: #f3f4f6;">
+        <div id="usersTable" class="table-container">
+            <table class="users-table">
+                <thead class="table-header">
                     <tr>
-                        <th style="padding: 12px; text-align: left; font-weight: 700;">Name</th>
-                        <th style="padding: 12px; text-align: left; font-weight: 700;">Email</th>
-                        <th style="padding: 12px; text-align: left; font-weight: 700;">Tier</th>
-                        <th style="padding: 12px; text-align: left; font-weight: 700;">Payment</th>
-                        <th style="padding: 12px; text-align: left; font-weight: 700;">Enrolled</th>
-                        <th style="padding: 12px; text-align: center; font-weight: 700;">Actions</th>
+                        <th class="table-th">Name</th>
+                        <th class="table-th">Email</th>
+                        <th class="table-th">Tier</th>
+                        <th class="table-th">Payment</th>
+                        <th class="table-th">Enrolled</th>
+                        <th class="table-th text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="usersTableBody">
                     <tr>
-                        <td colspan="6" style="padding: 40px; text-align: center; color: #6b7280;">
+                        <td colspan="6" class="loading-cell">
                             Loading users...
                         </td>
                     </tr>
@@ -67,9 +67,9 @@
             </table>
         </div>
 
-        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-            <div id="userCount" style="color: #6b7280;">Showing 0 users</div>
-            <div style="display: flex; gap: 8px;">
+        <div class="pagination-container">
+            <div id="userCount" class="user-count">Showing 0 users</div>
+            <div class="pagination-buttons">
                 <button id="prevPage" class="btn btn-secondary" disabled>← Previous</button>
                 <button id="nextPage" class="btn btn-secondary" disabled>Next →</button>
             </div>
@@ -77,9 +77,9 @@
     </div>
 
     <!-- Edit User Modal -->
-    <div id="editModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
-        <div style="background: white; padding: 24px; border-radius: 12px; max-width: 500px; width: 90%;">
-            <h2 style="margin-bottom: 16px;">Edit User</h2>
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 class="modal-title">Edit User</h2>
             <form id="editUserForm">
                 <input type="hidden" id="editUserId">
                 <div class="fg">
@@ -106,9 +106,9 @@
                         <option value="rejected">Rejected</option>
                     </select>
                 </div>
-                <div style="display: flex; gap: 12px; margin-top: 16px;">
-                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Changes</button>
-                    <button type="button" id="cancelEdit" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary flex-1">Save Changes</button>
+                    <button type="button" id="cancelEdit" class="btn btn-secondary flex-1">Cancel</button>
                 </div>
             </form>
         </div>

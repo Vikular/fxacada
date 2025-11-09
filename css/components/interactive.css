@@ -5,6 +5,7 @@
 /* FAQ Accordion */
 .faq-question {
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
   position: relative;
 }

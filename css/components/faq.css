@@ -27,6 +27,7 @@
   font-weight: 700;
   color: var(--color-text);
   cursor: pointer;
+  -webkit-user-select: none;
   user-select: none;
 }
 

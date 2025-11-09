@@ -8,59 +8,6 @@
     <link rel="alternate icon" href="/favicon.ico">
     <link rel="stylesheet" href="css/globals.css">
     <link rel="stylesheet" href="css/components.css">
-    <style>
-        .error-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            background: linear-gradient(180deg, #ffffff 0%, #f7f7fb 100%);
-        }
-        .error-code {
-            font-size: 120px;
-            font-weight: 900;
-            color: #667eea;
-            line-height: 1;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .error-message {
-            font-size: 28px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 12px;
-        }
-        .error-description {
-            font-size: 16px;
-            color: #6b7280;
-            max-width: 500px;
-            margin: 0 auto 32px;
-            line-height: 1.6;
-        }
-        .error-links {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .error-icon {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        @media (max-width: 768px) {
-            .error-code { font-size: 80px; }
-            .error-message { font-size: 22px; }
-            .error-icon { font-size: 60px; }
-        }
-    </style>
 </head>
 <body>
     <div class="error-container">
@@ -77,29 +24,19 @@
             <a href="contact.html" class="btn btn-secondary">💬 Contact Support</a>
         </div>
 
-        <div style="margin-top: 48px; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); max-width: 500px;">
-            <h3 style="margin-bottom: 12px; color: #1f2937;">🔍 Quick Links</h3>
-            <div style="display: flex; flex-direction: column; gap: 8px; text-align: left;">
-                <a href="index.html" style="color: #667eea; text-decoration: none; padding: 8px; border-radius: 6px; transition: all 0.2s;">
-                    → Home Page
-                </a>
-                <a href="index.html#pricing" style="color: #667eea; text-decoration: none; padding: 8px; border-radius: 6px; transition: all 0.2s;">
-                    → Pricing Plans
-                </a>
-                <a href="auth-modal.html" style="color: #667eea; text-decoration: none; padding: 8px; border-radius: 6px; transition: all 0.2s;">
-                    → Student Login
-                </a>
-                <a href="admin-login.html" style="color: #667eea; text-decoration: none; padding: 8px; border-radius: 6px; transition: all 0.2s;">
-                    → Admin Login
-                </a>
-                <a href="index.html#faq" style="color: #667eea; text-decoration: none; padding: 8px; border-radius: 6px; transition: all 0.2s;">
-                    → FAQ
-                </a>
+        <div class="error-quicklinks">
+            <h3>🔍 Quick Links</h3>
+            <div class="error-quicklinks-list">
+                <a href="index.html">→ Home Page</a>
+                <a href="index.html#pricing">→ Pricing Plans</a>
+                <a href="auth-modal.html">→ Student Login</a>
+                <a href="admin-login.html">→ Admin Login</a>
+                <a href="index.html#faq">→ FAQ</a>
             </div>
         </div>
 
-        <p style="margin-top: 32px; color: #9ca3af; font-size: 14px;">
-            Need help? <a href="contact.html" style="color: #667eea; text-decoration: underline;">Contact our support team</a>
+        <p class="error-help">
+            Need help? <a href="contact.html">Contact our support team</a>
         </p>
     </div>
 

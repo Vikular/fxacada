@@ -166,6 +166,7 @@ footer {
 .mt-0 { margin-top: 0; }
 .mt-20 { margin-top: 20px; }
 .mt-40 { margin-top: 40px; }
+.mt-60 { margin-top: 60px; }
 .mb-0 { margin-bottom: 0; }
 .mb-10 { margin-bottom: 10px; }
 .mb-20 { margin-bottom: 20px; }
@@ -251,4 +252,43 @@ footer {
   nav { gap: 10px; }
   .header-content { flex-wrap: wrap; }
   footer { padding: 32px 18px; }
+}
+
+/* =======================================
+   Utility Classes
+   ======================================= */
+
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+.mt-60 { margin-top: 60px; }
+.mb-20 { margin-bottom: 20px; }
+.text-center { text-align: center; }
+.full-width { width: 100%; }
+.footer-no-margin { margin-top: 0; }
+
+/* Message States */
+.msg {
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.msg.ok,
+.msg.success {
+  background: #ecfdf3;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.msg.err,
+.msg.error {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.msg:empty {
+  display: none;
 }

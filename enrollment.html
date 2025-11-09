@@ -29,36 +29,36 @@
         </div>
 
         <div class="enrollment-content">
-            <div class="msg ok" id="successMsg" style="display:none;"></div>
-            <div class="msg err" id="errorMsg" style="display:none;"></div>
+            <div class="msg ok" id="successMsg"></div>
+            <div class="msg err" id="errorMsg"></div>
 
-            <h3 style="margin-bottom: 16px;">Select Your Plan</h3>
+            <h3>Select Your Plan</h3>
             <div class="plan">
                 <input type="radio" name="tier" value="starter" id="starter" checked>
-                <label for="starter" style="cursor: pointer;">
+                <label for="starter">
                     <span class="pill">STARTER</span>
-                    <span style="margin-left: 10px;">Basic course access</span>
+                    <span>Basic course access</span>
                 </label>
                 <span class="price">$199</span>
             </div>
             <div class="plan">
                 <input type="radio" name="tier" value="core" id="core">
-                <label for="core" style="cursor: pointer;">
+                <label for="core">
                     <span class="pill">CORE</span>
-                    <span style="margin-left: 10px;">Live sessions + mentorship</span>
+                    <span>Live sessions + mentorship</span>
                 </label>
                 <span class="price">$499</span>
             </div>
             <div class="plan">
                 <input type="radio" name="tier" value="pro" id="pro">
-                <label for="pro" style="cursor: pointer;">
+                <label for="pro">
                     <span class="pill">PRO</span>
-                    <span style="margin-left: 10px;">FTMO coaching + VIP support</span>
+                    <span>FTMO coaching + VIP support</span>
                 </label>
                 <span class="price">$999</span>
             </div>
 
-            <h3 style="margin: 28px 0 16px;">Personal Information</h3>
+            <h3 class="section-spacing">Personal Information</h3>
             <form id="enrollmentForm">
                 <div class="form-grid">
                     <div class="form-group">
@@ -111,13 +111,13 @@
                 </div>
 
                 <div class="form-group full">
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <label class="checkbox-label">
                         <input type="checkbox" id="terms" name="terms" required>
                         <span>I agree to the <a href="terms.html" target="_blank">Terms of Service</a> and <a href="privacy.html" target="_blank">Privacy Policy</a> *</span>
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Complete Enrollment</button>
+                <button type="submit" class="btn btn-primary">Complete Enrollment</button>
             </form>
 
             <div class="note">
@@ -126,7 +126,7 @@
         </div>
     </div>
 
-    <footer style="margin-top: 0;">
+    <footer class="footer-no-margin">
         <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
         <div class="footer-links">
             <a href="terms.html">Terms</a>
