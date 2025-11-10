@@ -1,13 +1,42 @@
 // Handles login and password reset logic for auth-modal.html
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   // Password reset UI logic
   const forgotPasswordLink = document.getElementById("forgotPasswordLink");
   const resetForm = document.getElementById("resetForm");
   const loginForm = document.getElementById("loginForm");
   const backToLogin = document.getElementById("backToLogin");
+  const setPasswordForm = document.getElementById("setPasswordForm");
   const errorMsg = document.getElementById("errorMsg");
   const successMsg = document.getElementById("successMsg");
+
+  // --- Supabase password reset: handle access_token in URL fragment ---
+  const urlParams = new URLSearchParams(window.location.search);
+  const hashParams = new URLSearchParams(window.location.hash.slice(1));
+  const accessToken = hashParams.get("access_token");
+  const refreshToken = hashParams.get("refresh_token");
+  let sessionSet = false;
+
+  if (urlParams.get("reset") === "1" && setPasswordForm) {
+    // If access_token is present, set the session for Supabase
+    if (accessToken && refreshToken && window.supabaseClient) {
+      try {
+        await window.supabaseClient.auth.setSession({
+          access_token: accessToken,
+          refresh_token: refreshToken,
+        });
+        sessionSet = true;
+      } catch (err) {
+        if (errorMsg) {
+          errorMsg.textContent = "Session error: " + (err.message || err);
+          errorMsg.style.display = "block";
+        }
+      }
+    }
+    if (loginForm) loginForm.style.display = "none";
+    if (resetForm) resetForm.style.display = "none";
+    setPasswordForm.style.display = "flex";
+  }
 
   if (forgotPasswordLink && resetForm && loginForm && backToLogin) {
     forgotPasswordLink.addEventListener("click", function (e) {
@@ -20,9 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
       resetForm.style.display = "none";
       loginForm.style.display = "flex";
     });
-    resetForm.addEventListener("submit", function (e) {
+    resetForm.addEventListener("submit", async function (e) {
       e.preventDefault();
-      // TODO: Implement backend call for password reset
       const email = document.getElementById("resetEmail").value.trim();
       errorMsg.style.display = "none";
       successMsg.style.display = "none";
@@ -31,10 +59,60 @@ document.addEventListener("DOMContentLoaded", function () {
         errorMsg.style.display = "block";
         return;
       }
-      // Simulate success message
-      successMsg.textContent =
-        "If this email exists, a reset link has been sent.";
-      successMsg.style.display = "block";
+      try {
+        const { error } =
+          await window.supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: window.location.origin + "/auth-modal.html?reset=1",
+          });
+        if (error) throw error;
+        successMsg.textContent =
+          "If this email exists, a reset link has been sent.";
+        successMsg.style.display = "block";
+      } catch (err) {
+        errorMsg.textContent = err.message || "Failed to send reset email.";
+        errorMsg.style.display = "block";
+      }
+    });
+  }
+
+  // Set new password logic
+  if (setPasswordForm) {
+    setPasswordForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      errorMsg.style.display = "none";
+      successMsg.style.display = "none";
+      const newPassword = document.getElementById("newPassword").value;
+      if (!newPassword || newPassword.length < 8) {
+        errorMsg.textContent = "Password must be at least 8 characters.";
+        errorMsg.style.display = "block";
+        return;
+      }
+      try {
+        // Ensure session is set before updating password
+        if (
+          !sessionSet &&
+          accessToken &&
+          refreshToken &&
+          window.supabaseClient
+        ) {
+          await window.supabaseClient.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+        }
+        const { error } = await window.supabaseClient.auth.updateUser({
+          password: newPassword,
+        });
+        if (error) throw error;
+        successMsg.textContent = "Password updated! You can now log in.";
+        successMsg.style.display = "block";
+        setTimeout(() => {
+          window.location.href = "auth-modal.html";
+        }, 1500);
+      } catch (err) {
+        errorMsg.textContent = err.message || "Failed to update password.";
+        errorMsg.style.display = "block";
+      }
     });
   }
 

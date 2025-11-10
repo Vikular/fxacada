@@ -103,6 +103,37 @@
         >
       </form>
 
+      <!-- Set New Password Form (for Supabase password reset) -->
+      <form
+        id="setPasswordForm"
+        style="
+          display: none;
+          flex-direction: column;
+          gap: 16px;
+          margin-top: 10px;
+        "
+      >
+        <label data-i18n="Set your new password">
+          Set your new password
+          <input
+            type="password"
+            id="newPassword"
+            class="input"
+            required
+            minlength="8"
+            placeholder="New password"
+            data-i18n-placeholder="New password"
+          />
+        </label>
+        <button
+          type="submit"
+          class="btn btn-primary full-width"
+          data-i18n="Update Password"
+        >
+          Update Password
+        </button>
+      </form>
+
       <div class="links" style="margin-top: 20px; text-align: center">
         <p data-i18n="Don't have an account?">
           Don't have an account?
