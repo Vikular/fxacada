@@ -220,6 +220,11 @@ select {
   background: #fff;
   transition: var(--transition);
 }
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280;
+  opacity: 1;
+}
 input:focus,
 textarea:focus,
 select:focus {
