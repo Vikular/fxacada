@@ -75,16 +75,6 @@
     </style>
   </head>
   <body class="auth-page">
-    <select
-      id="lang-selector"
-      class="lang-selector"
-      aria-label="Select language"
-    >
-      <option value="en">English</option>
-      <option value="zh">中文</option>
-      <option value="hi">हिन्दी</option>
-      <option value="es">Español</option>
-    </select>
     <div class="auth-wrap">
       <h1 data-i18n="Student Login">🔐 Student Login</h1>
       <p class="sub" data-i18n="Access your forex mentorship dashboard">
@@ -104,6 +94,7 @@
             class="input"
             required
             autocomplete="email"
+            placeholder="student@example.com"
           />
         </label>
         <label data-i18n="Password"
@@ -115,6 +106,7 @@
             class="input"
             required
             autocomplete="current-password"
+            placeholder="••••••••"
           />
         </label>
         <button
@@ -142,30 +134,6 @@
     <script src="js/i18n.js"></script>
     <script src="js/config.js"></script>
     <script>
-      // Set login placeholders on language change
-      function setLoginPlaceholders() {
-        if (window.i18next) {
-          var emailInput = document.getElementById("email");
-          var passwordInput = document.getElementById("password");
-          if (emailInput)
-            emailInput.placeholder =
-              window.i18next.t("Email") + " (e.g. student@example.com)";
-          if (passwordInput)
-            passwordInput.placeholder =
-              window.i18next.t("Password") + " (••••••••)";
-        }
-      }
-      document.addEventListener("DOMContentLoaded", function () {
-        setLoginPlaceholders();
-        if (window.i18next) {
-          var origChangeLang = window.i18next.changeLanguage;
-          window.i18next.changeLanguage = function (lang) {
-            origChangeLang.call(window.i18next, lang);
-            setTimeout(setLoginPlaceholders, 0);
-          };
-        }
-      });
-
       const form = document.getElementById("loginForm");
       const errorMsg = document.getElementById("errorMsg");
       const successMsg = document.getElementById("successMsg");
