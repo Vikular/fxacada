@@ -193,6 +193,9 @@ function updateContent() {
     el.setAttribute("placeholder", window.i18next.t(key));
   });
 }
+// Expose updateContent globally so includes.js can call it
+window.updateContent = updateContent;
+}
 
 window.initI18n = function () {
   const userLang = detectBrowserLanguage();
