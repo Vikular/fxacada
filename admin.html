@@ -1,137 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard - Forex Mentorship</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
-</head>
-<body>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
     <header>
-        <div class="header-content">
-            <div class="logo">📈 Forex Mentorship - Admin</div>
-            <nav>
-                <a href="admin.html">Dashboard</a>
-                <a href="manage-users.html">Users</a>
-                <a href="reports.html">Reports</a>
-                <a href="settings.html">Settings</a>
-                <a href="#" id="logoutBtn">Logout</a>
-            </nav>
+      <div class="header-content">
+        <div class="logo" data-i18n="Forex Mentorship - Admin">
+          📈 Forex Mentorship - Admin
         </div>
+        <nav>
+          <a href="admin.html" data-i18n="Dashboard">Dashboard</a>
+          <a href="manage-users.html" data-i18n="Users">Users</a>
+          <a href="reports.html" data-i18n="Reports">Reports</a>
+          <a href="settings.html" data-i18n="Settings">Settings</a>
+          <a href="#" id="logoutBtn" data-i18n="Logout">Logout</a>
+        </nav>
+      </div>
     </header>
 
     <div class="container">
-        <section class="hero">
-            <h1>🛡️ Admin Dashboard</h1>
-            <p>Welcome back, <span id="adminName">Admin</span></p>
-        </section>
+      <section class="hero">
+        <h1 data-i18n="Admin Dashboard">🛡️ Admin Dashboard</h1>
+        <p data-i18n="Welcome back">
+          Welcome back, <span id="adminName">Admin</span>
+        </p>
+      </section>
 
-        <section class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">134</div>
-                    <div class="stat-label">Total Students</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">18</div>
-                    <div class="stat-label">Pending Payments</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5</div>
-                    <div class="stat-label">Pending FTMO Reviews</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number status-success">✅ Online</div>
-                    <div class="stat-label">System Status</div>
-                </div>
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">134</div>
+            <div class="stat-label" data-i18n="Total Students">
+              Total Students
             </div>
-        </section>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">18</div>
+            <div class="stat-label" data-i18n="Pending Payments">
+              Pending Payments
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5</div>
+            <div class="stat-label" data-i18n="Pending FTMO Reviews">
+              Pending FTMO Reviews
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number status-success">✅ Online</div>
+            <div class="stat-label" data-i18n="System Status">
+              System Status
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <h2 class="section-title">🚀 Quick Actions</h2>
-        <section class="features">
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Manage Users</h3>
-                <p>View, edit, and manage student accounts</p>
-                <a href="manage-users.html" class="btn btn-primary mt-20">View Users</a>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>View Reports</h3>
-                <p>Analytics and platform statistics</p>
-                <a href="reports.html" class="btn btn-primary mt-20">View Reports</a>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3>Settings</h3>
-                <p>Platform configuration and management</p>
-                <a href="settings.html" class="btn btn-primary mt-20">Open Settings</a>
-            </div>
-        </section>
+      <h2 class="section-title" data-i18n="Quick Actions">🚀 Quick Actions</h2>
+      <section class="features">
+        <div class="feature-card">
+          <div class="feature-icon">👥</div>
+          <h3 data-i18n="Manage Users">Manage Users</h3>
+          <p data-i18n="View, edit, and manage student accounts">
+            View, edit, and manage student accounts
+          </p>
+          <a
+            href="manage-users.html"
+            class="btn btn-primary mt-20"
+            data-i18n="View Users"
+            >View Users</a
+          >
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3 data-i18n="View Reports">View Reports</h3>
+          <p data-i18n="Analytics and platform statistics">
+            Analytics and platform statistics
+          </p>
+          <a
+            href="reports.html"
+            class="btn btn-primary mt-20"
+            data-i18n="View Reports"
+            >View Reports</a
+          >
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3 data-i18n="Settings">Settings</h3>
+          <p data-i18n="Platform configuration and management">
+            Platform configuration and management
+          </p>
+          <a
+            href="settings.html"
+            class="btn btn-primary mt-20"
+            data-i18n="Open Settings"
+            >Open Settings</a
+          >
+        </div>
+      </section>
 
-        <h2 class="section-title">⏰ Recent Activity</h2>
-        <section class="faq-section">
-            <div class="faq-item">
-                <div class="activity-item">
-                    <div>
-                        <strong>New enrollment:</strong> John Doe (Pro Tier)
-                    </div>
-                    <span class="small">2 hours ago</span>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="activity-item">
-                    <div>
-                        <strong>Payment submitted:</strong> Jane Smith ($499)
-                    </div>
-                    <span class="small">5 hours ago</span>
-                </div>
-            </div>
-            <div class="faq-item">
-                <div class="activity-item">
-                    <div>
-                        <strong>FTMO submission:</strong> Mike Johnson (Phase 1)
-                    </div>
-                    <span class="small">1 day ago</span>
-                </div>
-            </div>
-        </section>
+      <h2 class="section-title" data-i18n="Recent Activity">
+        ⏰ Recent Activity
+      </h2>
+      <section class="faq-section">
+        <div class="faq-item">
+          <div class="activity-item">
+            <div><strong>New enrollment:</strong> John Doe (Pro Tier)</div>
+            <span class="small">2 hours ago</span>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="activity-item">
+            <div><strong>Payment submitted:</strong> Jane Smith ($499)</div>
+            <span class="small">5 hours ago</span>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="activity-item">
+            <div><strong>FTMO submission:</strong> Mike Johnson (Phase 1)</div>
+            <span class="small">1 day ago</span>
+          </div>
+        </div>
+      </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interactions.js"></script>
     <script src="js/auth-guard.js"></script>
     <script>
-        if (!window.app) {
-            window.location.href = 'admin-login.html';
-        } else {
-            const role = localStorage.getItem('userRole');
-            if (role !== 'limited-admin' && role !== 'super-admin') {
-                window.location.href = 'admin-login.html';
-            }
+      if (!window.app) {
+        window.location.href = "admin-login.html";
+      } else {
+        const role = localStorage.getItem("userRole");
+        if (role !== "limited-admin" && role !== "super-admin") {
+          window.location.href = "admin-login.html";
         }
+      }
 
-        document.getElementById('logoutBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (window.app && window.app.logout) window.app.logout();
-            localStorage.clear();
-            window.location.href = 'index.html';
-        });
+      document.getElementById("logoutBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (window.app && window.app.logout) window.app.logout();
+        localStorage.clear();
+        window.location.href = "index.html";
+      });
 
-        // Protect page - require admin role
-        const user = checkAuth('admin');
-        if (user) {
-            console.log('Admin logged in:', user.email, user.role);
-            // Load admin dashboard...
-        }
+      // Protect page - require admin role
+      const user = checkAuth("admin");
+      if (user) {
+        console.log("Admin logged in:", user.email, user.role);
+        // Load admin dashboard...
+      }
     </script>
-</body>
+  </body>
 </html>

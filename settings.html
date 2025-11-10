@@ -1,169 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings - Admin - Forex Mentorship</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="css/components.css">
-</head>
-<body>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
     <header>
-        <div class="header-content">
-            <div class="logo">📈 Forex Mentorship - Admin</div>
-            <nav>
-                <a href="admin.html">Dashboard</a>
-                <a href="manage-users.html">Users</a>
-                <a href="reports.html">Reports</a>
-                <a href="settings.html">Settings</a>
-                <a href="#" id="logoutBtn">Logout</a>
-            </nav>
+      <div class="header-content">
+        <div class="logo" data-i18n="Forex Mentorship - Admin">
+          📈 Forex Mentorship - Admin
         </div>
+        <nav>
+          <a href="admin.html" data-i18n="Dashboard">Dashboard</a>
+          <a href="manage-users.html" data-i18n="Users">Users</a>
+          <a href="reports.html" data-i18n="Reports">Reports</a>
+          <a href="settings.html" data-i18n="Settings">Settings</a>
+          <a href="#" id="logoutBtn" data-i18n="Logout">Logout</a>
+        </nav>
+      </div>
     </header>
 
     <div class="admin-container">
-        <h1>⚙️ Platform Settings</h1>
-        <p style="text-align: center; color: #6b7280; margin-bottom: 28px;">Super Admin Only</p>
+      <h1 data-i18n="Platform Settings">⚙️ Platform Settings</h1>
+      <p
+        style="text-align: center; color: #6b7280; margin-bottom: 28px"
+        data-i18n="Super Admin Only"
+      >
+        Super Admin Only
+      </p>
 
-        <div class="msg ok" id="successMsg" style="display:none;"></div>
-        <div class="msg err" id="errorMsg" style="display:none;"></div>
+      <div class="msg ok" id="successMsg" style="display: none"></div>
+      <div class="msg err" id="errorMsg" style="display: none"></div>
 
-        <!-- General Settings -->
-        <div class="card" style="margin-bottom: 24px;">
-            <h2 style="margin-bottom: 16px;">🌐 General Settings</h2>
-            <form id="generalSettingsForm">
-                <div class="form-group">
-                    <label for="platformName">Platform Name</label>
-                    <input type="text" id="platformName" value="Pip Nation Academy" required>
-                </div>
-                <div class="form-group">
-                    <label for="supportEmail">Support Email</label>
-                    <input type="email" id="supportEmail" value="support@pipnation.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="whatsappNumber">WhatsApp Number</label>
-                    <input type="tel" id="whatsappNumber" value="+1234567890" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </form>
+      <!-- General Settings -->
+      <div class="card" style="margin-bottom: 24px">
+        <h2 style="margin-bottom: 16px" data-i18n="General Settings">
+          🌐 General Settings
+        </h2>
+        <form id="generalSettingsForm">
+          <div class="form-group">
+            <label for="platformName" data-i18n="Platform Name"
+              >Platform Name</label
+            >
+            <input
+              type="text"
+              id="platformName"
+              value="Pip Nation Academy"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="supportEmail" data-i18n="Support Email"
+              >Support Email</label
+            >
+            <input
+              type="email"
+              id="supportEmail"
+              value="support@pipnation.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="whatsappNumber" data-i18n="WhatsApp Number"
+              >WhatsApp Number</label
+            >
+            <input
+              type="tel"
+              id="whatsappNumber"
+              value="+1234567890"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-i18n="Save Changes"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+
+      <!-- Pricing Settings -->
+      <div class="card" style="margin-bottom: 24px">
+        <h2 style="margin-bottom: 16px" data-i18n="Pricing Configuration">
+          💰 Pricing Configuration
+        </h2>
+        <form id="pricingForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="starterPrice" data-i18n="Starter Tier ($)"
+                >Starter Tier ($)</label
+              >
+              <input
+                type="number"
+                id="starterPrice"
+                value="199"
+                required
+                min="0"
+              />
+            </div>
+            <div class="form-group">
+              <label for="corePrice" data-i18n="Core Tier ($)"
+                >Core Tier ($)</label
+              >
+              <input
+                type="number"
+                id="corePrice"
+                value="499"
+                required
+                min="0"
+              />
+            </div>
+            <div class="form-group full">
+              <label for="proPrice" data-i18n="Pro Tier ($)"
+                >Pro Tier ($)</label
+              >
+              <input type="number" id="proPrice" value="999" required min="0" />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            data-i18n="Update Pricing"
+          >
+            Update Pricing
+          </button>
+        </form>
+      </div>
+
+      <!-- Admin Management -->
+      <div class="card" style="margin-bottom: 24px">
+        <h2 style="margin-bottom: 16px" data-i18n="Admin Management">
+          👥 Admin Management
+        </h2>
+        <form id="addAdminForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="adminEmail" data-i18n="Admin Email"
+                >Admin Email</label
+              >
+              <input
+                type="email"
+                id="adminEmail"
+                placeholder="admin@example.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="adminRole" data-i18n="Role">Role</label>
+              <select id="adminRole" required>
+                <option value="limited-admin" data-i18n="Limited Admin">
+                  Limited Admin
+                </option>
+                <option value="super-admin" data-i18n="Super Admin">
+                  Super Admin
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" data-i18n="Add Admin">
+            Add Admin
+          </button>
+        </form>
+
+        <div style="margin-top: 20px">
+          <h3 style="margin-bottom: 12px" data-i18n="Current Admins">
+            Current Admins
+          </h3>
+          <div id="adminsList">
+            <div
+              style="
+                padding: 12px;
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                margin-bottom: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <div>
+                <strong>admin@pipnation.com</strong>
+                <span class="pill" style="margin-left: 10px; font-size: 10px"
+                  >SUPER ADMIN</span
+                >
+              </div>
+              <button
+                class="btn btn-secondary"
+                style="padding: 6px 12px; font-size: 12px"
+              >
+                Remove
+              </button>
+              <button
+                class="btn btn-secondary"
+                style="padding: 6px 12px; font-size: 12px"
+                data-i18n="Remove"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Pricing Settings -->
-        <div class="card" style="margin-bottom: 24px;">
-            <h2 style="margin-bottom: 16px;">💰 Pricing Configuration</h2>
-            <form id="pricingForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="starterPrice">Starter Tier ($)</label>
-                        <input type="number" id="starterPrice" value="199" required min="0">
-                    </div>
-                    <div class="form-group">
-                        <label for="corePrice">Core Tier ($)</label>
-                        <input type="number" id="corePrice" value="499" required min="0">
-                    </div>
-                    <div class="form-group full">
-                        <label for="proPrice">Pro Tier ($)</label>
-                        <input type="number" id="proPrice" value="999" required min="0">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Update Pricing</button>
-            </form>
+      <!-- System Status -->
+      <div class="card">
+        <h2 style="margin-bottom: 16px" data-i18n="System Status">
+          🔧 System Status
+        </h2>
+        <div class="status-item">
+          <span class="status-label" data-i18n="Database Connection"
+            >Database Connection:</span
+          >
+          <span class="status-value status-success" data-i18n="Connected"
+            >✅ Connected</span
+          >
         </div>
-
-        <!-- Admin Management -->
-        <div class="card" style="margin-bottom: 24px;">
-            <h2 style="margin-bottom: 16px;">👥 Admin Management</h2>
-            <form id="addAdminForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="adminEmail">Admin Email</label>
-                        <input type="email" id="adminEmail" placeholder="admin@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="adminRole">Role</label>
-                        <select id="adminRole" required>
-                            <option value="limited-admin">Limited Admin</option>
-                            <option value="super-admin">Super Admin</option>
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Admin</button>
-            </form>
-
-            <div style="margin-top: 20px;">
-                <h3 style="margin-bottom: 12px;">Current Admins</h3>
-                <div id="adminsList">
-                    <div style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>admin@pipnation.com</strong>
-                            <span class="pill" style="margin-left: 10px; font-size: 10px;">SUPER ADMIN</span>
-                        </div>
-                        <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 12px;">Remove</button>
-                    </div>
-                </div>
-            </div>
+        <div class="status-item">
+          <span class="status-label" data-i18n="Storage Service"
+            >Storage Service:</span
+          >
+          <span class="status-value status-success" data-i18n="Active"
+            >✅ Active</span
+          >
         </div>
-
-        <!-- System Status -->
-        <div class="card">
-            <h2 style="margin-bottom: 16px;">🔧 System Status</h2>
-            <div class="status-item">
-                <span class="status-label">Database Connection:</span>
-                <span class="status-value status-success">✅ Connected</span>
-            </div>
-            <div class="status-item">
-                <span class="status-label">Storage Service:</span>
-                <span class="status-value status-success">✅ Active</span>
-            </div>
-            <div class="status-item">
-                <span class="status-label">Email Service:</span>
-                <span class="status-value status-success">✅ Operational</span>
-            </div>
-            <div class="status-item">
-                <span class="status-label">Last Backup:</span>
-                <span class="status-value">2 hours ago</span>
-            </div>
+        <div class="status-item">
+          <span class="status-label" data-i18n="Email Service"
+            >Email Service:</span
+          >
+          <span class="status-value status-success" data-i18n="Operational"
+            >✅ Operational</span
+          >
         </div>
-
-        <!-- Danger Zone -->
-        <div class="card" style="margin-top: 24px; border-color: #ef4444;">
-            <h2 style="margin-bottom: 16px; color: #ef4444;">⚠️ Danger Zone</h2>
-            <p style="color: #6b7280; margin-bottom: 16px;">These actions are irreversible. Proceed with caution.</p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <button class="btn" style="background: #ef4444; color: white;">Reset All Data</button>
-                <button class="btn" style="background: #f59e0b; color: white;">Export Database</button>
-                <button class="btn" style="background: #6b7280; color: white;">Clear Cache</button>
-            </div>
+        <div class="status-item">
+          <span class="status-label" data-i18n="Last Backup">Last Backup:</span>
+          <span class="status-value" data-i18n="2 hours ago">2 hours ago</span>
         </div>
+      </div>
+
+      <!-- Danger Zone -->
+      <div class="card" style="margin-top: 24px; border-color: #ef4444">
+        <h2 style="margin-bottom: 16px; color: #ef4444" data-i18n="Danger Zone">
+          ⚠️ Danger Zone
+        </h2>
+        <p
+          style="color: #6b7280; margin-bottom: 16px"
+          data-i18n="These actions are irreversible. Proceed with caution."
+        >
+          These actions are irreversible. Proceed with caution.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap">
+          <button
+            class="btn"
+            style="background: #ef4444; color: white"
+            data-i18n="Reset All Data"
+          >
+            Reset All Data
+          </button>
+          <button
+            class="btn"
+            style="background: #f59e0b; color: white"
+            data-i18n="Export Database"
+          >
+            Export Database
+          </button>
+          <button
+            class="btn"
+            style="background: #6b7280; color: white"
+            data-i18n="Clear Cache"
+          >
+            Clear Cache
+          </button>
+        </div>
+      </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interactions.js"></script>
     <script>
-        // Check super-admin access
-        if (!window.app) {
-            window.location.href = 'admin-login.html';
-        } else {
-            const role = localStorage.getItem('userRole');
-            if (role !== 'super-admin') {
-                alert('Access Denied: Super Admin Only');
-                window.location.href = 'admin.html';
-            }
+      // Check super-admin access
+      if (!window.app) {
+        window.location.href = "admin-login.html";
+      } else {
+        const role = localStorage.getItem("userRole");
+        if (role !== "super-admin") {
+          alert("Access Denied: Super Admin Only");
+          window.location.href = "admin.html";
         }
+      }
 
-        document.getElementById('logoutBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            if (window.app && window.app.logout) window.app.logout();
-            localStorage.clear();
-            window.location.href = 'index.html';
-        });
+      document.getElementById("logoutBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (window.app && window.app.logout) window.app.logout();
+        localStorage.clear();
+        window.location.href = "index.html";
+      });
     </script>
-</body>
+  </body>
 </html>

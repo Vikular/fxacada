@@ -1,39 +1,142 @@
-/* Checkbox label horizontal alignment */
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  font-weight: 400;
+/* Dark mode styles */
+body.dark-mode {
+  background: #181a1b;
+  color: #e0e0e0;
 }
-.checkbox-label input[type="checkbox"] {
-  margin: 0;
+body.dark-mode header,
+body.dark-mode .enrollment-container,
+body.dark-mode .footer-no-margin {
+  background: #232526;
+  color: #e0e0e0;
 }
-/* =======================================
-   Global Styles & Design Tokens
-   ======================================= */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #232526;
+  color: #e0e0e0;
+  border-color: #444;
+}
+body.dark-mode .btn,
+body.dark-mode button,
+body.dark-mode .pill {
+  background: #333;
+  color: #fff;
+  border-color: #444;
+}
+body.dark-mode .plan,
+body.dark-mode .form-group,
+body.dark-mode .note,
+body.dark-mode {
+  background: #181a1b;
+  color: #f3f4f6;
+}
+body.dark-mode header,
+body.dark-mode .enrollment-container,
+body.dark-mode .footer-no-margin,
+body.dark-mode .container,
+body.dark-mode .admin-container,
+body.dark-mode .contact-container {
+  background: #232526;
+  color: #f3f4f6;
+}
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: #232526;
+  color: #f3f4f6;
+  border-color: #444;
+  caret-color: #8ecfff;
+}
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: #b0b3b8;
+}
+body.dark-mode .btn,
+body.dark-mode button,
+body.dark-mode .pill {
+  background: #333;
+  color: #f3f4f6;
+  border-color: #444;
+}
+body.dark-mode .plan,
+body.dark-mode .form-group,
+body.dark-mode .note,
+body.dark-mode .msg,
+body.dark-mode .card,
+body.dark-mode .section,
+body.dark-mode .stat-card {
+  background: #232526;
+  color: #f3f4f6;
+}
+body.dark-mode a {
+  color: #8ecfff;
+  text-decoration: underline;
+}
+body.dark-mode a:visited {
+  color: #b3e5fc;
+}
+body.dark-mode .checkbox-label span,
+body.dark-mode label,
+body.dark-mode .stat-label,
+body.dark-mode .stat-number,
+body.dark-mode .section-title,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #f3f4f6;
+}
+body.dark-mode .status-label {
+  color: #b0b3b8;
+}
+body.dark-mode .status-success {
+  color: #10b981;
+}
+body.dark-mode .status-warning {
+  color: #f59e0b;
+}
+body.dark-mode .status-error {
+  color: #ef4444;
+}
 
-/* CSS Variables (Design Tokens) */
+body.dark-mode .small {
+  color: #b0b3b8;
+}
+
 :root {
-  --primary: #1a2238; /* Navy Blue */
-  --primary-dark: #0d1b2a; /* Charcoal */
-  --accent: #21e6c1; /* Aqua Green */
-  --accent-alt: #ffd700; /* Gold */
-  --text: #222b45; /* Dark gray/blue */
-  --text-light: #6b7280;
-  --border: #e5e7eb;
-  --bg: #f5f6fa; /* Very light gray/white */
-  --radius: 10px;
+  --primary: #2563eb; /* Blue 600 */
+  --primary-dark: #1e40af; /* Blue 800 */
+  --primary-light: #60a5fa; /* Blue 400 */
+  --accent: #f59e42; /* Orange 400 */
+  --accent-alt: #fbbf24; /* Amber 400 */
+  --success: #10b981; /* Green 500 */
+  --warning: #f59e0b; /* Amber 500 */
+  --error: #ef4444; /* Red 500 */
+  --border: #d1d5db; /* Gray 300 */
+  --bg: #f9fafb; /* Gray 50 */
+  --surface: #fff; /* White */
+  --text: #1a202c; /* Gray 900 */
+  --text-light: #6b7280; /* Gray 500 */
+  --text-inverse: #fff;
   --color-primary: var(--primary);
   --color-primary-dark: var(--primary-dark);
+  --color-primary-light: var(--primary-light);
   --color-accent: var(--accent);
   --color-accent-alt: var(--accent-alt);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-error: var(--error);
+  --color-border: var(--border);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
   --color-text: var(--text);
   --color-text-light: var(--text-light);
-  --color-border: var(--border);
-  --color-surface: #fff;
+  --color-text-inverse: var(--text-inverse);
   --shadow-sm: 0 1px 4px rgba(26, 34, 56, 0.04);
   --max-width: 1100px;
+  --radius: 10px;
   --radius-sm: 6px;
   --transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
