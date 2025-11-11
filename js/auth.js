@@ -115,7 +115,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         const user = await window.supabaseClient.auth.getUser();
         const email = user?.data?.user?.email;
         if (email) {
-          await fetch("/backend/auth/update-password", {
+          // Use correct backend URL for local and production
+          let backendUrl = "http://localhost:4000/auth/update-password";
+          if (
+            window.location.hostname !== "localhost" &&
+            window.location.hostname !== "127.0.0.1"
+          ) {
+            // Replace with your production backend URL if needed
+            // backendUrl = "https://your-production-backend.com/auth/update-password";
+          }
+          await fetch(backendUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, newPassword }),
@@ -188,4 +197,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     });
   }
+
+  app.get("/health", (req, res) => res.json({ ok: true }));
 });
