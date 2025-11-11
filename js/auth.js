@@ -104,6 +104,18 @@ document.addEventListener("DOMContentLoaded", async function () {
           password: newPassword,
         });
         if (error) throw error;
+
+        // Also update password hash in users table via backend
+        const user = await window.supabaseClient.auth.getUser();
+        const email = user?.data?.user?.email;
+        if (email) {
+          await fetch("/backend/auth/update-password", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, newPassword }),
+          });
+        }
+
         successMsg.textContent = "Password updated! You can now log in.";
         successMsg.style.display = "block";
         setTimeout(() => {
