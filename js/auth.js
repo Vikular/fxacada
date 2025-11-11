@@ -60,9 +60,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         return;
       }
       try {
+        // Use dynamic redirectTo for local and production
+        let redirectTo = window.location.origin + "/auth-modal.html?reset=1";
+        // Optionally, customize for production domain if needed
+        // if (window.location.hostname === "your-production-domain.com") {
+        //   redirectTo = "https://your-production-domain.com/auth-modal.html?reset=1";
+        // }
         const { error } =
           await window.supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo: window.location.origin + "/auth-modal.html?reset=1",
+            redirectTo,
           });
         if (error) throw error;
         successMsg.textContent =
