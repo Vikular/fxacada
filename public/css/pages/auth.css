@@ -1,0 +1,79 @@
+/* Auth Modal/Login Page Styles */
+.lang-selector {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 10;
+  background: #fff;
+  color: #222;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 4px 10px;
+  font-size: 15px;
+}
+body.dark-mode .lang-selector {
+  background: #232526;
+  color: #f3f4f6;
+  border: 1px solid #444;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.auth-wrap {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.auth-wrap h1 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 26px;
+}
+
+.auth-wrap .sub {
+  text-align: center;
+  color: var(--text-light);
+  margin: 0 0 24px;
+  font-size: 14px;
+}
+
+.auth-wrap form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-wrap label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.auth-wrap .links {
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.auth-wrap .links a {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .auth-wrap {
+    padding: 20px;
+  }
+}

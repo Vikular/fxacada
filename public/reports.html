@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports - Admin - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+    <header>
+      <div class="header-content">
+        <div class="logo" data-i18n="Forex Mentorship - Admin">
+          📈 Forex Mentorship - Admin
+        </div>
+        <nav>
+          <a href="admin.html" data-i18n="Dashboard">Dashboard</a>
+          <a href="manage-users.html" data-i18n="Users">Users</a>
+          <a href="reports.html" data-i18n="Reports">Reports</a>
+          <a href="settings.html" data-i18n="Settings">Settings</a>
+          <a href="#" id="logoutBtn" data-i18n="Logout">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="admin-container">
+      <h1 data-i18n="Reports & Analytics">📊 Reports & Analytics</h1>
+
+      <!-- Summary Stats -->
+      <section class="stats-section">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">2,847</div>
+            <div class="stat-label" data-i18n="Total Students">
+              Total Students
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">$421,450</div>
+            <div class="stat-label" data-i18n="Total Revenue">
+              Total Revenue
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">94%</div>
+            <div class="stat-label" data-i18n="Payment Success Rate">
+              Payment Success Rate
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">156</div>
+            <div class="stat-label" data-i18n="New This Month">
+              New This Month
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Enrollment by Tier -->
+      <h2 class="section-title" data-i18n="Enrollment Breakdown">
+        📈 Enrollment Breakdown
+      </h2>
+      <section class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🥉</div>
+          <h3 data-i18n="Starter Tier">Starter Tier</h3>
+          <p
+            style="
+              font-size: 28px;
+              font-weight: 800;
+              color: #667eea;
+              margin: 10px 0;
+            "
+          >
+            1,245
+          </p>
+          <p style="color: #6b7280">43.7% of total</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🥈</div>
+          <h3 data-i18n="Core Tier">Core Tier</h3>
+          <p
+            style="
+              font-size: 28px;
+              font-weight: 800;
+              color: #667eea;
+              margin: 10px 0;
+            "
+          >
+            1,358
+          </p>
+          <p style="color: #6b7280">47.7% of total</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🥇</div>
+          <h3 data-i18n="Pro Tier">Pro Tier</h3>
+          <p
+            style="
+              font-size: 28px;
+              font-weight: 800;
+              color: #667eea;
+              margin: 10px 0;
+            "
+          >
+            244
+          </p>
+          <p style="color: #6b7280">8.6% of total</p>
+        </div>
+      </section>
+
+      <!-- Payment Status -->
+      <h2 class="section-title" data-i18n="Payment Status">
+        💰 Payment Status
+      </h2>
+      <div class="card" style="padding: 24px">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+          "
+        >
+          <div>
+            <div
+              style="font-size: 13px; color: #6b7280; margin-bottom: 4px"
+              data-i18n="Approved"
+            >
+              Approved
+            </div>
+            <div style="font-size: 24px; font-weight: 800; color: #10b981">
+              2,650
+            </div>
+            <div style="font-size: 12px; color: #10b981">93.1%</div>
+          </div>
+          <div>
+            <div
+              style="font-size: 13px; color: #6b7280; margin-bottom: 4px"
+              data-i18n="Pending"
+            >
+              Pending
+            </div>
+            <div style="font-size: 24px; font-weight: 800; color: #f59e0b">
+              182
+            </div>
+            <div style="font-size: 12px; color: #f59e0b">6.4%</div>
+          </div>
+          <div>
+            <div
+              style="font-size: 13px; color: #6b7280; margin-bottom: 4px"
+              data-i18n="Rejected"
+            >
+              Rejected
+            </div>
+            <div style="font-size: 24px; font-weight: 800; color: #ef4444">
+              15
+            </div>
+            <div style="font-size: 12px; color: #ef4444">0.5%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly Revenue -->
+      <h2 class="section-title" data-i18n="Monthly Revenue Trend">
+        💵 Monthly Revenue Trend
+      </h2>
+      <div class="card" style="padding: 24px">
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+          "
+        >
+          <div
+            style="
+              text-align: center;
+              padding: 12px;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+            "
+          >
+            <div style="font-size: 12px; color: #6b7280" data-i18n="January">
+              January
+            </div>
+            <div style="font-size: 20px; font-weight: 700; margin-top: 4px">
+              $38,450
+            </div>
+          </div>
+          <div
+            style="
+              text-align: center;
+              padding: 12px;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+            "
+          >
+            <div style="font-size: 12px; color: #6b7280" data-i18n="February">
+              February
+            </div>
+            <div style="font-size: 20px; font-weight: 700; margin-top: 4px">
+              $42,180
+            </div>
+          </div>
+          <div
+            style="
+              text-align: center;
+              padding: 12px;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+            "
+          >
+            <div style="font-size: 12px; color: #6b7280" data-i18n="March">
+              March
+            </div>
+            <div style="font-size: 20px; font-weight: 700; margin-top: 4px">
+              $45,920
+            </div>
+          </div>
+          <div
+            style="
+              text-align: center;
+              padding: 12px;
+              border: 1px solid #e5e7eb;
+              border-radius: 8px;
+              background: #eef2ff;
+            "
+          >
+            <div style="font-size: 12px; color: #6b7280" data-i18n="This Month">
+              This Month
+            </div>
+            <div
+              style="
+                font-size: 20px;
+                font-weight: 700;
+                margin-top: 4px;
+                color: #667eea;
+              "
+            >
+              $51,230
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Export Options -->
+      <div style="margin-top: 40px; text-align: center">
+        <h3 style="margin-bottom: 16px" data-i18n="Export Reports">
+          Export Reports
+        </h3>
+        <div
+          style="
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+          "
+        >
+          <button
+            class="btn btn-primary"
+            data-tooltip="Export all data to CSV"
+            data-i18n="Export CSV"
+          >
+            📥 Export CSV
+          </button>
+          <button
+            class="btn btn-secondary"
+            data-tooltip="Generate PDF report"
+            data-i18n="Generate PDF"
+          >
+            📄 Generate PDF
+          </button>
+          <button
+            class="btn btn-secondary"
+            data-tooltip="Email report to admins"
+            data-i18n="Email Report"
+          >
+            📧 Email Report
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+    <script>
+      // Check admin access
+      if (!window.app) {
+        window.location.href = "admin-login.html";
+      }
+
+      document.getElementById("logoutBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        if (window.app && window.app.logout) window.app.logout();
+        localStorage.clear();
+        window.location.href = "index.html";
+      });
+    </script>
+  </body>
+</html>

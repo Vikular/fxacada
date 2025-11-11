@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <script src="js/includes.js" defer></script>
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+    <style>
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .user-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 18px;
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .stat-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .stat-card h3 {
+        margin: 0 0 8px;
+        font-size: 14px;
+        color: var(--text-light);
+        font-weight: 600;
+      }
+      .stat-card .value {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary);
+      }
+      .section {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+      .section h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+      }
+      .module-section {
+        margin-bottom: 24px;
+      }
+      .module-section h3 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        color: var(--primary);
+      }
+      .material-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .material-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        transition: all 0.2s;
+      }
+      .material-item:hover {
+        border-color: var(--primary);
+        background: #f9fafb;
+      }
+      .material-icon {
+        font-size: 24px;
+      }
+      .material-info {
+        flex: 1;
+      }
+      .material-info h4 {
+        margin: 0 0 4px;
+        font-size: 15px;
+      }
+      .material-info p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--text-light);
+      }
+      .submission-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-bottom: 8px;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-light);
+      }
+      .btn-small {
+        padding: 8px 16px;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+    <div data-include="partials/header.html"></div>
+
+    <main class="container">
+      <div class="dashboard-header">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatar">👤</div>
+          <div>
+            <h1
+              style="margin: 0; font-size: 24px"
+              id="userName"
+              data-i18n="Student"
+            >
+              Loading...
+            </h1>
+            <p
+              style="margin: 0; color: var(--text-light); font-size: 14px"
+              id="userEmail"
+            ></p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center">
+          <span class="pill" id="userTier">LOADING</span>
+          <button
+            onclick="logout()"
+            class="btn btn-secondary"
+            data-i18n="Logout"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <h3 data-i18n="Account Status">Account Status</h3>
+          <div class="value" id="accountStatus">Active</div>
+        </div>
+        <div class="stat-card">
+          <h3 data-i18n="Tier Level">Tier Level</h3>
+          <div class="value" id="tierLevel">-</div>
+        </div>
+        <div class="stat-card">
+          <h3 data-i18n="Modules Available">Modules Available</h3>
+          <div class="value" id="coursesCount">0</div>
+        </div>
+        <div class="stat-card">
+          <h3 data-i18n="Last Login">Last Login</h3>
+          <div class="value" style="font-size: 16px" id="lastLogin">-</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 data-i18n="Your Course Materials">📚 Your Course Materials</h2>
+        <div id="courseMaterials">
+          <div class="empty-state" data-i18n="Loading courses...">
+            Loading courses...
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 data-i18n="Payment History">💳 Payment History</h2>
+        <div id="paymentHistory">
+          <div class="empty-state" data-i18n="Loading payments...">
+            Loading payments...
+          </div>
+        </div>
+        <a
+          href="submit-payment.html"
+          class="btn btn-primary"
+          style="margin-top: 12px"
+          data-i18n="Submit New Payment"
+          >Submit New Payment</a
+        >
+      </div>
+
+      <div class="section">
+        <h2 data-i18n="FTMO Submissions">🏆 FTMO Submissions</h2>
+        <div id="ftmoHistory">
+          <div class="empty-state" data-i18n="Loading FTMO submissions...">
+            Loading FTMO submissions...
+          </div>
+        </div>
+        <a
+          href="submit-ftmo.html"
+          class="btn btn-primary"
+          style="margin-top: 12px"
+          data-i18n="Submit FTMO Challenge"
+          >Submit FTMO Challenge</a
+        >
+      </div>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth-guard.js"></script>
+    <script>
+      let currentUser = null;
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        console.log("🔄 Student dashboard loading...");
+
+        // Check authentication - THIS IS THE ONLY AUTH CHECK
+        currentUser = checkAuth(); // Don't specify role, allow both students and admins
+        if (!currentUser) {
+          console.log("❌ No user found, redirecting...");
+          return; // checkAuth already redirects
+        }
+
+        console.log("✅ User loaded:", currentUser);
+
+        // Display user info
+        const initials =
+          (currentUser.first_name?.[0] || "") +
+          (currentUser.last_name?.[0] || "");
+        document.getElementById("userAvatar").textContent = initials || "👤";
+        document.getElementById("userName").textContent =
+          `${currentUser.first_name || ""} ${
+            currentUser.last_name || ""
+          }`.trim() || "Student";
+        document.getElementById("userEmail").textContent = currentUser.email;
+        document.getElementById("userTier").textContent = (
+          currentUser.tier || "LEAD"
+        ).toUpperCase();
+
+        // Stats
+        document.getElementById("accountStatus").textContent =
+          currentUser.is_active ? "Active" : "Inactive";
+        document.getElementById("tierLevel").textContent = (
+          currentUser.tier || "Lead"
+        ).toUpperCase();
+
+        if (currentUser.last_login_at) {
+          const lastLogin = new Date(currentUser.last_login_at);
+          document.getElementById("lastLogin").textContent =
+            lastLogin.toLocaleDateString();
+        } else {
+          document.getElementById("lastLogin").textContent = "First time";
+        }
+
+        // Load data
+        await Promise.all([
+          loadCourseMaterials(),
+          loadPaymentHistory(),
+          loadFTMOHistory(),
+        ]);
+      });
+
+      async function loadCourseMaterials() {
+        try {
+          const tier = currentUser.tier || "starter";
+
+          console.log("📚 Loading courses for tier:", tier);
+
+          const { data: materials, error } = await window.supabaseClient
+            .from("course_materials")
+            .select("*")
+            .eq("is_published", true)
+            .eq("tier", tier)
+            .order("module", { ascending: true })
+            .order("order_index", { ascending: true });
+
+          if (error) throw error;
+
+          console.log("📚 Course materials loaded:", materials?.length || 0);
+
+          const container = document.getElementById("courseMaterials");
+
+          if (!materials || materials.length === 0) {
+            container.innerHTML =
+              '<div class="empty-state">No course materials available for your tier yet. Please contact support or upgrade your tier.</div>';
+            document.getElementById("coursesCount").textContent = "0";
+            return;
+          }
+
+          // Group by module
+          const grouped = {};
+          materials.forEach((m) => {
+            if (!grouped[m.module]) grouped[m.module] = [];
+            grouped[m.module].push(m);
+          });
+
+          document.getElementById("coursesCount").textContent =
+            Object.keys(grouped).length;
+
+          container.innerHTML = Object.entries(grouped)
+            .map(
+              ([module, items]) => `
+          <div class="module-section">
+            <h3>${module}</h3>
+            <div class="material-list">
+              ${items
+                .map(
+                  (item) => `
+                <div class="material-item">
+                  <span class="material-icon">${getContentIcon(
+                    item.content_type
+                  )}</span>
+                  <div class="material-info">
+                    <h4>${item.title}</h4>
+                    <p>${item.description || "No description"}</p>
+                  </div>
+                  <a href="${
+                    item.content_url
+                  }" target="_blank" class="btn btn-secondary btn-small">View</a>
+                </div>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        `
+            )
+            .join("");
+        } catch (err) {
+          console.error("❌ Error loading courses:", err);
+          document.getElementById("courseMaterials").innerHTML =
+            '<div class="empty-state">Error loading courses. Please refresh the page.</div>';
+        }
+      }
+
+      async function loadPaymentHistory() {
+        try {
+          console.log("💳 Loading payment history...");
+
+          const { data, error } = await window.supabaseClient
+            .from("payment_submissions")
+            .select("*")
+            .eq("user_id", currentUser.user_id)
+            .order("submitted_at", { ascending: false });
+
+          if (error) throw error;
+
+          console.log("💳 Payments loaded:", data?.length || 0);
+
+          const container = document.getElementById("paymentHistory");
+
+          if (!data || data.length === 0) {
+            container.innerHTML =
+              '<div class="empty-state">No payment submissions yet.</div>';
+            return;
+          }
+
+          container.innerHTML = data
+            .map(
+              (p) => `
+          <div class="submission-item">
+            <div>
+              <strong>${p.tier.toUpperCase()}</strong> - $${p.amount}
+              <br><span class="small" style="color: var(--text-light);">${new Date(
+                p.submitted_at
+              ).toLocaleDateString()}</span>
+            </div>
+            <span class="pill pill-${p.status}">${p.status.toUpperCase()}</span>
+          </div>
+        `
+            )
+            .join("");
+        } catch (err) {
+          console.error("❌ Error loading payments:", err);
+          document.getElementById("paymentHistory").innerHTML =
+            '<div class="empty-state">Error loading payment history.</div>';
+        }
+      }
+
+      async function loadFTMOHistory() {
+        try {
+          console.log("🏆 Loading FTMO history...");
+
+          const { data, error } = await window.supabaseClient
+            .from("ftmo_submissions")
+            .select("*")
+            .eq("user_id", currentUser.user_id)
+            .order("submitted_at", { ascending: false });
+
+          if (error) throw error;
+
+          console.log("🏆 FTMO submissions loaded:", data?.length || 0);
+
+          const container = document.getElementById("ftmoHistory");
+
+          if (!data || data.length === 0) {
+            container.innerHTML =
+              '<div class="empty-state">No FTMO submissions yet.</div>';
+            return;
+          }
+
+          container.innerHTML = data
+            .map(
+              (f) => `
+          <div class="submission-item">
+            <div>
+              <strong>${f.challenge_type}</strong>
+              <br><span class="small" style="color: var(--text-light);">${new Date(
+                f.submitted_at
+              ).toLocaleDateString()}</span>
+            </div>
+            <span class="pill pill-${f.status}">${f.status.toUpperCase()}</span>
+          </div>
+        `
+            )
+            .join("");
+        } catch (err) {
+          console.error("❌ Error loading FTMO:", err);
+          document.getElementById("ftmoHistory").innerHTML =
+            '<div class="empty-state">Error loading FTMO history.</div>';
+        }
+      }
+
+      function getContentIcon(type) {
+        const icons = {
+          video: "🎥",
+          pdf: "📄",
+          text: "📝",
+        };
+        return icons[type] || "📚";
+      }
+    </script>
+  </body>
+</html>

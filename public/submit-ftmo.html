@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit FTMO Challenge - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body class="auth-page">
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+    <div class="auth-wrap">
+      <h1 data-i18n="Submit FTMO Challenge">🎯 Submit FTMO Challenge</h1>
+      <p
+        class="sub"
+        data-i18n="Share your FTMO challenge details to receive personalized coaching"
+      >
+        Share your FTMO challenge details to receive personalized coaching
+      </p>
+
+      <div class="msg ok" id="successMsg" style="display: none"></div>
+      <div class="msg err" id="errorMsg" style="display: none"></div>
+
+      <form id="ftmoForm">
+        <div class="fg">
+          <label for="challengeType" data-i18n="Challenge Type"
+            >Challenge Type *</label
+          >
+          <select id="challengeType" name="challengeType" required>
+            <option value="" data-i18n="Select type">Select type</option>
+            <option value="phase1" data-i18n="Phase 1">Phase 1</option>
+            <option value="phase2" data-i18n="Phase 2">Phase 2</option>
+            <option value="verification" data-i18n="Verification">
+              Verification
+            </option>
+            <option value="funded" data-i18n="Funded Account">
+              Funded Account
+            </option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="accountSize" data-i18n="Account Size"
+            >Account Size *</label
+          >
+          <select id="accountSize" name="accountSize" required>
+            <option value="" data-i18n="Select size">Select size</option>
+            <option value="10k" data-i18n="$10,000">$10,000</option>
+            <option value="25k" data-i18n="$25,000">$25,000</option>
+            <option value="50k" data-i18n="$50,000">$50,000</option>
+            <option value="100k" data-i18n="$100,000">$100,000</option>
+            <option value="200k" data-i18n="$200,000">$200,000</option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="currentProfit" data-i18n="Current Profit/Loss (%)"
+            >Current Profit/Loss (%) *</label
+          >
+          <input
+            type="number"
+            id="currentProfit"
+            name="currentProfit"
+            required
+            placeholder="e.g., 5.2"
+            step="0.1"
+          />
+          <span
+            class="small"
+            data-i18n="Enter positive for profit, negative for loss"
+            >Enter positive for profit, negative for loss</span
+          >
+        </div>
+
+        <div class="fg">
+          <label for="tradingDays" data-i18n="Trading Days Completed"
+            >Trading Days Completed *</label
+          >
+          <input
+            type="number"
+            id="tradingDays"
+            name="tradingDays"
+            required
+            placeholder="e.g., 8"
+            min="0"
+          />
+        </div>
+
+        <div class="fg">
+          <label for="challengeGoal" data-i18n="Your Challenge Goal"
+            >Your Challenge Goal *</label
+          >
+          <select id="challengeGoal" name="challengeGoal" required>
+            <option value="" data-i18n="Select goal">Select goal</option>
+            <option value="pass-phase1" data-i18n="Pass Phase 1">
+              Pass Phase 1
+            </option>
+            <option value="pass-phase2" data-i18n="Pass Phase 2">
+              Pass Phase 2
+            </option>
+            <option value="get-funded" data-i18n="Get Funded Account">
+              Get Funded Account
+            </option>
+            <option value="improve-consistency" data-i18n="Improve Consistency">
+              Improve Consistency
+            </option>
+          </select>
+        </div>
+
+        <div class="fg">
+          <label for="screenshot" data-i18n="Challenge Dashboard Screenshot"
+            >Challenge Dashboard Screenshot</label
+          >
+          <input
+            type="file"
+            id="screenshot"
+            name="screenshot"
+            accept="image/*"
+          />
+          <span
+            class="small"
+            data-i18n="Optional but recommended (JPG, PNG - Max 5MB)"
+            >Optional but recommended (JPG, PNG - Max 5MB)</span
+          >
+        </div>
+
+        <div class="fg">
+          <label for="challenges" data-i18n="Main Challenges You're Facing"
+            >Main Challenges You're Facing</label
+          >
+          <textarea
+            id="challenges"
+            name="challenges"
+            rows="4"
+            placeholder="What difficulties are you experiencing? (Optional)"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%">
+          Submit for Coaching
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          style="width: 100%"
+          data-i18n="Submit for Coaching"
+        >
+          Submit for Coaching
+        </button>
+      </form>
+
+      <div class="links">
+        <a href="student.html" data-i18n="Back to Dashboard"
+          >← Back to Dashboard</a
+        >
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enroll Now - Forex Mentorship</title>
+    <meta name="description" content="Enroll in our forex mentorship program" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <button
+          id="darkModeToggle"
+          aria-label="Toggle dark mode"
+          style="
+            margin-left: auto;
+            font-size: 1.2em;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: none;
+            background: #eee;
+            cursor: pointer;
+          "
+        >
+          🌙
+        </button>
+        <select
+          id="langSelect"
+          aria-label="Select language"
+          style="margin-left: 12px; padding: 6px 10px; border-radius: 6px"
+        >
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="ar">العربية</option>
+          <option value="zh">中文</option>
+        </select>
+        <div class="logo">📈 Forex Mentorship</div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="index.html#pricing">Pricing</a>
+          <a href="auth-modal.html">Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="enrollment-container">
+      <div class="enrollment-header">
+        <h1 data-i18n="Start Your Trading Journey">
+          🎓 Start Your Trading Journey
+        </h1>
+        <p
+          data-i18n="Complete your enrollment and get instant access to our mentorship program"
+        >
+          Complete your enrollment and get instant access to our mentorship
+          program
+        </p>
+      </div>
+
+      <div class="enrollment-content">
+        <div class="msg ok" id="successMsg"></div>
+        <div class="msg err" id="errorMsg"></div>
+
+        <h3 data-i18n="Select Your Plan">Select Your Plan</h3>
+        <div class="plan">
+          <input
+            type="radio"
+            name="tier"
+            value="starter"
+            id="starter"
+            checked
+          />
+          <label for="starter">
+            <span class="pill">STARTER</span>
+            <span>Basic course access</span>
+          </label>
+          <span class="price">$199</span>
+        </div>
+        <div class="plan">
+          <input type="radio" name="tier" value="core" id="core" />
+          <label for="core">
+            <span class="pill">CORE</span>
+            <span>Live sessions + mentorship</span>
+          </label>
+          <span class="price">$499</span>
+        </div>
+        <div class="plan">
+          <input type="radio" name="tier" value="pro" id="pro" />
+          <label for="pro">
+            <span class="pill">PRO</span>
+            <span>FTMO coaching + VIP support</span>
+          </label>
+          <span class="price">$999</span>
+        </div>
+
+        <h3 class="section-spacing" data-i18n="Personal Information">
+          Personal Information
+        </h3>
+        <form id="enrollmentForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName" data-i18n="Full Name *">Full Name *</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                required
+                placeholder="John Doe"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email" data-i18n="Email *">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="john@example.com"
+              />
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="phone" data-i18n="Phone Number *"
+                >Phone Number *</label
+              >
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                placeholder="+1 (234) 567-8900"
+              />
+            </div>
+            <div class="form-group">
+              <label for="country" data-i18n="Country *">Country *</label>
+              <input
+                type="text"
+                id="countrySearch"
+                placeholder="Type to search country..."
+                style="
+                  margin-bottom: 6px;
+                  width: 100%;
+                  padding: 6px;
+                  box-sizing: border-box;
+                "
+                autocomplete="off"
+              />
+              <select id="country" name="country" required>
+                <option value="">Select country</option>
+                <option value="AF">Afghanistan</option>
+                <option value="AL">Albania</option>
+                <option value="DZ">Algeria</option>
+                <option value="AS">American Samoa</option>
+                <option value="AD">Andorra</option>
+                <option value="AO">Angola</option>
+                <option value="AG">Antigua and Barbuda</option>
+                <option value="AR">Argentina</option>
+                <option value="AM">Armenia</option>
+                <option value="AU">Australia</option>
+                <option value="AT">Austria</option>
+                <option value="AZ">Azerbaijan</option>
+                <option value="BS">Bahamas</option>
+                <option value="BH">Bahrain</option>
+                <option value="BD">Bangladesh</option>
+                <option value="BB">Barbados</option>
+                <option value="BY">Belarus</option>
+                <option value="BE">Belgium</option>
+                <option value="BZ">Belize</option>
+                <option value="BJ">Benin</option>
+                <option value="BM">Bermuda</option>
+                <option value="BT">Bhutan</option>
+                <option value="BO">Bolivia</option>
+                <option value="BA">Bosnia and Herzegovina</option>
+                <option value="BW">Botswana</option>
+                <option value="BR">Brazil</option>
+                <option value="BN">Brunei</option>
+                <option value="BG">Bulgaria</option>
+                <option value="BF">Burkina Faso</option>
+                <option value="BI">Burundi</option>
+                <option value="KH">Cambodia</option>
+                <option value="CM">Cameroon</option>
+                <option value="CA">Canada</option>
+                <option value="CV">Cape Verde</option>
+                <option value="KY">Cayman Islands</option>
+                <option value="CF">Central African Republic</option>
+                <option value="TD">Chad</option>
+                <option value="CL">Chile</option>
+                <option value="CN">China</option>
+                <option value="CO">Colombia</option>
+                <option value="KM">Comoros</option>
+                <option value="CG">Congo</option>
+                <option value="CD">Congo, Democratic Republic</option>
+                <option value="CR">Costa Rica</option>
+                <option value="CI">Côte d’Ivoire</option>
+                <option value="HR">Croatia</option>
+                <option value="CU">Cuba</option>
+                <option value="CY">Cyprus</option>
+                <option value="CZ">Czech Republic</option>
+                <option value="DK">Denmark</option>
+                <option value="DJ">Djibouti</option>
+                <option value="DM">Dominica</option>
+                <option value="DO">Dominican Republic</option>
+                <option value="EC">Ecuador</option>
+                <option value="EG">Egypt</option>
+                <option value="SV">El Salvador</option>
+                <option value="GQ">Equatorial Guinea</option>
+                <option value="ER">Eritrea</option>
+                <option value="EE">Estonia</option>
+                <option value="SZ">Eswatini</option>
+                <option value="ET">Ethiopia</option>
+                <option value="FJ">Fiji</option>
+                <option value="FI">Finland</option>
+                <option value="FR">France</option>
+                <option value="GA">Gabon</option>
+                <option value="GM">Gambia</option>
+                <option value="GE">Georgia</option>
+                <option value="DE">Germany</option>
+                <option value="GH">Ghana</option>
+                <option value="GR">Greece</option>
+                <option value="GD">Grenada</option>
+                <option value="GU">Guam</option>
+                <option value="GT">Guatemala</option>
+                <option value="GN">Guinea</option>
+                <option value="GW">Guinea-Bissau</option>
+                <option value="GY">Guyana</option>
+                <option value="HT">Haiti</option>
+                <option value="HN">Honduras</option>
+                <option value="HU">Hungary</option>
+                <option value="IS">Iceland</option>
+                <option value="IN">India</option>
+                <option value="ID">Indonesia</option>
+                <option value="IR">Iran</option>
+                <option value="IQ">Iraq</option>
+                <option value="IE">Ireland</option>
+                <option value="IL">Israel</option>
+                <option value="IT">Italy</option>
+                <option value="JM">Jamaica</option>
+                <option value="JP">Japan</option>
+                <option value="JO">Jordan</option>
+                <option value="KZ">Kazakhstan</option>
+                <option value="KE">Kenya</option>
+                <option value="KI">Kiribati</option>
+                <option value="KW">Kuwait</option>
+                <option value="KG">Kyrgyzstan</option>
+                <option value="LA">Laos</option>
+                <option value="LV">Latvia</option>
+                <option value="LB">Lebanon</option>
+                <option value="LS">Lesotho</option>
+                <option value="LR">Liberia</option>
+                <option value="LY">Libya</option>
+                <option value="LI">Liechtenstein</option>
+                <option value="LT">Lithuania</option>
+                <option value="LU">Luxembourg</option>
+                <option value="MG">Madagascar</option>
+                <option value="MW">Malawi</option>
+                <option value="MY">Malaysia</option>
+                <option value="MV">Maldives</option>
+                <option value="ML">Mali</option>
+                <option value="MT">Malta</option>
+                <option value="MH">Marshall Islands</option>
+                <option value="MR">Mauritania</option>
+                <option value="MU">Mauritius</option>
+                <option value="MX">Mexico</option>
+                <option value="FM">Micronesia</option>
+                <option value="MD">Moldova</option>
+                <option value="MC">Monaco</option>
+                <option value="MN">Mongolia</option>
+                <option value="ME">Montenegro</option>
+                <option value="MA">Morocco</option>
+                <option value="MZ">Mozambique</option>
+                <option value="MM">Myanmar</option>
+                <option value="NA">Namibia</option>
+                <option value="NR">Nauru</option>
+                <option value="NP">Nepal</option>
+                <option value="NL">Netherlands</option>
+                <option value="NZ">New Zealand</option>
+                <option value="NI">Nicaragua</option>
+                <option value="NE">Niger</option>
+                <option value="NG">Nigeria</option>
+                <option value="KP">North Korea</option>
+                <option value="MK">North Macedonia</option>
+                <option value="NO">Norway</option>
+                <option value="OM">Oman</option>
+                <option value="PK">Pakistan</option>
+                <option value="PW">Palau</option>
+                <option value="PS">Palestine</option>
+                <option value="PA">Panama</option>
+                <option value="PG">Papua New Guinea</option>
+                <option value="PY">Paraguay</option>
+                <option value="PE">Peru</option>
+                <option value="PH">Philippines</option>
+                <option value="PL">Poland</option>
+                <option value="PT">Portugal</option>
+                <option value="PR">Puerto Rico</option>
+                <option value="QA">Qatar</option>
+                <option value="RO">Romania</option>
+                <option value="RU">Russia</option>
+                <option value="RW">Rwanda</option>
+                <option value="KN">Saint Kitts and Nevis</option>
+                <option value="LC">Saint Lucia</option>
+                <option value="VC">Saint Vincent and the Grenadines</option>
+                <option value="WS">Samoa</option>
+                <option value="SM">San Marino</option>
+                <option value="ST">Sao Tome and Principe</option>
+                <option value="SA">Saudi Arabia</option>
+                <option value="SN">Senegal</option>
+                <option value="RS">Serbia</option>
+                <option value="SC">Seychelles</option>
+                <option value="SL">Sierra Leone</option>
+                <option value="SG">Singapore</option>
+                <option value="SK">Slovakia</option>
+                <option value="SI">Slovenia</option>
+                <option value="SB">Solomon Islands</option>
+                <option value="SO">Somalia</option>
+                <option value="ZA">South Africa</option>
+                <option value="KR">South Korea</option>
+                <option value="SS">South Sudan</option>
+                <option value="ES">Spain</option>
+                <option value="LK">Sri Lanka</option>
+                <option value="SD">Sudan</option>
+                <option value="SR">Suriname</option>
+                <option value="SE">Sweden</option>
+                <option value="CH">Switzerland</option>
+                <option value="SY">Syria</option>
+                <option value="TW">Taiwan</option>
+                <option value="TJ">Tajikistan</option>
+                <option value="TZ">Tanzania</option>
+                <option value="TH">Thailand</option>
+                <option value="TL">Timor-Leste</option>
+                <option value="TG">Togo</option>
+                <option value="TO">Tonga</option>
+                <option value="TT">Trinidad and Tobago</option>
+                <option value="TN">Tunisia</option>
+                <option value="TR">Turkey</option>
+                <option value="TM">Turkmenistan</option>
+                <option value="TV">Tuvalu</option>
+                <option value="UG">Uganda</option>
+                <option value="UA">Ukraine</option>
+                <option value="AE">United Arab Emirates</option>
+                <option value="GB">United Kingdom</option>
+                <option value="US">United States</option>
+                <option value="UY">Uruguay</option>
+                <option value="UZ">Uzbekistan</option>
+                <option value="VU">Vanuatu</option>
+                <option value="VA">Vatican City</option>
+                <option value="VE">Venezuela</option>
+                <option value="VN">Vietnam</option>
+                <option value="YE">Yemen</option>
+                <option value="ZM">Zambia</option>
+                <option value="ZW">Zimbabwe</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group full">
+            <label for="password" data-i18n="Create Password *"
+              >Create Password *</label
+            >
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Min. 8 characters"
+              minlength="8"
+            />
+            <span class="small" data-i18n="Must be at least 8 characters long"
+              >Must be at least 8 characters long</span
+            >
+          </div>
+
+          <div class="form-group full">
+            <label for="experience" data-i18n="Trading Experience *"
+              >Trading Experience *</label
+            >
+            <select id="experience" name="experience" required>
+              <option value="">Select your level</option>
+              <option value="beginner" data-i18n="Beginner (0-6 months)">
+                Beginner (0-6 months)
+              </option>
+              <option
+                value="intermediate"
+                data-i18n="Intermediate (6-24 months)"
+              >
+                Intermediate (6-24 months)
+              </option>
+              <option value="advanced" data-i18n="Advanced (2+ years)">
+                Advanced (2+ years)
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="goals" data-i18n="Your Trading Goals"
+              >Your Trading Goals</label
+            >
+            <textarea
+              id="goals"
+              name="goals"
+              placeholder="What do you hope to achieve? (Optional)"
+            ></textarea>
+          </div>
+
+          <div class="form-group full">
+            <label class="checkbox-label">
+              <input type="checkbox" id="terms" name="terms" required />
+              <span>
+                <span data-i18n="I agree to the">I agree to the</span>
+                <a
+                  href="terms.html"
+                  target="_blank"
+                  data-i18n="Terms of Service"
+                  >Terms of Service</a
+                >
+                <span data-i18n="and">and</span>
+                <a
+                  href="privacy.html"
+                  target="_blank"
+                  data-i18n="Privacy Policy"
+                  >Privacy Policy</a
+                >
+                *
+              </span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <span data-i18n="Complete Enrollment">Complete Enrollment</span>
+          </button>
+        </form>
+
+        <div
+          class="note"
+          data-i18n="After enrollment, you'll receive login credentials via email and can submit your payment proof."
+        >
+          After enrollment, you'll receive login credentials via email and can
+          submit your payment proof.
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-no-margin">
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="index.html">Home</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/country-phone-prefixes.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/i18next@23.11.2/dist/umd/i18next.min.js"></script>
+    <script>
+      // Internationalization (i18n) logic
+      (function () {
+        const resources = {
+          en: {
+            translation: {
+              "Start Your Trading Journey": "Start Your Trading Journey",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "Complete your enrollment and get instant access to our mentorship program",
+              "Select Your Plan": "Select Your Plan",
+              "Personal Information": "Personal Information",
+              "Full Name *": "Full Name *",
+              "Email *": "Email *",
+              "Phone Number *": "Phone Number *",
+              "Country *": "Country *",
+              "Create Password *": "Create Password *",
+              "Must be at least 8 characters long":
+                "Must be at least 8 characters long",
+              "Trading Experience *": "Trading Experience *",
+              "Beginner (0-6 months)": "Beginner (0-6 months)",
+              "Intermediate (6-24 months)": "Intermediate (6-24 months)",
+              "Advanced (2+ years)": "Advanced (2+ years)",
+              "Your Trading Goals": "Your Trading Goals",
+              "What do you hope to achieve? (Optional)":
+                "What do you hope to achieve? (Optional)",
+              "I agree to the": "I agree to the",
+              "Terms of Service": "Terms of Service",
+              and: "and",
+              "Privacy Policy": "Privacy Policy",
+              "Complete Enrollment": "Complete Enrollment",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "After enrollment, you'll receive login credentials via email and can submit your payment proof.",
+            },
+          },
+          fr: {
+            translation: {
+              "Start Your Trading Journey":
+                "Commencez votre parcours de trading",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "Complétez votre inscription et accédez instantanément à notre programme de mentorat",
+              "Select Your Plan": "Sélectionnez votre plan",
+              "Personal Information": "Informations personnelles",
+              "Full Name *": "Nom complet *",
+              "Email *": "E-mail *",
+              "Phone Number *": "Numéro de téléphone *",
+              "Country *": "Pays *",
+              "Create Password *": "Créer un mot de passe *",
+              "Must be at least 8 characters long":
+                "Doit comporter au moins 8 caractères",
+              "Trading Experience *": "Expérience de trading *",
+              "Beginner (0-6 months)": "Débutant (0-6 mois)",
+              "Intermediate (6-24 months)": "Intermédiaire (6-24 mois)",
+              "Advanced (2+ years)": "Avancé (2+ ans)",
+              "Your Trading Goals": "Vos objectifs de trading",
+              "What do you hope to achieve? (Optional)":
+                "Que souhaitez-vous accomplir ? (Optionnel)",
+              "I agree to the": "J'accepte les",
+              "Terms of Service": "Conditions d'utilisation",
+              and: "et",
+              "Privacy Policy": "Politique de confidentialité",
+              "Complete Enrollment": "Finaliser l'inscription",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "Après l'inscription, vous recevrez vos identifiants par e-mail et pourrez soumettre votre preuve de paiement.",
+            },
+          },
+          es: {
+            translation: {
+              "Start Your Trading Journey": "Comienza tu viaje de trading",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "Completa tu inscripción y obtén acceso instantáneo a nuestro programa de mentoría",
+              "Select Your Plan": "Selecciona tu plan",
+              "Personal Information": "Información personal",
+              "Full Name *": "Nombre completo *",
+              "Email *": "Correo electrónico *",
+              "Phone Number *": "Número de teléfono *",
+              "Country *": "País *",
+              "Create Password *": "Crear contraseña *",
+              "Must be at least 8 characters long":
+                "Debe tener al menos 8 caracteres",
+              "Trading Experience *": "Experiencia en trading *",
+              "Beginner (0-6 months)": "Principiante (0-6 meses)",
+              "Intermediate (6-24 months)": "Intermedio (6-24 meses)",
+              "Advanced (2+ years)": "Avanzado (2+ años)",
+              "Your Trading Goals": "Tus objetivos de trading",
+              "What do you hope to achieve? (Optional)":
+                "¿Qué esperas lograr? (Opcional)",
+              "I agree to the": "Acepto los",
+              "Terms of Service": "Términos de servicio",
+              and: "y",
+              "Privacy Policy": "Política de privacidad",
+              "Complete Enrollment": "Completar inscripción",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "Después de la inscripción, recibirás tus credenciales por correo electrónico y podrás enviar tu comprobante de pago.",
+            },
+          },
+          de: {
+            translation: {
+              "Start Your Trading Journey": "Beginnen Sie Ihre Trading-Reise",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "Schließen Sie Ihre Anmeldung ab und erhalten Sie sofortigen Zugang zu unserem Mentoring-Programm",
+              "Select Your Plan": "Wählen Sie Ihren Plan",
+              "Personal Information": "Persönliche Informationen",
+              "Full Name *": "Vollständiger Name *",
+              "Email *": "E-Mail *",
+              "Phone Number *": "Telefonnummer *",
+              "Country *": "Land *",
+              "Create Password *": "Passwort erstellen *",
+              "Must be at least 8 characters long":
+                "Muss mindestens 8 Zeichen lang sein",
+              "Trading Experience *": "Handelserfahrung *",
+              "Beginner (0-6 months)": "Anfänger (0-6 Monate)",
+              "Intermediate (6-24 months)": "Fortgeschritten (6-24 Monate)",
+              "Advanced (2+ years)": "Experte (2+ Jahre)",
+              "Your Trading Goals": "Ihre Handelsziele",
+              "What do you hope to achieve? (Optional)":
+                "Was möchten Sie erreichen? (Optional)",
+              "I agree to the": "Ich stimme den",
+              "Terms of Service": "Nutzungsbedingungen",
+              and: "und",
+              "Privacy Policy": "Datenschutzrichtlinie",
+              "Complete Enrollment": "Anmeldung abschließen",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "Nach der Anmeldung erhalten Sie Ihre Zugangsdaten per E-Mail und können Ihren Zahlungsnachweis einreichen.",
+            },
+          },
+          ar: {
+            translation: {
+              "Start Your Trading Journey": "ابدأ رحلتك في التداول",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "أكمل تسجيلك واحصل على وصول فوري إلى برنامج الإرشاد الخاص بنا",
+              "Select Your Plan": "اختر خطتك",
+              "Personal Information": "المعلومات الشخصية",
+              "Full Name *": "الاسم الكامل *",
+              "Email *": "البريد الإلكتروني *",
+              "Phone Number *": "رقم الهاتف *",
+              "Country *": "الدولة *",
+              "Create Password *": "إنشاء كلمة مرور *",
+              "Must be at least 8 characters long":
+                "يجب أن تتكون من 8 أحرف على الأقل",
+              "Trading Experience *": "خبرة التداول *",
+              "Beginner (0-6 months)": "مبتدئ (0-6 أشهر)",
+              "Intermediate (6-24 months)": "متوسط (6-24 شهرًا)",
+              "Advanced (2+ years)": "متقدم (أكثر من سنتين)",
+              "Your Trading Goals": "أهدافك في التداول",
+              "What do you hope to achieve? (Optional)":
+                "ما الذي تأمل في تحقيقه؟ (اختياري)",
+              "I agree to the": "أوافق على",
+              "Terms of Service": "شروط الخدمة",
+              and: "و",
+              "Privacy Policy": "سياسة الخصوصية",
+              "Complete Enrollment": "إكمال التسجيل",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "بعد التسجيل، ستتلقى بيانات تسجيل الدخول عبر البريد الإلكتروني ويمكنك تقديم إثبات الدفع الخاص بك.",
+            },
+          },
+          zh: {
+            translation: {
+              "Start Your Trading Journey": "开始您的交易之旅",
+              "Complete your enrollment and get instant access to our mentorship program":
+                "完成注册，立即获得我们的指导课程",
+              "Select Your Plan": "选择您的计划",
+              "Personal Information": "个人信息",
+              "Full Name *": "全名 *",
+              "Email *": "电子邮件 *",
+              "Phone Number *": "电话号码 *",
+              "Country *": "国家 *",
+              "Create Password *": "创建密码 *",
+              "Must be at least 8 characters long": "至少8个字符",
+              "Trading Experience *": "交易经验 *",
+              "Beginner (0-6 months)": "初学者 (0-6个月)",
+              "Intermediate (6-24 months)": "中级 (6-24个月)",
+              "Advanced (2+ years)": "高级 (2年以上)",
+              "Your Trading Goals": "您的交易目标",
+              "What do you hope to achieve? (Optional)":
+                "您希望实现什么？（可选）",
+              "I agree to the": "我同意",
+              "Terms of Service": "服务条款",
+              and: "和",
+              "Privacy Policy": "隐私政策",
+              "Complete Enrollment": "完成注册",
+              "After enrollment, you'll receive login credentials via email and can submit your payment proof.":
+                "注册后，您将通过电子邮件收到登录凭证，并可提交付款证明。",
+            },
+          },
+        };
+        i18next.init({ lng: "en", resources }, function (err, t) {
+          function updateTexts() {
+            document.querySelectorAll("[data-i18n]").forEach(function (el) {
+              el.innerHTML = t(el.getAttribute("data-i18n"));
+            });
+            // Placeholders
+            document.getElementById("fullName").placeholder = t("Full Name *");
+            document.getElementById("email").placeholder = t("Email *");
+            document.getElementById("phone").placeholder = "+1 (234) 567-8900";
+            document.getElementById("countrySearch").placeholder =
+              t("Country *");
+            document.getElementById("password").placeholder = t(
+              "Must be at least 8 characters long"
+            );
+            document.getElementById("goals").placeholder = t(
+              "What do you hope to achieve? (Optional)"
+            );
+          }
+          updateTexts();
+          document
+            .getElementById("langSelect")
+            .addEventListener("change", function () {
+              i18next.changeLanguage(this.value, updateTexts);
+              // RTL support
+              document.body.dir = this.value === "ar" ? "rtl" : "ltr";
+            });
+          // Auto-detect browser language
+          const browserLang = (navigator.language || "").split("-")[0];
+          if (resources[browserLang]) {
+            document.getElementById("langSelect").value = browserLang;
+            i18next.changeLanguage(browserLang, updateTexts);
+            document.body.dir = browserLang === "ar" ? "rtl" : "ltr";
+          }
+        });
+      })();
+      // Dark mode toggle logic
+      (function () {
+        const toggle = document.getElementById("darkModeToggle");
+        const darkClass = "dark-mode";
+        const iconMoon = "🌙";
+        const iconSun = "☀️";
+        function setDarkMode(on) {
+          document.body.classList.toggle(darkClass, on);
+          toggle.textContent = on ? iconSun : iconMoon;
+          localStorage.setItem("darkMode", on ? "1" : "0");
+        }
+        if (toggle) {
+          // Initial state
+          const darkPref = localStorage.getItem("darkMode");
+          setDarkMode(darkPref === "1");
+          toggle.addEventListener("click", function () {
+            setDarkMode(!document.body.classList.contains(darkClass));
+          });
+        }
+      })();
+      // Auto-suggest phone prefix and country search/filter
+      document.addEventListener("DOMContentLoaded", function () {
+        var countrySelect = document.getElementById("country");
+        var phoneInput = document.getElementById("phone");
+        var countrySearch = document.getElementById("countrySearch");
+        if (!countrySelect || !phoneInput || !window.countryPhonePrefixes)
+          return;
+        // Phone prefix auto-suggest
+        countrySelect.addEventListener("change", function () {
+          var selectedCode = countrySelect.value;
+          var found = window.countryPhonePrefixes.find(function (c) {
+            return c.code === selectedCode;
+          });
+          if (found && found.dial) {
+            if (
+              !phoneInput.value ||
+              phoneInput.value.startsWith("+") ||
+              phoneInput.value.startsWith("00")
+            ) {
+              phoneInput.value = found.dial + " ";
+              phoneInput.focus();
+            }
+          }
+        });
+        // Country search filter
+        if (countrySearch) {
+          countrySearch.addEventListener("input", function () {
+            var filter = countrySearch.value.trim().toLowerCase();
+            for (var i = 0; i < countrySelect.options.length; i++) {
+              var opt = countrySelect.options[i];
+              if (i === 0) {
+                opt.style.display = "";
+                continue;
+              } // Always show 'Select country'
+              var countryObj = window.countryPhonePrefixes.find(function (c) {
+                return c.code === opt.value;
+              });
+              var name = countryObj
+                ? countryObj.name.toLowerCase()
+                : opt.text.toLowerCase();
+              opt.style.display = name.includes(filter) ? "" : "none";
+            }
+            // If only one match, select it
+            var visibleOpts = Array.from(countrySelect.options).filter(
+              function (o, idx) {
+                return o.style.display !== "none" && idx !== 0;
+              }
+            );
+            if (visibleOpts.length === 1) {
+              countrySelect.value = visibleOpts[0].value;
+              countrySelect.dispatchEvent(new Event("change"));
+            }
+          });
+        }
+        // Keyboard: jump to country by first letter
+        countrySelect.addEventListener("keydown", function (e) {
+          if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
+            var letter = e.key.toLowerCase();
+            var startIdx = countrySelect.selectedIndex + 1;
+            var opts = Array.from(countrySelect.options);
+            var foundIdx = opts.findIndex(function (opt, idx) {
+              if (idx < startIdx) return false;
+              var countryObj = window.countryPhonePrefixes.find(function (c) {
+                return c.code === opt.value;
+              });
+              var name = countryObj
+                ? countryObj.name.toLowerCase()
+                : opt.text.toLowerCase();
+              return name.startsWith(letter) && opt.style.display !== "none";
+            });
+            if (foundIdx === -1) {
+              // Wrap around
+              foundIdx = opts.findIndex(function (opt, idx) {
+                if (idx === 0) return false;
+                var countryObj = window.countryPhonePrefixes.find(function (c) {
+                  return c.code === opt.value;
+                });
+                var name = countryObj
+                  ? countryObj.name.toLowerCase()
+                  : opt.text.toLowerCase();
+                return name.startsWith(letter) && opt.style.display !== "none";
+              });
+            }
+            if (foundIdx > 0) {
+              countrySelect.selectedIndex = foundIdx;
+              countrySelect.dispatchEvent(new Event("change"));
+              e.preventDefault();
+            }
+          }
+        });
+        // Auto-select tier from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const tier = urlParams.get("tier");
+        if (tier) {
+          const radio = document.getElementById(tier);
+          if (radio) radio.checked = true;
+        }
+      });
+    </script>
+  </body>
+</html>

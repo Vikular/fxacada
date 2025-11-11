@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Forex Mentorship</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+    <header>
+      <div class="header-content">
+        <div class="logo" data-i18n="Forex Mentorship">📈 Forex Mentorship</div>
+        <nav>
+          <a href="index.html" data-i18n="Home">Home</a>
+          <a href="index.html#pricing" data-i18n="Pricing">Pricing</a>
+          <a href="auth-modal.html" class="btn btn-primary" data-i18n="Login"
+            >Login</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <div class="contact-container">
+      <div class="contact-header">
+        <h1 data-i18n="Get in Touch">💬 Get in Touch</h1>
+        <p
+          data-i18n="We're here to help! Send us a message and we'll respond within 24 hours."
+        >
+          We're here to help! Send us a message and we'll respond within 24
+          hours.
+        </p>
+      </div>
+
+      <div class="contact-content">
+        <div class="methods">
+          <div class="method">
+            <b data-i18n="Email">📧 Email</b>
+            <a href="mailto:support@forexmentorship.com"
+              >support@forexmentorship.com</a
+            >
+          </div>
+          <div class="method">
+            <b data-i18n="WhatsApp">💬 WhatsApp</b>
+            <a href="https://wa.me/1234567890" target="_blank" rel="noopener"
+              >+1 (234) 567-890</a
+            >
+          </div>
+          <div class="method">
+            <b data-i18n="Response Time">⏰ Response Time</b>
+            <span data-i18n="Usually within 24 hours"
+              >Usually within 24 hours</span
+            >
+          </div>
+        </div>
+
+        <div class="msg ok" id="successMsg"></div>
+        <div class="msg err" id="errorMsg"></div>
+
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name" data-i18n="Name">Name *</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              placeholder="Your full name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="Email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              placeholder="your@email.com"
+            />
+          </div>
+          <div class="form-group">
+            <label for="subject" data-i18n="Subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="" data-i18n="Select a topic">
+                Select a topic
+              </option>
+              <option value="enrollment" data-i18n="Enrollment Question">
+                Enrollment Question
+              </option>
+              <option value="payment" data-i18n="Payment Issue">
+                Payment Issue
+              </option>
+              <option value="technical" data-i18n="Technical Support">
+                Technical Support
+              </option>
+              <option value="ftmo" data-i18n="FTMO Coaching">
+                FTMO Coaching
+              </option>
+              <option value="other" data-i18n="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message" data-i18n="Message">Message *</label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              placeholder="How can we help you?"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary full-width"
+            data-i18n="Send Message"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-footer">
+        <p data-i18n="Need immediate assistance?">
+          Need immediate assistance? Check our
+          <a href="index.html#faq" data-i18n="FAQ">FAQ</a> or
+          <a
+            href="https://wa.me/1234567890"
+            target="_blank"
+            rel="noopener"
+            data-i18n="message us on WhatsApp"
+            >message us on WhatsApp</a
+          >.
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer-no-margin">
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="terms.html" data-i18n="Terms">Terms</a>
+        <a href="privacy.html" data-i18n="Privacy">Privacy</a>
+        <a href="index.html" data-i18n="Home">Home</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/interactions.js"></script>
+  </body>
+</html>

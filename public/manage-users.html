@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Users - Admin</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <script src="js/includes.js" defer></script>
+    <script src="js/admin-users.js" defer></script>
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+    <div data-include="partials/header.html"></div>
+
+    <main class="container">
+      <h1 data-i18n="Manage Users">Manage Users</h1>
+      <div class="filters">
+        <input
+          class="input"
+          id="search"
+          placeholder="Search email..."
+          data-i18n="Search email..."
+        />
+        <select class="select" id="tier" aria-label="Filter by tier">
+          <option value="" data-i18n="All tiers">All tiers</option>
+          <option value="starter" data-i18n="Starter">Starter</option>
+          <option value="core" data-i18n="Core">Core</option>
+          <option value="pro" data-i18n="Pro">Pro</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" id="usersTable">
+          <thead>
+            <tr>
+              <th data-i18n="Email">Email</th>
+              <th data-i18n="Name">Name</th>
+              <th data-i18n="Tier">Tier</th>
+              <th data-i18n="Status">Status</th>
+            </tr>
+            <script src="js/i18n.js"></script>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </main>
+
+    <div data-include="partials/footer.html"></div>
+  </body>
+</html>
