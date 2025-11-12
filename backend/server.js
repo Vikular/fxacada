@@ -1,3 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config({ path: "./.env" });
+
+// Debug: Log env variables to verify loading
+console.log("SUPABASE_URL:", process.env.SUPABASE_URL);
+console.log(
+  "SUPABASE_ANON_KEY:",
+  process.env.SUPABASE_ANON_KEY ? "[set]" : "[not set]"
+);
+
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";

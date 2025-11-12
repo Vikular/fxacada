@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  // Login form logic
+  // Login form logic (Supabase built-in)
   const form = document.getElementById("loginForm");
   if (form) {
     form.addEventListener("submit", async (e) => {
@@ -155,48 +155,27 @@ document.addEventListener("DOMContentLoaded", async function () {
       const password = document.getElementById("password").value;
 
       try {
-        const { data, error } = await window.supabaseClient.rpc(
-          "verify_user_password",
-          {
-            p_email: email,
-            p_password: password,
-          }
-        );
-
-        if (error) throw new Error("Authentication failed");
-        if (!data || data.length === 0) {
-          errorMsg.textContent = "Invalid email or password";
-          errorMsg.style.display = "block";
-          return;
-        }
-
-        const user = data[0];
-
-        if (["admin", "super-admin", "limited-admin"].includes(user.role)) {
-          errorMsg.textContent = "Please use Admin Login for admin accounts";
-          errorMsg.style.display = "block";
-          return;
-        }
-
-        await window.supabaseClient.rpc("update_last_login", {
-          p_user_id: user.user_id,
-        });
-        localStorage.setItem("user", JSON.stringify(user));
-        localStorage.setItem("user_role", user.role);
-
+        const { data, error } =
+          await window.supabaseClient.auth.signInWithPassword({
+            email,
+            password,
+          });
+        if (error) throw error;
+        // Optionally, fetch user profile from your backend or Supabase table if needed
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("user_role", data.user.role || "student");
         successMsg.textContent = "Login successful! Redirecting...";
         successMsg.style.display = "block";
-
         setTimeout(() => {
           window.location.href = "student.html";
         }, 1000);
       } catch (err) {
         console.error("Login error:", err);
-        errorMsg.textContent = "Login failed. Please try again.";
+        errorMsg.textContent = err.message || "Login failed. Please try again.";
         errorMsg.style.display = "block";
       }
     });
   }
 
-  app.get("/health", (req, res) => res.json({ ok: true }));
+  // Removed invalid app.get (not for frontend)
 });
