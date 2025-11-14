@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enroll Now - Forex Mentorship</title>
-    <meta name="description" content="Enroll in our forex mentorship program" />
+    <title>Enroll Now - PIP NATION ACADEMY</title>
+    <meta name="description" content="Enroll in PIP NATION ACADEMY program" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="stylesheet" href="css/globals.css" />
@@ -40,7 +40,7 @@
           <option value="ar">العربية</option>
           <option value="zh">中文</option>
         </select>
-        <div class="logo">📈 Forex Mentorship</div>
+        <div class="logo">📈 PIP NATION ACADEMY</div>
         <nav>
           <a href="index.html">Home</a>
           <a href="index.html#pricing">Pricing</a>
@@ -63,6 +63,39 @@
       </div>
 
       <div class="enrollment-content">
+        <!-- DEMO: Tier Progression Simulation Buttons -->
+        <div
+          style="margin-bottom: 18px; display: flex; gap: 10px; flex-wrap: wrap"
+        >
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="localStorage.setItem('ftmoPassed','true');location.reload();"
+          >
+            Simulate FTMO Pass
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="localStorage.setItem('isFunded','true');location.reload();"
+          >
+            Simulate Funding
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="localStorage.setItem('proProof','true');location.reload();"
+          >
+            Simulate Pro Proof
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="localStorage.clear();location.reload();"
+          >
+            Reset Progress
+          </button>
+        </div>
         <div class="msg ok" id="successMsg"></div>
         <div class="msg err" id="errorMsg"></div>
 
@@ -82,23 +115,88 @@
           <span class="price">$199</span>
         </div>
         <div class="plan">
-          <input type="radio" name="tier" value="core" id="core" />
+          <input type="radio" name="tier" value="core" id="core" disabled />
           <label for="core">
             <span class="pill">CORE</span>
             <span>Live sessions + mentorship</span>
+            <span class="small" style="color: #b00; display: block"
+              >Pass FTMO Free Challenge to unlock</span
+            >
           </label>
           <span class="price">$499</span>
         </div>
         <div class="plan">
-          <input type="radio" name="tier" value="pro" id="pro" />
+          <input type="radio" name="tier" value="pro" id="pro" disabled />
           <label for="pro">
             <span class="pill">PRO</span>
             <span>FTMO coaching + VIP support</span>
+            <span class="small" style="color: #b00; display: block"
+              >Must be funded to unlock</span
+            >
           </label>
           <span class="price">$999</span>
         </div>
 
         <h3 class="section-spacing" data-i18n="Personal Information">
+          <h3 class="section-spacing" data-i18n="Select Course Categories">
+            Select Course Categories
+          </h3>
+          <div class="form-group full" id="categorySelectGroup">
+            <label data-i18n="Choose the topics you want to learn"
+              >Choose the topics you want to learn:</label
+            >
+            <div
+              style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px"
+            >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Technical Analysis"
+                />
+                Technical Analysis</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Trading Psychology"
+                />
+                Trading Psychology</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Risk Management"
+                />
+                Risk Management</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="Live Trading Sessions"
+                />
+                Live Trading Sessions</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  name="categories"
+                  value="FTMO Challenge Support"
+                />
+                FTMO Challenge Support</label
+              >
+              <label
+                ><input type="checkbox" name="categories" value="Mentorship" />
+                Mentorship</label
+              >
+            </div>
+            <span class="small" style="color: #888"
+              >You can select multiple categories.</span
+            >
+          </div>
           Personal Information
         </h3>
         <form id="enrollmentForm">
@@ -459,6 +557,56 @@
     <script src="js/country-phone-prefixes.js"></script>
     <script src="js/main.js"></script>
     <script src="js/interactions.js"></script>
+    <script>
+      // Tier progression logic
+      document.addEventListener("DOMContentLoaded", function () {
+        // Simulate backend/user state for demo (replace with real checks)
+        // These would be set after FTMO challenge or funding is verified
+        var hasPassedFTMO = localStorage.getItem("ftmoPassed") === "true";
+        var isFunded = localStorage.getItem("isFunded") === "true";
+        var hasProProof = localStorage.getItem("proProof") === "true";
+
+        // Enable Core if FTMO passed
+        if (hasPassedFTMO) {
+          document.getElementById("core").disabled = false;
+          document.querySelector('label[for="core"] .small').textContent = "";
+        }
+        // Enable Pro if funded
+        if (isFunded) {
+          document.getElementById("pro").disabled = false;
+          document.querySelector('label[for="pro"] .small').textContent =
+            hasProProof
+              ? ""
+              : "Upload proof of being a funded trader to unlock";
+        }
+        // If Pro proof uploaded, enable Pro
+        if (hasProProof) {
+          document.getElementById("pro").disabled = false;
+          document.querySelector('label[for="pro"] .small').textContent = "";
+        }
+      });
+    </script>
+    <script>
+      // Store selected categories in localStorage on enrollment
+      document.addEventListener("DOMContentLoaded", function () {
+        var form = document.getElementById("enrollmentForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            var checked = Array.from(
+              document.querySelectorAll('input[name="categories"]:checked')
+            ).map((cb) => cb.value);
+            if (checked.length > 0) {
+              localStorage.setItem(
+                "enrolledCategories",
+                JSON.stringify(checked)
+              );
+            } else {
+              localStorage.removeItem("enrolledCategories");
+            }
+          });
+        }
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/i18next@23.11.2/dist/umd/i18next.min.js"></script>
     <script>
       // Internationalization (i18n) logic

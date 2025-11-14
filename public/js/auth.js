@@ -111,25 +111,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         });
         if (error) throw error;
 
-        // Also update password hash in users table via backend
-        const user = await window.supabaseClient.auth.getUser();
-        const email = user?.data?.user?.email;
-        if (email) {
-          // Use correct backend URL for local and production
-          let backendUrl = "http://localhost:4000/auth/update-password";
-          if (
-            window.location.hostname !== "localhost" &&
-            window.location.hostname !== "127.0.0.1"
-          ) {
-            // Replace with your production backend URL if needed
-            // backendUrl = "https://your-production-backend.com/auth/update-password";
-          }
-          await fetch(backendUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, newPassword }),
-          });
-        }
+        // No backend call needed: Supabase Auth handles password update securely
 
         successMsg.textContent = "Password updated! You can now log in.";
         successMsg.style.display = "block";
