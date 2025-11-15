@@ -1,23 +1,28 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
 console.log("DEBUG SUPABASE_URL:", process.env.SUPABASE_URL);
 
-import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
+const express = require("express");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-import userAdminRoute from "./routes/user-admin.js";
-import uploadRoute from "./routes/upload.js";
-import authRoutes from "./routes/auth.js";
-import registerRoute from "./routes/register.js";
-import userRoutes from "./routes/users.js";
-import paymentRoutes from "./routes/payments.js";
-import ftmoRoutes from "./routes/ftmo.js";
-import adminRoutes from "./routes/admin.js";
+const userAdminRoute = require("./routes/user-admin.js").default;
+const uploadRoute = require("./routes/upload.js").default;
+const authRoutes = require("./routes/auth.js").default;
+const registerRoute = require("./routes/register.js").default;
+const userRoutes = require("./routes/users.js").default;
+const paymentRoutes = require("./routes/payments.js").default;
+const ftmoRoutes = require("./routes/ftmo.js").default;
+const adminRoutes = require("./routes/admin.js").default;
+
+// Health check endpoint
+app.get("/auth/health", (req, res) => {
+  res.json({ status: "ok" });
+});
 
 app.use("/user-admin", userAdminRoute);
 app.use("/upload", uploadRoute);
