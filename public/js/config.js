@@ -12,8 +12,28 @@ function initSupabaseClient() {
       SUPABASE_CONFIG.anonKey
     );
     console.log("✅ Supabase client initialized");
+    checkSupabaseConnection();
   } else {
     console.error("❌ Supabase library not loaded");
+  }
+}
+
+// Helper: Check Supabase connection by pinging a simple table (public schema)
+async function checkSupabaseConnection() {
+  if (!window.supabaseClient) return;
+  try {
+    // Try to fetch from a public table (change 'course_materials' to any table you have)
+    const { error } = await window.supabaseClient
+      .from("course_materials")
+      .select("*")
+      .limit(1);
+    if (error) {
+      console.error("❌ Supabase connection failed:", error.message);
+    } else {
+      console.log("🔗 Supabase connection test succeeded.");
+    }
+  } catch (err) {
+    console.error("❌ Supabase connection error:", err);
   }
 }
 

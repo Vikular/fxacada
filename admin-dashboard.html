@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Users Dashboard</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px #0001;
+        padding: 32px;
+      }
+      h1 {
+        margin-top: 0;
+      }
+      .filters {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      input[type="text"],
+      select {
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+      }
+      th,
+      td {
+        padding: 12px 10px;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+      }
+      th {
+        background: #f3f4f6;
+      }
+      .pill {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        background: #e0e7ff;
+        color: #3730a3;
+      }
+      tr:nth-child(even) {
+        background: #fafbfc;
+      }
+      @media (max-width: 600px) {
+        .container {
+          padding: 10px;
+        }
+        th,
+        td {
+          padding: 8px 4px;
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Admin Users</h1>
+      <div class="filters">
+        <input type="text" id="search" placeholder="Search by name or email" />
+        <label
+          for="tier"
+          style="
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+          "
+          >Filter by tier</label
+        >
+        <select id="tier">
+          <option value="">All Tiers</option>
+          <option value="starter">Starter</option>
+          <option value="core">Core</option>
+          <option value="pro">Pro</option>
+        </select>
+      </div>
+      <table id="usersTable">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Tier</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Rows will be injected by JS -->
+        </tbody>
+      </table>
+    </div>
+    <script src="js/admin-users.js"></script>
+  </body>
+</html>

@@ -1,3 +1,14 @@
+/* Admin Login Page Styles (moved from inline) */
+.admin-badge {
+  display: inline-block;
+  background: #fbbf24;
+  color: #92400e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
 /* Auth Modal/Login Page Styles */
 .lang-selector {
   position: absolute;
@@ -76,4 +87,30 @@ body.dark-mode .lang-selector {
   .auth-wrap {
     padding: 20px;
   }
+}
+
+/* Extracted utility classes for inline styles */
+.d-none {
+  display: none !important;
+}
+.d-block {
+  display: block !important;
+}
+.text-right {
+  text-align: right !important;
+}
+.mt-20 {
+  margin-top: 20px !important;
+}
+.mb-8 {
+  margin-bottom: 8px !important;
+}
+.fs-13 {
+  font-size: 13px !important;
+}
+.form-flex-col {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  margin-top: 10px !important;
 }

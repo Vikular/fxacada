@@ -9,6 +9,7 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="stylesheet" href="css/globals.css" />
     <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages/enrollment.css" />
   </head>
   <body>
     <header>
@@ -16,22 +17,14 @@
         <button
           id="darkModeToggle"
           aria-label="Toggle dark mode"
-          style="
-            margin-left: auto;
-            font-size: 1.2em;
-            padding: 6px 12px;
-            border-radius: 6px;
-            border: none;
-            background: #eee;
-            cursor: pointer;
-          "
+          class="enrollment-dark-toggle"
         >
           🌙
         </button>
         <select
           id="langSelect"
           aria-label="Select language"
-          style="margin-left: 12px; padding: 6px 10px; border-radius: 6px"
+          class="enrollment-lang-select"
         >
           <option value="en">English</option>
           <option value="fr">Français</option>
@@ -64,9 +57,7 @@
 
       <div class="enrollment-content">
         <!-- DEMO: Tier Progression Simulation Buttons -->
-        <div
-          style="margin-bottom: 18px; display: flex; gap: 10px; flex-wrap: wrap"
-        >
+        <div class="enrollment-demo-buttons">
           <button
             type="button"
             class="btn btn-secondary"
@@ -119,7 +110,7 @@
           <label for="core">
             <span class="pill">CORE</span>
             <span>Live sessions + mentorship</span>
-            <span class="small" style="color: #b00; display: block"
+            <span class="small enrollment-locked"
               >Pass FTMO Free Challenge to unlock</span
             >
           </label>
@@ -130,7 +121,7 @@
           <label for="pro">
             <span class="pill">PRO</span>
             <span>FTMO coaching + VIP support</span>
-            <span class="small" style="color: #b00; display: block"
+            <span class="small enrollment-locked"
               >Must be funded to unlock</span
             >
           </label>
@@ -145,9 +136,7 @@
             <label data-i18n="Choose the topics you want to learn"
               >Choose the topics you want to learn:</label
             >
-            <div
-              style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px"
-            >
+            <div class="enrollment-category-group">
               <label
                 ><input
                   type="checkbox"
@@ -193,7 +182,7 @@
                 Mentorship</label
               >
             </div>
-            <span class="small" style="color: #888"
+            <span class="small enrollment-category-note"
               >You can select multiple categories.</span
             >
           </div>
@@ -242,12 +231,7 @@
                 type="text"
                 id="countrySearch"
                 placeholder="Type to search country..."
-                style="
-                  margin-bottom: 6px;
-                  width: 100%;
-                  padding: 6px;
-                  box-sizing: border-box;
-                "
+                class="enrollment-country-search"
                 autocomplete="off"
               />
               <select id="country" name="country" required>

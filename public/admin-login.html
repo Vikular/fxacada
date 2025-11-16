@@ -8,73 +8,18 @@
     <link rel="alternate icon" href="/favicon.ico" />
     <link rel="stylesheet" href="css/globals.css" />
     <link rel="stylesheet" href="css/components.css" />
-    <style>
-      .auth-page {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-      }
-      .auth-wrap {
-        background: #fff;
-        border-radius: 16px;
-        padding: 40px;
-        max-width: 420px;
-        width: 90%;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-      }
-      .auth-wrap h1 {
-        margin: 0 0 8px;
-        text-align: center;
-        color: #1f2937;
-      }
-      .auth-wrap .sub {
-        text-align: center;
-        color: var(--text-light);
-        margin: 0 0 24px;
-      }
-      .auth-wrap form {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .auth-wrap label {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        font-weight: 600;
-        font-size: 14px;
-      }
-      .auth-wrap .links {
-        font-size: 14px;
-      }
-      .auth-wrap .links a {
-        color: var(--primary);
-        font-weight: 600;
-      }
-      .admin-badge {
-        display: inline-block;
-        background: #fbbf24;
-        color: #92400e;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 12px;
-        font-weight: 700;
-        margin-bottom: 16px;
-      }
-    </style>
+    <link rel="stylesheet" href="css/pages/auth.css" />
   </head>
   <body class="auth-page">
     <div class="auth-wrap">
-      <div style="text-align: center">
+      <div class="text-center">
         <span class="admin-badge">🛡️ ADMIN ACCESS</span>
       </div>
       <!-- <h1>Admin Login</h1> -->
       <p class="sub">Secure administrator portal</p>
 
-      <div class="msg err" id="errorMsg" style="display: none"></div>
-      <div class="msg ok" id="successMsg" style="display: none"></div>
+      <div class="msg err d-none" id="errorMsg"></div>
+      <div class="msg ok d-none" id="successMsg"></div>
 
       <form id="adminLoginForm">
         <label
@@ -106,7 +51,7 @@
         </button>
       </form>
 
-      <div class="links" style="margin-top: 20px; text-align: center">
+      <div class="links mt-20 text-center">
         <p><a href="auth-modal.html">← Student Login</a></p>
         <p><a href="index.html">← Back to Home</a></p>
       </div>

@@ -18,8 +18,8 @@
         Access your PIP NATION ACADEMY dashboard
       </p>
 
-      <div class="msg err" id="errorMsg" style="display: none"></div>
-      <div class="msg ok" id="successMsg" style="display: none"></div>
+      <div class="msg err d-none" id="errorMsg"></div>
+      <div class="msg ok d-none" id="successMsg"></div>
 
       <form id="loginForm">
         <label data-i18n="Email">
@@ -51,12 +51,7 @@
         <a
           href="#"
           id="forgotPasswordLink"
-          style="
-            font-size: 13px;
-            margin-bottom: 8px;
-            text-align: right;
-            display: block;
-          "
+          class="fs-13 mb-8 text-right d-block"
           >Forgot password?</a
         >
         <button
@@ -68,15 +63,7 @@
         </button>
       </form>
 
-      <form
-        id="resetForm"
-        style="
-          display: none;
-          flex-direction: column;
-          gap: 16px;
-          margin-top: 10px;
-        "
-      >
+      <form id="resetForm" class="d-none form-flex-col">
         <label data-i18n="Enter your email to reset password">
           Enter your email to reset password
           <input
@@ -95,24 +82,13 @@
         >
           Send Reset Link
         </button>
-        <a
-          href="#"
-          id="backToLogin"
-          style="font-size: 13px; text-align: right; display: block"
+        <a href="#" id="backToLogin" class="fs-13 text-right d-block"
           >Back to login</a
         >
       </form>
 
       <!-- Set New Password Form (for Supabase password reset) -->
-      <form
-        id="setPasswordForm"
-        style="
-          display: none;
-          flex-direction: column;
-          gap: 16px;
-          margin-top: 10px;
-        "
-      >
+      <form id="setPasswordForm" class="d-none form-flex-col">
         <label data-i18n="Set your new password">
           Set your new password
           <input
@@ -134,7 +110,7 @@
         </button>
       </form>
 
-      <div class="links" style="margin-top: 20px; text-align: center">
+      <div class="links mt-20 text-center">
         <p data-i18n="Don't have an account?">
           Don't have an account?
           <a href="enrollment.html" data-i18n="Enroll Now">Enroll Now</a>

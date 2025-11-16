@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIP NATION ACADEMY | Core Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #0d1117;
+        color: #c9d1d9;
+      }
+      .card {
+        background-color: #161b22;
+        border-radius: 12px;
+        border: 1px solid #30363d;
+      }
+      .tier-tag {
+        background-color: #1d4ed8;
+        color: #ffffff;
+        padding: 4px 10px;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.8rem;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <div id="app-container" class="p-4 md:p-8 lg:p-12">
+      <!-- Header -->
+      <header
+        class="flex items-center justify-between pb-8 border-b border-[#30363d]"
+      >
+        <h1 class="text-3xl font-bold text-[#58a6ff]">PIP NATION ACADEMY</h1>
+        <div class="flex items-center space-x-3">
+          <span id="user-tier" class="tier-tag">CORE</span>
+          <span id="user-info" class="text-sm">Loading User...</span>
+        </div>
+      </header>
+      <!-- Main Content Grid -->
+      <main class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Column 1: Course Navigation & Modules -->
+        <section class="lg:col-span-2 space-y-8">
+          <h2 class="text-2xl font-semibold">
+            Your Learning Path (SMC Advanced)
+          </h2>
+          <!-- Course Modules Container -->
+          <div id="course-modules" class="space-y-6"></div>
+        </section>
+        <!-- Column 2: Quick Access & Tools -->
+        <aside class="space-y-8">
+          <h2 class="text-2xl font-semibold">Core Tools & Features</h2>
+          <!-- Real-Time Signal Access -->
+          <div class="card p-5 space-y-3">
+            <h3 class="text-xl font-semibold text-[#8b949e]">
+              Real-Time Signal Feed
+            </h3>
+            <p class="text-sm text-[#444c56]">
+              Get <b>immediate access</b> to trade signals as they are
+              published. For educational use only.
+            </p>
+            <button
+              class="w-full py-2 bg-[#1d4ed8] hover:bg-[#153e75] text-white font-bold rounded-lg transition duration-150"
+            >
+              View Live Signals
+            </button>
+          </div>
+          <!-- Core Community Chat -->
+          <div class="card p-5 space-y-3">
+            <h3 class="text-xl font-semibold text-[#8b949e]">
+              Core Community Chat
+            </h3>
+            <p class="text-sm text-[#444c56]">
+              Collaborate with other Core members and mentors for advanced
+              discussion.
+            </p>
+            <button
+              class="w-full py-2 bg-[#1d4ed8] hover:bg-[#153e75] text-white font-bold rounded-lg transition duration-150"
+            >
+              Join Core Chat
+            </button>
+          </div>
+          <!-- Advanced Quiz Generator -->
+          <div class="card p-5 space-y-3" id="quiz-generator-card">
+            <h3 class="text-xl font-semibold text-[#8b949e]">
+              Advanced Quiz Generator
+            </h3>
+            <p class="text-sm text-[#444c56]">
+              Enter an advanced SMC or Forex topic to generate a challenging
+              quiz. Example: <em>Order Blocks and Liquidity Grabs</em>
+            </p>
+            <textarea
+              id="quiz-prompt-input"
+              class="w-full p-2 rounded bg-[#0d1117] border border-[#30363d] text-[#c9d1d9]"
+              rows="2"
+              placeholder="Enter quiz topic..."
+            ></textarea>
+            <button
+              id="generate-quiz-btn"
+              class="w-full py-2 bg-[#1d4ed8] hover:bg-[#153e75] text-white font-bold rounded-lg transition duration-150"
+              onclick="generateQuiz()"
+            >
+              Generate Quiz
+            </button>
+            <div id="quiz-loading-indicator" class="text-center py-2 d-none">
+              <span class="animate-spin inline-block mr-2">⏳</span> Generating
+              quiz...
+            </div>
+            <div id="quiz-results-area" class="mt-4"></div>
+          </div>
+        </aside>
+      </main>
+    </div>
+    <script type="module">
+      // ...existing code for Firebase initialization and dashboard rendering...
+      // --- Advanced Quiz Generator Implementation ---
+      window.generateQuiz = async function generateQuiz() {
+        const promptInput = document.getElementById("quiz-prompt-input");
+        const loadingIndicator = document.getElementById(
+          "quiz-loading-indicator"
+        );
+        const resultsArea = document.getElementById("quiz-results-area");
+        const apiKey = ""; // Place your Gemini API key here
+        const topic = promptInput.value.trim();
+        if (!topic) {
+          resultsArea.innerHTML =
+            '<div class="text-red-400">Please enter a topic to generate a quiz.</div>';
+          return;
+        }
+        loadingIndicator.style.display = "";
+        resultsArea.innerHTML = "";
+        // Gemini API call with exponential backoff
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+        const systemInstruction =
+          "You are an expert Forex trading educator. Your task is to generate a short, structured multiple-choice quiz (exactly 5 questions) based on the user's provided topic. The quiz must be challenging and focus on advanced Forex or SMC concepts appropriate for a Core-tier student.";
+        const responseSchema = [
+          {
+            question: "string",
+            options: ["string", "string", "string", "string"],
+            correct_answer: "string",
+            explanation: "string",
+          },
+        ];
+        const requestBody = {
+          contents: [{ role: "user", parts: [{ text: topic }] }],
+          systemInstruction: {
+            role: "system",
+            parts: [{ text: systemInstruction }],
+          },
+          responseMimeType: "application/json",
+          responseSchema: JSON.stringify(responseSchema),
+        };
+        let attempt = 0;
+        let maxAttempts = 5;
+        let delay = 1000;
+        let lastError = null;
+        while (attempt < maxAttempts) {
+          try {
+            const resp = await fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(requestBody),
+            });
+            if (!resp.ok) throw new Error(`API error: ${resp.status}`);
+            const data = await resp.json();
+            // Gemini returns JSON in a field, not as root
+            let quizData = null;
+            if (
+              data &&
+              data.candidates &&
+              data.candidates[0] &&
+              data.candidates[0].content &&
+              data.candidates[0].content.parts &&
+              data.candidates[0].content.parts[0].text
+            ) {
+              try {
+                quizData = JSON.parse(data.candidates[0].content.parts[0].text);
+              } catch (e) {
+                throw new Error("Failed to parse quiz JSON.");
+              }
+            } else {
+              throw new Error("Malformed API response.");
+            }
+            if (!Array.isArray(quizData) || quizData.length !== 5) {
+              throw new Error("Quiz must contain exactly 5 questions.");
+            }
+            displayQuiz(quizData);
+            loadingIndicator.style.display = "none";
+            return;
+          } catch (err) {
+            lastError = err;
+            attempt++;
+            if (attempt < maxAttempts) {
+              await new Promise((res) => setTimeout(res, delay));
+              delay *= 2;
+            }
+          }
+        }
+        loadingIndicator.style.display = "none";
+        resultsArea.innerHTML = `<div class='text-red-400'>Failed to generate quiz after ${maxAttempts} attempts. ${
+          lastError ? lastError.message : ""
+        }</div>`;
+      };
+      window.displayQuiz = function displayQuiz(quizData) {
+        const resultsArea = document.getElementById("quiz-results-area");
+        resultsArea.innerHTML = "";
+        quizData.forEach((q, idx) => {
+          const qDiv = document.createElement("div");
+          qDiv.className =
+            "mb-6 p-4 rounded bg-[#161b22] border border-[#30363d]";
+          qDiv.innerHTML = `
+                    <div class="font-semibold mb-2">Q${idx + 1}: ${
+            q.question
+          }</div>
+                    <ul class="space-y-1">
+                        ${q.options
+                          .map(
+                            (opt) =>
+                              `<li class='option-item px-3 py-1 rounded bg-[#23272e]'>${opt}</li>`
+                          )
+                          .join("")}
+                    </ul>
+                    <div class="answer-section mt-2 d-none">
+                        <div class="text-green-400 font-bold">Answer: ${
+                          q.correct_answer
+                        }</div>
+                        <div class="text-xs text-[#8b949e]">${
+                          q.explanation
+                        }</div>
+                    </div>
+                `;
+          resultsArea.appendChild(qDiv);
+        });
+        // Show Answers button
+        const showBtn = document.createElement("button");
+        showBtn.className =
+          "mt-4 w-full py-2 bg-[#1d4ed8] hover:bg-[#153e75] text-white font-bold rounded-lg transition duration-150";
+        showBtn.textContent = "Show Answers";
+        showBtn.onclick = function () {
+          resultsArea
+            .querySelectorAll(".answer-section")
+            .forEach((sec) => (sec.style.display = ""));
+          showBtn.disabled = true;
+          showBtn.textContent = "Answers Shown";
+        };
+        resultsArea.appendChild(showBtn);
+      };
+    </script>
+  </body>
+</html>

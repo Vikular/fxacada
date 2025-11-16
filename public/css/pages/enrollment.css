@@ -29,7 +29,7 @@
   background: white;
   padding: 32px;
   border-radius: var(--radius-lg);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .enrollment-content h3 {
@@ -132,18 +132,65 @@
   .form-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .enrollment-content {
     padding: 20px;
   }
-  
+
   .plan {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
   }
-  
+
   .plan .price {
     align-self: flex-end;
   }
+}
+
+/* Extracted from inline styles in enrollment.html */
+.enrollment-dark-toggle {
+  margin-left: auto;
+  font-size: 1.2em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+}
+
+.enrollment-lang-select {
+  margin-left: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.enrollment-demo-buttons {
+  margin-bottom: 18px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.enrollment-category-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.enrollment-category-note {
+  color: #888;
+}
+
+.enrollment-country-search {
+  margin-bottom: 6px;
+  width: 100%;
+  padding: 6px;
+  box-sizing: border-box;
+}
+
+.enrollment-locked {
+  color: #b00;
+  display: block;
 }

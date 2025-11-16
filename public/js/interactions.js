@@ -1,9 +1,44 @@
+// ============================================
+// DASHBOARD SIDEBAR TOGGLE (for student dashboard)
+// ============================================
+/**
+ * Toggles the expanded/collapsed state of the dashboard sidebar.
+ */
+function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const toggleIcon = document.getElementById("toggle-icon");
+
+  sidebar.classList.toggle("collapsed");
+
+  // Update the toggle icon based on the state
+  if (sidebar.classList.contains("collapsed")) {
+    toggleIcon.textContent = "▶️"; // Right arrow when collapsed
+    toggleIcon.setAttribute("aria-label", "Expand sidebar");
+  } else {
+    toggleIcon.textContent = "◀️"; // Left arrow when expanded
+    toggleIcon.setAttribute("aria-label", "Collapse sidebar");
+  }
+}
+
+// Make the function globally accessible for the onclick attribute in HTML
+window.toggleSidebar = toggleSidebar;
+
+// Initial collapse on small screens
+window.addEventListener("load", () => {
+  if (window.innerWidth < 768) {
+    // Start collapsed on mobile
+    const sidebar = document.getElementById("sidebar");
+    if (sidebar && !sidebar.classList.contains("collapsed")) {
+      toggleSidebar(); // Use the toggle function for clean setup
+    }
+  }
+});
 /* filepath: c:\Users\BUYPC COMPUTERS\Desktop\X\web-app-project\js\interactions.js */
 // ============================================
 // INTERACTIVE FEATURES
 // ============================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   initFAQAccordion();
   initMobileMenu();
   initSmoothScroll();
@@ -16,39 +51,39 @@ document.addEventListener('DOMContentLoaded', () => {
 // FAQ ACCORDION
 // ============================================
 function initFAQAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
-  
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    
+  const faqItems = document.querySelectorAll(".faq-item");
+
+  faqItems.forEach((item) => {
+    const question = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+
     if (!question || !answer) return;
-    
+
     // Hide all answers initially
-    answer.style.display = 'none';
-    
+    answer.style.display = "none";
+
     // Add toggle icon if not exists
-    if (!question.querySelector('.faq-icon')) {
-      const icon = document.createElement('span');
-      icon.className = 'faq-icon';
-      icon.textContent = '▼';
+    if (!question.querySelector(".faq-icon")) {
+      const icon = document.createElement("span");
+      icon.className = "faq-icon";
+      icon.textContent = "▼";
       question.appendChild(icon);
     }
-    
-    question.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
-      
+
+    question.addEventListener("click", () => {
+      const isActive = item.classList.contains("active");
+
       // Close all other FAQs
-      faqItems.forEach(otherItem => {
-        otherItem.classList.remove('active');
-        const otherAnswer = otherItem.querySelector('.faq-answer');
-        if (otherAnswer) otherAnswer.style.display = 'none';
+      faqItems.forEach((otherItem) => {
+        otherItem.classList.remove("active");
+        const otherAnswer = otherItem.querySelector(".faq-answer");
+        if (otherAnswer) otherAnswer.style.display = "none";
       });
-      
+
       // Toggle current FAQ
       if (!isActive) {
-        item.classList.add('active');
-        answer.style.display = 'block';
+        item.classList.add("active");
+        answer.style.display = "block";
       }
     });
   });
@@ -58,47 +93,47 @@ function initFAQAccordion() {
 // MOBILE MENU
 // ============================================
 function initMobileMenu() {
-  const header = document.querySelector('header');
+  const header = document.querySelector("header");
   if (!header) return;
-  
-  const nav = header.querySelector('nav');
+
+  const nav = header.querySelector("nav");
   if (!nav) return;
-  
+
   // Create hamburger button
-  const hamburger = document.createElement('button');
-  hamburger.className = 'hamburger';
+  const hamburger = document.createElement("button");
+  hamburger.className = "hamburger";
   hamburger.innerHTML = `
     <span></span>
     <span></span>
     <span></span>
   `;
-  hamburger.setAttribute('aria-label', 'Toggle menu');
-  
+  hamburger.setAttribute("aria-label", "Toggle menu");
+
   // Insert hamburger before nav
-  header.querySelector('.header-content').insertBefore(hamburger, nav);
-  
+  header.querySelector(".header-content").insertBefore(hamburger, nav);
+
   // Toggle menu
-  hamburger.addEventListener('click', () => {
-    nav.classList.toggle('mobile-open');
-    hamburger.classList.toggle('active');
-    document.body.classList.toggle('menu-open');
+  hamburger.addEventListener("click", () => {
+    nav.classList.toggle("mobile-open");
+    hamburger.classList.toggle("active");
+    document.body.classList.toggle("menu-open");
   });
-  
+
   // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!header.contains(e.target) && nav.classList.contains('mobile-open')) {
-      nav.classList.remove('mobile-open');
-      hamburger.classList.remove('active');
-      document.body.classList.remove('menu-open');
+  document.addEventListener("click", (e) => {
+    if (!header.contains(e.target) && nav.classList.contains("mobile-open")) {
+      nav.classList.remove("mobile-open");
+      hamburger.classList.remove("active");
+      document.body.classList.remove("menu-open");
     }
   });
-  
+
   // Close menu on link click
-  nav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('mobile-open');
-      hamburger.classList.remove('active');
-      document.body.classList.remove('menu-open');
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("mobile-open");
+      hamburger.classList.remove("active");
+      document.body.classList.remove("menu-open");
     });
   });
 }
@@ -107,17 +142,17 @@ function initMobileMenu() {
 // SMOOTH SCROLL
 // ============================================
 function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href === '#') return;
-      
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href === "#") return;
+
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
         target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+          behavior: "smooth",
+          block: "start",
         });
       }
     });
@@ -128,33 +163,37 @@ function initSmoothScroll() {
 // FORM VALIDATION
 // ============================================
 function initFormValidation() {
-  const forms = document.querySelectorAll('form');
-  
-  forms.forEach(form => {
+  const forms = document.querySelectorAll("form");
+
+  forms.forEach((form) => {
     // Real-time validation
-    const inputs = form.querySelectorAll('input, textarea, select');
-    inputs.forEach(input => {
-      input.addEventListener('blur', () => validateField(input));
-      input.addEventListener('input', () => {
-        if (input.classList.contains('error')) {
+    const inputs = form.querySelectorAll("input, textarea, select");
+    inputs.forEach((input) => {
+      input.addEventListener("blur", () => validateField(input));
+      input.addEventListener("input", () => {
+        if (input.classList.contains("error")) {
           validateField(input);
         }
       });
     });
-    
+
     // Form submission
-    form.addEventListener('submit', (e) => {
+    form.addEventListener("submit", (e) => {
       let isValid = true;
-      
-      inputs.forEach(input => {
+
+      inputs.forEach((input) => {
         if (!validateField(input)) {
           isValid = false;
         }
       });
-      
+
       if (!isValid) {
         e.preventDefault();
-        showMessage(form, 'error', '⚠️ Please fix the errors before submitting');
+        showMessage(
+          form,
+          "error",
+          "⚠️ Please fix the errors before submitting"
+        );
       }
     });
   });
@@ -163,76 +202,76 @@ function initFormValidation() {
 function validateField(field) {
   const value = field.value.trim();
   const type = field.type;
-  const required = field.hasAttribute('required');
-  let error = '';
-  
+  const required = field.hasAttribute("required");
+  let error = "";
+
   // Clear previous error
   clearFieldError(field);
-  
+
   // Required check
   if (required && !value) {
-    error = 'This field is required';
+    error = "This field is required";
   }
-  
+
   // Email validation
-  else if (type === 'email' && value) {
+  else if (type === "email" && value) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(value)) {
-      error = 'Please enter a valid email';
+      error = "Please enter a valid email";
     }
   }
-  
+
   // Phone validation
-  else if (field.name === 'phone' && value) {
+  else if (field.name === "phone" && value) {
     const phoneRegex = /^[\d\s\-\+\(\)]+$/;
     if (!phoneRegex.test(value) || value.length < 10) {
-      error = 'Please enter a valid phone number';
+      error = "Please enter a valid phone number";
     }
   }
-  
+
   // Password strength
-  else if (type === 'password' && value && value.length < 8) {
-    error = 'Password must be at least 8 characters';
+  else if (type === "password" && value && value.length < 8) {
+    error = "Password must be at least 8 characters";
   }
-  
+
   if (error) {
     showFieldError(field, error);
     return false;
   }
-  
+
   return true;
 }
 
 function showFieldError(field, message) {
-  field.classList.add('error');
-  
+  field.classList.add("error");
+
   // Remove existing error
-  const existingError = field.parentElement.querySelector('.field-error');
+  const existingError = field.parentElement.querySelector(".field-error");
   if (existingError) existingError.remove();
-  
+
   // Add error message
-  const errorEl = document.createElement('span');
-  errorEl.className = 'field-error';
+  const errorEl = document.createElement("span");
+  errorEl.className = "field-error";
   errorEl.textContent = message;
   field.parentElement.appendChild(errorEl);
 }
 
 function clearFieldError(field) {
-  field.classList.remove('error');
-  const errorEl = field.parentElement.querySelector('.field-error');
+  field.classList.remove("error");
+  const errorEl = field.parentElement.querySelector(".field-error");
   if (errorEl) errorEl.remove();
 }
 
 function showMessage(form, type, message) {
   // Remove existing messages
-  const existingMsg = form.querySelector('.form-message');
+  const existingMsg = form.querySelector(".form-message");
   if (existingMsg) existingMsg.remove();
-  
-  const msgEl = document.createElement('div');
+
+  const msgEl = document.createElement("div");
   msgEl.className = `form-message ${type}`;
   msgEl.textContent = message;
   form.insertBefore(msgEl, form.firstChild);
-  
+
   // Auto-hide after 5 seconds
   setTimeout(() => {
     msgEl.remove();
@@ -243,25 +282,26 @@ function showMessage(form, type, message) {
 // TOOLTIPS
 // ============================================
 function initTooltips() {
-  const tooltipElements = document.querySelectorAll('[data-tooltip]');
-  
-  tooltipElements.forEach(el => {
-    const tooltipText = el.getAttribute('data-tooltip');
-    
-    el.addEventListener('mouseenter', (e) => {
-      const tooltip = document.createElement('div');
-      tooltip.className = 'tooltip';
+  const tooltipElements = document.querySelectorAll("[data-tooltip]");
+
+  tooltipElements.forEach((el) => {
+    const tooltipText = el.getAttribute("data-tooltip");
+
+    el.addEventListener("mouseenter", (e) => {
+      const tooltip = document.createElement("div");
+      tooltip.className = "tooltip";
       tooltip.textContent = tooltipText;
       document.body.appendChild(tooltip);
-      
+
       const rect = el.getBoundingClientRect();
-      tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
-      tooltip.style.top = rect.top - tooltip.offsetHeight - 8 + 'px';
-      
+      tooltip.style.left =
+        rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + "px";
+      tooltip.style.top = rect.top - tooltip.offsetHeight - 8 + "px";
+
       el._tooltip = tooltip;
     });
-    
-    el.addEventListener('mouseleave', () => {
+
+    el.addEventListener("mouseleave", () => {
       if (el._tooltip) {
         el._tooltip.remove();
         el._tooltip = null;
@@ -275,12 +315,12 @@ function initTooltips() {
 // ============================================
 function initLoadingStates() {
   // Add loading state to buttons on form submit
-  document.querySelectorAll('form').forEach(form => {
-    form.addEventListener('submit', (e) => {
+  document.querySelectorAll("form").forEach((form) => {
+    form.addEventListener("submit", (e) => {
       const submitBtn = form.querySelector('button[type="submit"]');
       if (submitBtn && !submitBtn.disabled) {
         showButtonLoading(submitBtn);
-        
+
         // Reset after 3 seconds if still loading (fallback)
         setTimeout(() => {
           hideButtonLoading(submitBtn);
@@ -293,8 +333,8 @@ function initLoadingStates() {
 function showButtonLoading(button) {
   button.disabled = true;
   button._originalText = button.textContent;
-  button.textContent = '⏳ Loading...';
-  button.classList.add('loading');
+  button.textContent = "⏳ Loading...";
+  button.classList.add("loading");
 }
 
 function hideButtonLoading(button) {
@@ -302,7 +342,7 @@ function hideButtonLoading(button) {
   if (button._originalText) {
     button.textContent = button._originalText;
   }
-  button.classList.remove('loading');
+  button.classList.remove("loading");
 }
 
 // ============================================
@@ -312,5 +352,5 @@ window.interactions = {
   showButtonLoading,
   hideButtonLoading,
   showMessage,
-  validateField
+  validateField,
 };

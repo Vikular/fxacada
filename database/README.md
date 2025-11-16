@@ -20,6 +20,7 @@ This guide will help you set up the complete database structure for the FX Acade
 6. Click **Run** or press `Ctrl+Enter`
 
 This will create:
+
 - ✅ `users` table (students, admins, leads)
 - ✅ `payment_submissions` table (payment tracking)
 - ✅ `ftmo_submissions` table (FTMO challenge tracking)
@@ -34,14 +35,16 @@ This will create:
 1. In Supabase Dashboard, go to **Storage** (left sidebar)
 2. Click **Create Bucket**
 
-**Bucket 1: payment-proofs**
+#### Bucket 1: payment-proofs
+
 - Name: `payment-proofs`
 - Public: ❌ No (private)
 - File size limit: `5242880` (5MB)
 - Allowed MIME types: `image/jpeg, image/png, application/pdf`
 - Click **Create**
 
-**Bucket 2: ftmo-screenshots**
+#### Bucket 2: ftmo-screenshots
+
 - Name: `ftmo-screenshots`
 - Public: ❌ No (private)
 - File size limit: `5242880` (5MB)
@@ -63,9 +66,9 @@ Run this query in SQL Editor to check everything:
 
 ```sql
 -- Check tables exist
-SELECT table_name 
-FROM information_schema.tables 
-WHERE table_schema = 'public' 
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema = 'public'
 AND table_name IN ('users', 'payment_submissions', 'ftmo_submissions', 'admin_logs');
 
 -- Check storage buckets
@@ -76,6 +79,7 @@ SELECT email, role FROM users WHERE role = 'super-admin';
 ```
 
 You should see:
+
 - ✅ 4 tables listed
 - ✅ 2 storage buckets
 - ✅ 1 admin user
@@ -88,52 +92,63 @@ You should see:
 ⚠️ **IMPORTANT:** Change this password immediately!
 
 To change the password:
+
 ```sql
-UPDATE users 
-SET password_hash = 'YourNewSecurePassword!' 
+UPDATE users
+SET password_hash = 'YourNewSecurePassword!'
 WHERE email = 'admin@fxacademy.com';
 ```
 
 ## 📊 Database Schema Overview
 
 ### Users Table
+
 Stores all user accounts with roles:
+
 - `student` - Regular enrolled students
 - `lead` - Potential customers (not enrolled yet)
 - `limited-admin` - Admin with restricted access
 - `super-admin` - Full system access
 
 ### Payment Submissions Table
+
 Tracks payment proof uploads:
+
 - `pending` - Awaiting review
 - `approved` - Payment verified
 - `rejected` - Payment declined
 
 ### FTMO Submissions Table
+
 Tracks FTMO challenge coaching:
+
 - `pending` - New submission
 - `in-review` - Admin reviewing
 - `coaching` - Active coaching
 - `completed` - Finished
 
 ### Admin Logs Table
+
 Audit trail of all admin actions for security and tracking.
 
 ## 🔍 Useful Queries
 
 ### Get platform statistics
+
 ```sql
 SELECT * FROM admin_stats;
 ```
 
 ### Get all students with details
+
 ```sql
 SELECT * FROM user_details WHERE role = 'student';
 ```
 
 ### Get pending payments
+
 ```sql
-SELECT 
+SELECT
   p.*,
   u.first_name,
   u.last_name,
@@ -145,8 +160,9 @@ ORDER BY p.created_at DESC;
 ```
 
 ### Get pending FTMO reviews
+
 ```sql
-SELECT 
+SELECT
   f.*,
   u.first_name,
   u.last_name,
@@ -161,6 +177,7 @@ ORDER BY f.created_at DESC;
 ## 🛡️ Row Level Security (RLS)
 
 RLS is enabled on all tables to ensure:
+
 - Students can only see/edit their own data
 - Admins can see/edit all data
 - Public can register (insert into users)
@@ -182,20 +199,24 @@ All tables automatically update the `updated_at` field when records change.
 ## 🐛 Troubleshooting
 
 ### "relation does not exist" error
+
 - Make sure you ran `schema.sql` completely
 - Check that you're in the right Supabase project
 
 ### "permission denied" error
+
 - RLS policies may need adjustment
 - Check if user is authenticated
 - Verify role assignments
 
 ### File upload fails
+
 - Verify storage buckets are created
 - Check bucket names match exactly: `payment-proofs`, `ftmo-screenshots`
 - Ensure storage policies are applied
 
 ### Can't login
+
 - Verify user exists: `SELECT * FROM users WHERE email = 'your@email.com'`
 - Check `is_active` is `true`
 - Verify credentials match
@@ -203,6 +224,7 @@ All tables automatically update the `updated_at` field when records change.
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check Supabase logs: Dashboard → Logs
 2. Check browser console for JavaScript errors
 3. Verify all SQL queries ran successfully
