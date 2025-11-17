@@ -1,163 +1,196 @@
-// Handles login and password reset logic for auth-modal.html
+// --- Element References ---
+const loginForm = document.getElementById("loginForm");
+const resetForm = document.getElementById("resetForm");
+const setPasswordForm = document.getElementById("setPasswordForm");
+const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+const backToLoginLink = document.getElementById("backToLogin");
+const errorMsg = document.getElementById("errorMsg");
+const successMsg = document.getElementById("successMsg");
 
-document.addEventListener("DOMContentLoaded", async function () {
-  // Password reset UI logic
-  const forgotPasswordLink = document.getElementById("forgotPasswordLink");
-  const resetForm = document.getElementById("resetForm");
-  const loginForm = document.getElementById("loginForm");
-  const backToLogin = document.getElementById("backToLogin");
-  const setPasswordForm = document.getElementById("setPasswordForm");
-  const errorMsg = document.getElementById("errorMsg");
-  const successMsg = document.getElementById("successMsg");
-
-  // --- Supabase password reset: handle access_token in URL fragment ---
-  const urlParams = new URLSearchParams(window.location.search);
-  const hashParams = new URLSearchParams(window.location.hash.slice(1));
-  const accessToken = hashParams.get("access_token");
-  const refreshToken = hashParams.get("refresh_token");
-  let sessionSet = false;
-
-  if (urlParams.get("reset") === "1" && setPasswordForm) {
-    // If access_token is present, set the session for Supabase
-    if (accessToken && refreshToken && window.supabaseClient) {
-      try {
-        await window.supabaseClient.auth.setSession({
-          access_token: accessToken,
-          refresh_token: refreshToken,
-        });
-        sessionSet = true;
-      } catch (err) {
-        if (errorMsg) {
-          errorMsg.textContent = "Session error: " + (err.message || err);
-          errorMsg.style.display = "block";
-        }
-      }
-    }
-    if (loginForm) loginForm.style.display = "none";
-    if (resetForm) resetForm.style.display = "none";
-    setPasswordForm.style.display = "flex";
+// --- Utility Functions ---
+function showMessage(element, message, isError = false) {
+  errorMsg.classList.add("d-none");
+  successMsg.classList.add("d-none");
+  element.textContent = message;
+  element.classList.remove("d-none");
+  if (isError) {
+    element.setAttribute("role", "alert");
+    element.setAttribute("aria-live", "assertive");
+  } else {
+    element.removeAttribute("role");
+    element.setAttribute("aria-live", "polite");
   }
+  element.focus && element.focus();
+}
 
-  if (forgotPasswordLink && resetForm && loginForm && backToLogin) {
-    forgotPasswordLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      loginForm.style.display = "none";
-      resetForm.style.display = "flex";
-    });
-    backToLogin.addEventListener("click", function (e) {
-      e.preventDefault();
-      resetForm.style.display = "none";
-      loginForm.style.display = "flex";
-    });
-    resetForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const email = document.getElementById("resetEmail").value.trim();
-      errorMsg.style.display = "none";
-      successMsg.style.display = "none";
-      if (!email) {
-        errorMsg.textContent = "Please enter your email.";
-        errorMsg.style.display = "block";
-        return;
-      }
-      try {
-        // Use dynamic redirectTo for local and production
-        let redirectTo = window.location.origin + "/auth-modal.html?reset=1";
-        // Optionally, customize for production domain if needed
-        // if (window.location.hostname === "your-production-domain.com") {
-        //   redirectTo = "https://your-production-domain.com/auth-modal.html?reset=1";
-        // }
-        const { error } =
-          await window.supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo,
-          });
-        if (error) throw error;
-        successMsg.textContent =
-          "If this email exists, a reset link has been sent.";
-        successMsg.style.display = "block";
-      } catch (err) {
-        errorMsg.textContent = err.message || "Failed to send reset email.";
-        errorMsg.style.display = "block";
-      }
-    });
+function clearMessages() {
+  errorMsg.classList.add("d-none");
+  successMsg.classList.add("d-none");
+  errorMsg.textContent = "";
+  successMsg.textContent = "";
+}
+
+function showForm(formToShow) {
+  loginForm.classList.add("d-none");
+  resetForm.classList.add("d-none");
+  setPasswordForm.classList.add("d-none");
+  clearMessages();
+  formToShow.classList.remove("d-none");
+  // Focus first input for accessibility
+  const firstInput = formToShow.querySelector("input");
+  if (firstInput) firstInput.focus();
+}
+
+function setLoading(form, isLoading) {
+  const btn = form.querySelector("button[type='submit']");
+  if (btn) {
+    btn.disabled = isLoading;
+    btn.textContent = isLoading
+      ? "Please wait..."
+      : btn.getAttribute("data-i18n") || btn.textContent;
   }
+}
 
-  // Set new password logic
-  if (setPasswordForm) {
-    setPasswordForm.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      errorMsg.style.display = "none";
-      successMsg.style.display = "none";
-      const newPassword = document.getElementById("newPassword").value;
-      if (!newPassword || newPassword.length < 8) {
-        errorMsg.textContent = "Password must be at least 8 characters.";
-        errorMsg.style.display = "block";
-        return;
-      }
-      try {
-        // Ensure session is set before updating password
-        if (
-          !sessionSet &&
-          accessToken &&
-          refreshToken &&
-          window.supabaseClient
-        ) {
-          await window.supabaseClient.auth.setSession({
-            access_token: accessToken,
-            refresh_token: refreshToken,
-          });
-        }
-        const { error } = await window.supabaseClient.auth.updateUser({
-          password: newPassword,
-        });
-        if (error) throw error;
-
-        // No backend call needed: Supabase Auth handles password update securely
-
-        successMsg.textContent = "Password updated! You can now log in.";
-        successMsg.style.display = "block";
-        setTimeout(() => {
-          window.location.href = "auth-modal.html";
-        }, 1500);
-      } catch (err) {
-        errorMsg.textContent = err.message || "Failed to update password.";
-        errorMsg.style.display = "block";
-      }
-    });
+// --- 1. Login Handler ---
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearMessages();
+  setLoading(loginForm, true);
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  if (!email || !password) {
+    showMessage(errorMsg, "Please enter both email and password.", true);
+    setLoading(loginForm, false);
+    return;
   }
-
-  // Login form logic (Supabase built-in)
-  const form = document.getElementById("loginForm");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      errorMsg.style.display = "none";
-      successMsg.style.display = "none";
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      try {
-        const { data, error } =
-          await window.supabaseClient.auth.signInWithPassword({
-            email,
-            password,
-          });
-        if (error) throw error;
-        // Optionally, fetch user profile from your backend or Supabase table if needed
-        localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("user_role", data.user.role || "student");
-        successMsg.textContent = "Login successful! Redirecting...";
-        successMsg.style.display = "block";
-        setTimeout(() => {
-          window.location.href = "student.html";
-        }, 1000);
-      } catch (err) {
-        console.error("Login error:", err);
-        errorMsg.textContent = err.message || "Login failed. Please try again.";
-        errorMsg.style.display = "block";
+  try {
+    const { data, error } = await window.supabaseClient.auth.signInWithPassword(
+      {
+        email,
+        password,
       }
-    });
+    );
+    if (error) throw error;
+    window.location.href = "student.html";
+  } catch (err) {
+    showMessage(errorMsg, `Login failed: ${err.message || err}`, true);
+  } finally {
+    setLoading(loginForm, false);
   }
-
-  // Removed invalid app.get (not for frontend)
 });
+
+// --- 2. Password Reset Request Handler ---
+forgotPasswordLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showForm(resetForm);
+});
+
+backToLoginLink.addEventListener("click", (e) => {
+  e.preventDefault();
+  showForm(loginForm);
+});
+
+resetForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearMessages();
+  setLoading(resetForm, true);
+  const resetEmail = document.getElementById("resetEmail").value.trim();
+  if (!resetEmail) {
+    showMessage(errorMsg, "Please enter your email.", true);
+    setLoading(resetForm, false);
+    return;
+  }
+  try {
+    const { error } = await window.supabaseClient.auth.resetPasswordForEmail(
+      resetEmail,
+      {
+        redirectTo: window.location.origin + window.location.pathname,
+      }
+    );
+    if (error) throw error;
+    showMessage(
+      successMsg,
+      "Password reset link sent! Check your email.",
+      false
+    );
+  } catch (err) {
+    showMessage(errorMsg, `Error: ${err.message || err}`, true);
+  } finally {
+    setLoading(resetForm, false);
+  }
+});
+
+// --- 3. Set New Password (Handles Supabase URL Hash) ---
+let setPasswordListenerAdded = false;
+async function checkAuthForPasswordReset() {
+  try {
+    const {
+      data: { session },
+    } = await window.supabaseClient.auth.getSession();
+    if (
+      session &&
+      session.user &&
+      window.location.hash.includes("type=recovery")
+    ) {
+      showForm(setPasswordForm);
+      showMessage(successMsg, "Please set your new password below.", false);
+      history.replaceState(null, "", window.location.pathname);
+      if (!setPasswordListenerAdded) {
+        setPasswordForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          clearMessages();
+          setLoading(setPasswordForm, true);
+          const newPassword = document.getElementById("newPassword").value;
+          if (!newPassword || newPassword.length < 8) {
+            showMessage(
+              errorMsg,
+              "Password must be at least 8 characters.",
+              true
+            );
+            setLoading(setPasswordForm, false);
+            return;
+          }
+          try {
+            const { error } = await window.supabaseClient.auth.updateUser({
+              password: newPassword,
+            });
+            if (error) throw error;
+            showMessage(
+              successMsg,
+              "Password updated successfully! Redirecting...",
+              false
+            );
+            setTimeout(() => {
+              window.location.href = "student.html";
+            }, 2000);
+          } catch (err) {
+            showMessage(
+              errorMsg,
+              `Password update failed: ${err.message || err}`,
+              true
+            );
+          } finally {
+            setLoading(setPasswordForm, false);
+          }
+        });
+        setPasswordListenerAdded = true;
+      }
+    } else {
+      showForm(loginForm);
+    }
+  } catch (err) {
+    showMessage(errorMsg, `Error: ${err.message || err}`, true);
+    showForm(loginForm);
+  }
+}
+
+// Hide all forms except loginForm on initial load (unless password reset is detected)
+function hideAllFormsExceptLogin() {
+  loginForm.classList.remove("d-none");
+  resetForm.classList.add("d-none");
+  setPasswordForm.classList.add("d-none");
+}
+
+hideAllFormsExceptLogin();
+// Check for the hash on page load
+checkAuthForPasswordReset();

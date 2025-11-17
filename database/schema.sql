@@ -8,7 +8,7 @@
 -- 1. USERS TABLE
 -- ============================================
 -- Stores all user accounts (students, admins, leads)
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,

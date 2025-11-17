@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SMC & ICT Based Forex Trading Courses - Learn Smart Money Concepts and Inner Circle Trader Strategies"
+    />
+    <title>Courses | PIP NATION ACADEMY</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="css/globals.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages/courses.css" />
+    <style>
+      .lang-selector {
+        position: absolute;
+        top: 18px;
+        right: 24px;
+        z-index: 10;
+        background: #fff;
+        color: #222;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        padding: 4px 10px;
+        font-size: 15px;
+      }
+      body.dark-mode .lang-selector {
+        background: #232526;
+        color: #f3f4f6;
+        border: 1px solid #444;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Language Selector -->
+    <select
+      id="lang-selector"
+      class="lang-selector"
+      aria-label="Select language"
+    >
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="hi">हिन्दी</option>
+      <option value="es">Español</option>
+    </select>
+
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <div class="logo" data-i18n="Master Forex Trading">
+          📈 PIP NATION ACADEMY
+        </div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="courses.html" class="active" data-i18n="Courses">Courses</a>
+          <a href="index.html#pricing" data-i18n="Pricing">Pricing</a>
+          <a href="auth-modal.html" data-i18n="Student Login">Student Login</a>
+          <a href="admin-login.html" data-i18n="Admin">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Page Header -->
+      <section class="page-header">
+        <h1>📚 Complete SMC & ICT Course Curriculum</h1>
+        <p class="subtitle">
+          Master Smart Money Concepts and Inner Circle Trader strategies through
+          our structured three-tier progression system
+        </p>
+        <!-- Course Stats -->
+        <div class="course-stats">
+          <div class="stat-box">
+            <div class="stat-number" id="total-courses">25</div>
+            <div class="stat-label">Total Courses</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number" id="total-modules">220+</div>
+            <div class="stat-label">Video Modules</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">40+</div>
+            <div class="stat-label">Weeks Content</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">SMC & ICT</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tier Navigation -->
+      <div class="tier-tabs">
+        <button class="tier-tab active" data-tier="starter">
+          🟢 Starter Trader
+        </button>
+        <button class="tier-tab" data-tier="core">🔵 Core Trader</button>
+        <button class="tier-tab" data-tier="pro">🟣 Pro Trader</button>
+      </div>
+
+      <!-- TIER 1: STARTER TRADER -->
+      <section id="tier-starter" class="tier-section active">
+        <div class="tier-header">
+          <h2>🟢 Tier 1: Starter Trader</h2>
+          <p>
+            Foundation of SMC & ICT Concepts | 7 Courses | ~70 Modules | 14
+            Weeks
+          </p>
+        </div>
+        <div class="tier-description">
+          <h3>Scaling Condition:</h3>
+          <p><strong>Pass FTMO Free Trial Challenge</strong></p>
+          <ul>
+            <li>✅ Meet profit target</li>
+            <li>✅ Stay within max daily/total loss</li>
+            <li>✅ Complete minimum trading days</li>
+            <li>✅ Submit certificate for verification</li>
+          </ul>
+        </div>
+        <div class="courses-grid" id="starter-courses">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- TIER 2: CORE TRADER -->
+      <section id="tier-core" class="tier-section">
+        <div class="tier-header">
+          <h2>🔵 Tier 2: Core Trader</h2>
+          <p>
+            Advanced Strategies & System Development | 9 Courses | ~90 Modules |
+            20 Weeks
+          </p>
+        </div>
+        <div class="tier-description">
+          <h3>Mandatory Daily Risk Rules:</h3>
+          <ul>
+            <li>⚠️ Max 2 trades per day</li>
+            <li>⚠️ Max 2% risk per trade</li>
+            <li>⚠️ Daily stop after rules hit</li>
+          </ul>
+          <h3>Scaling Condition:</h3>
+          <p><strong>90-Day Demo/Micro Account Challenge</strong></p>
+          <ul>
+            <li>✅ 20% net profit over 90 days</li>
+            <li>✅ Less than 10% max drawdown</li>
+            <li>✅ 90% plan adherence</li>
+            <li>✅ Submit trading plan, journal & statements</li>
+          </ul>
+        </div>
+        <div class="courses-grid" id="core-courses">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- TIER 3: PRO TRADER -->
+      <section id="tier-pro" class="tier-section">
+        <div class="tier-header">
+          <h2>🟣 Tier 3: Pro Trader</h2>
+          <p>
+            Psychology, Consistency & Professional Trading | 9 Courses | ~90
+            Modules | 20+ Weeks
+          </p>
+        </div>
+        <div class="tier-description">
+          <h3>Scaling Condition:</h3>
+          <p><strong>3 Months of Live, Consistent Profit</strong></p>
+          <ul>
+            <li>✅ Minimum 2% profit per month</li>
+            <li>✅ 1% max risk per trade</li>
+            <li>✅ Submit live account statements</li>
+            <li>✅ Final review with mentor</li>
+            <li>✅ Graduate to professional trader status</li>
+          </ul>
+        </div>
+        <div class="courses-grid" id="pro-courses">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Learning Path CTA -->
+      <section class="learning-path-cta">
+        <h2>🎯 Ready to Start Your Journey?</h2>
+        <p>
+          Our curriculum is designed to take you from complete beginner to
+          professional funded trader. Each tier builds on the previous, ensuring
+          you have a solid foundation before advancing.
+        </p>
+        <div class="cta-buttons">
+          <a href="index.html#pricing" class="btn btn-primary"
+            >Choose Your Plan</a
+          >
+          <a href="enrollment.html?tier=starter" class="btn btn-secondary"
+            >Enroll Now</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Pip Nation Academy. All rights reserved.</p>
+      <p>SMC & ICT Based Professional Trading Education</p>
+      <div class="footer-links">
+        <a href="terms.html">Terms of Service</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="contact.html" data-i18n="Contact Us">Contact Us</a>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.min.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/courses.js"></script>
+    <script src="js/interactions.js"></script>
+    <script src="js/courses-page.js"></script>
+  </body>
+</html>
